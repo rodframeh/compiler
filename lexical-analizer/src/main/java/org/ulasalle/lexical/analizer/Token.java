@@ -3,15 +3,15 @@ package org.ulasalle.lexical.analizer;
 
 public class Token {
     
-    private TypeToken typeState;
+    private TypeToken typeToken;
     private String lexema;
 
-    public TypeToken getTypeState() {
-        return typeState;
+    public TypeToken getTypeToken() {
+        return typeToken;
     }
 
-    public void setTypeState(TypeToken typeState) {
-        this.typeState = typeState;
+    public void setTypeToken(TypeToken typeToken) {
+        this.typeToken = typeToken;
     }
 
     public String getLexema() {

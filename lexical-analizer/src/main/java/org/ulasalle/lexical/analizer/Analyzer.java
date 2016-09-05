@@ -11,8 +11,8 @@ import java.util.logging.Logger;
 public class Analyzer {
 
     private String line;
-    private final List<Token> tokens= new LinkedList<>();
-    private final List<LexicalError> lexicalErrors= new LinkedList<>();
+    private final List<Token> tokens = new LinkedList<>();
+    private final List<LexicalError> lexicalErrors = new LinkedList<>();
 
     public List<Token> getTokens() {
         return tokens;
@@ -53,23 +53,29 @@ public class Analyzer {
                 for (int i = 0; i < characters.length(); i++) {
                     reader.next();
                 }
+                TypeToken typeToken = reader.getTypeToken();
                 //añade el token a la lista
-                if (!reader.getTypeToken().equals(TypeToken.IS_NOT_FINAL)) {
+                if (!typeToken.equals(TypeToken.IS_NOT_FINAL)) {
                     Token token = new Token();
                     //si se ha leido todo el token(palabra) por completo
                     if (reader.getReadStatus().equals(ReadStatus.COMPLETED)) {
                         token.setLexema(characters);
-                        token.setTypeState(reader.getTypeToken());
-                        tokens.add(token);
                     } else {
                         //si una parte del lexema es un token y la otra tambien
-                        token.setLexema(characters.substring(0, 
-                                reader.getPositionStop()));
-                        token.setTypeState(reader.getTypeToken());
-                        tokens.add(token);
                         stack.push(characters.substring(
                                 reader.getPositionStop(), characters.length()));
+                        characters=characters.substring(0,reader.getPositionStop());
+                        token.setLexema(characters);
                     }
+                    if (typeToken.equals(TypeToken.IDENTIFIER)) {
+                        for (Keyword keyword : Keyword.values()) {
+                            if (keyword.toString().equals(characters)) {
+                                typeToken = TypeToken.KEYWORD;
+                            }
+                        }
+                    }
+                    token.setTypeToken(typeToken);
+                    tokens.add(token);
                 } else {
                     LexicalError lexicalError = new LexicalError();
                     lexicalError.setPositionInFile(positionInFile);
@@ -88,16 +94,21 @@ public class Analyzer {
 
     //solo para test
     public void show() {
-        if(tokens!=null)tokens.stream().forEach((token) -> {
-            System.out.println(token.getLexema() + " - " + token.getTypeState());
-        });
-        if(lexicalErrors!=null)lexicalErrors.stream().forEach((lexicalError) -> {
-            System.out.println(lexicalError.getPositionInFile()
-                    + " - " + lexicalError.getPositionInLine()
-                    + " - " + lexicalError.getPositionInCharacters()
-                    + " - " + lexicalError.getCharacters()
-                    + " - " + lexicalError.getDescription()
-            );
-        });
+        if (tokens != null) {
+            tokens.stream().forEach((token) -> {
+                System.out.println(token.getLexema() + " - " + token.getTypeToken());
+            });
+        }
+        if (lexicalErrors != null) {
+            lexicalErrors.stream().forEach((lexicalError) -> {
+                System.out.println(lexicalError.getPositionInFile()
+                        + " - " + lexicalError.getPositionInLine()
+                        + " - " + lexicalError.getPositionInCharacters()
+                        + " - " + lexicalError.getCharacters()
+                        + " - " + lexicalError.getDescription()
+                );
+            });
+        }
     }
+
 }

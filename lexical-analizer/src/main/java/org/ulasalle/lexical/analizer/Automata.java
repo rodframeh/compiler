@@ -6,7 +6,7 @@ public class Automata {
     private boolean[][] transitionsAccepted;
     private int[][] transitions;
     private final int lengthStates = 9;
-    private final int lengthTransitions = 82;
+    private final int lengthTransitions = 83;
 
     public void build() {
         loadAlphabet();
@@ -62,16 +62,16 @@ public class Automata {
 
     private void loadTransitions() {
         // agregamos comillas apertura                                     q0-q1
-        transitions[0][81] = 1;
-        transitionsAccepted[0][81] = true;
+        transitions[0][82] = 1;
+        transitionsAccepted[0][82] = true;
         // agregamos todo excepto comillas                                 q1-q1
-        for (int i = 0; i < 81; i++) {
+        for (int i = 0; i < 82; i++) {
             transitions[1][i] = 1;
             transitionsAccepted[1][i] = true;
         }
         // agregamos comillas cierre                                       q1-q2
-        transitions[1][81] = 2;
-        transitionsAccepted[1][81] = true;
+        transitions[1][82] = 2;
+        transitionsAccepted[1][82] = true;
         // agregamos operadores aritmeticos                                q0-q3
         for (int i = 62; i < 67; i++) {
             transitions[0][i] = 3;
@@ -144,8 +144,8 @@ public class Automata {
             '&', '|',
             //delimitadores                                     6          73-78
             ',', ';', '{', '}', '(', ')',
-            //especiales                                        3          79-81
-            '_', '$', '"'
+            //especiales                                        3          79-82
+            '_', '$',' ', '"'
         };
     }
 

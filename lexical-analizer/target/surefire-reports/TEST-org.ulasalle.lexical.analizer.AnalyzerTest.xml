@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="5" failures="0" name="org.ulasalle.lexical.analizer.AnalyzerTest" time="0.186" errors="0" skipped="0">
+<testsuite tests="5" failures="0" name="org.ulasalle.lexical.analizer.AnalyzerTest" time="0.143" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
     <property name="sun.boot.library.path" value="/usr/lib/jvm/java-8-openjdk/jre/lib/amd64"/>
@@ -15,7 +15,7 @@
     <property name="sun.os.patch.level" value="unknown"/>
     <property name="test" value="org.ulasalle.lexical.analizer.AnalyzerTest"/>
     <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
-    <property name="user.dir" value="/home/francisco/NetBeansProjects/lexical-analizer"/>
+    <property name="user.dir" value="/home/francisco/compiler/lexical-analizer"/>
     <property name="java.runtime.version" value="1.8.0_102-b14"/>
     <property name="java.awt.graphicsenv" value="sun.awt.X11GraphicsEnvironment"/>
     <property name="java.endorsed.dirs" value="/usr/lib/jvm/java-8-openjdk/jre/lib/endorsed"/>
@@ -62,8 +62,8 @@
     <property name="sun.cpu.isalist" value=""/>
   </properties>
   <testcase classname="org.ulasalle.lexical.analizer.AnalyzerTest" name="testGetLexicalErrors" time="0.003"/>
-  <testcase classname="org.ulasalle.lexical.analizer.AnalyzerTest" name="testStart" time="0.086"/>
+  <testcase classname="org.ulasalle.lexical.analizer.AnalyzerTest" name="testStart" time="0.068"/>
   <testcase classname="org.ulasalle.lexical.analizer.AnalyzerTest" name="testGetLine" time="0"/>
-  <testcase classname="org.ulasalle.lexical.analizer.AnalyzerTest" name="testGetTokens" time="0.002"/>
-  <testcase classname="org.ulasalle.lexical.analizer.AnalyzerTest" name="testSetLine" time="0.001"/>
+  <testcase classname="org.ulasalle.lexical.analizer.AnalyzerTest" name="testGetTokens" time="0"/>
+  <testcase classname="org.ulasalle.lexical.analizer.AnalyzerTest" name="testSetLine" time="0"/>
 </testsuite>
