@@ -2,8 +2,8 @@ package org.ulasalle.lexical.analizer;
 
 public class Reader {
 
-    private Integer index;
-    private Integer currentState;
+    private int index;
+    private int currentState;
     private int lengthSymbols;
     private String characters;
     private ReadStatus readStatus;
@@ -53,7 +53,7 @@ public class Reader {
                         //verifica si se puede mover a otro estado
                         if (automata.getTransitionsAccepted()[this.currentState][j]) {
                             currentState = automata.getTransitions()[this.currentState][j];
-                            this.typeToken = automata.getTypeFinalState(this.currentState);
+                            this.typeToken = automata.getFinalState(this.currentState);
                             index++;
                             //verifica llego al final de la cadena
                             if (index == lengthSymbols) {

@@ -18,7 +18,7 @@ public class Automata {
         loadTransitions();
     }
 
-    public TypeToken getTypeFinalState(int state) {
+    public TypeToken getFinalState(int state) {
         switch (state) {
             case 2:
                 return TypeToken.STRING_LITERAL;
