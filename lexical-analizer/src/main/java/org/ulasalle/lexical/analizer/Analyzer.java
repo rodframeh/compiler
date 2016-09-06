@@ -11,33 +11,26 @@ import java.util.logging.Logger;
 public class Analyzer {
 
     private String line;
+    // Lista enlazada de tokens
     private final List<Token> tokens = new LinkedList<>();
+    // Lista enlazada de de erroresLexicos
     private final List<LexicalError> lexicalErrors = new LinkedList<>();
-
-    public List<Token> getTokens() {
-        return tokens;
-    }
-
-    public List<LexicalError> getLexicalErrors() {
-        return lexicalErrors;
-    }
-
-    public String getLine() {
-        return line;
-    }
-
-    public void setLine(String line) {
-        this.line = line;
-    }
-
+    
     public List<String> start() throws Exception {
         //a eliminar posteriormente
         int positionInFile = 0;//linea en el archivo 
+        
+        //StringTokenizer separa cada caracter
         StringTokenizer stringTokenizer = new StringTokenizer(line);
+        
         //necesarios
+        //
         Reader reader = new Reader();
+        
+        //Creacion de una pila
         Stack<String> stack = new Stack<>();
         //añado lexemas a mi stack 
+        //Ingresa los tokens 
         while (stringTokenizer.hasMoreTokens()) {
             stack.add(stringTokenizer.nextToken());
         }
@@ -109,6 +102,27 @@ public class Analyzer {
                 );
             });
         }
+    }
+    
+    /**
+     *  Getter y Setters de Clase Analyzer
+     */
+    
+    
+    public List<Token> getTokens() {
+        return tokens;
+    }
+
+    public List<LexicalError> getLexicalErrors() {
+        return lexicalErrors;
+    }
+
+    public String getLine() {
+        return line;
+    }
+
+    public void setLine(String line) {
+        this.line = line;
     }
 
 }
