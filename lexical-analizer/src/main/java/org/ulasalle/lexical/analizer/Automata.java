@@ -17,7 +17,8 @@ public class Automata {
         prepareTransitions();
         loadTransitions();
     }
-
+    
+    
     public TypeToken getFinalState(int state) {
         switch (state) {
             case 2:

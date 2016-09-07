@@ -74,7 +74,8 @@ public class AnalyzerTest {
     public void testStart() throws Exception {
         System.out.println("start");
         Analyzer instance = new Analyzer();
-        instance.setLine("Programa ( entero ) { Entero variable=12; EscribirPantalla(\"hola mundo\"); }");
+        instance.setLine("Programa ( entero ) { Entero variable=12; EscribirPantalla(\"holamundo\"); "
+                + "/*Comentario multilinea*/}");
         instance.start();
         instance.show();
     }

@@ -22,7 +22,6 @@ public class Analyzer {
         
         //StringTokenizer separa cada caracter
         StringTokenizer stringTokenizer = new StringTokenizer(line);
-        
         //necesarios
         //
         Reader reader = new Reader();
@@ -31,6 +30,7 @@ public class Analyzer {
         Stack<String> stack = new Stack<>();
         //añado lexemas a mi stack 
         //Ingresa los tokens 
+        
         while (stringTokenizer.hasMoreTokens()) {
             stack.add(stringTokenizer.nextToken());
         }
@@ -103,10 +103,6 @@ public class Analyzer {
             });
         }
     }
-    
-    /**
-     *  Getter y Setters de Clase Analyzer
-     */
     
     
     public List<Token> getTokens() {
