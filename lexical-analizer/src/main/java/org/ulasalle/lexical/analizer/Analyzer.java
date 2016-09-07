@@ -25,7 +25,6 @@ public class Analyzer {
             this.numberLine = i++;
             analizeLine();
         }
-        show();
     }
 
     public void analizeLine() throws Exception {
@@ -67,8 +66,8 @@ public class Analyzer {
                     } else {
                         //si una parte del lexema es un token y la otra tambien
                         stack.push(characters.substring(
-                                reader.getPositionStop(), characters.length()));
-                        characters = characters.substring(0, reader.getPositionStop());
+                                reader.getIndex(), characters.length()));
+                        characters = characters.substring(0, reader.getIndex());
                         token.setLexema(characters);
                     }
                     if (typeToken.equals(TypeToken.IDENTIFIER)) {
@@ -83,10 +82,10 @@ public class Analyzer {
                 } else {
                     LexicalError lexicalError = new LexicalError();
                     lexicalError.setPositionInFile(numberLine);
-                    lexicalError.setDescription(reader.getReadStatus());
                     lexicalError.setCharacters(characters);
-                    lexicalError.setPositionInCharacters(reader.getPositionStop());
+                    lexicalError.setPositionInCharacters(reader.getIndex());
                     lexicalError.setPositionInLine(line.indexOf(characters));
+                    lexicalError.setDescription(reader.getReadStatus());
                     lexicalErrors.add(lexicalError);
                 }
             } catch (Exception ex) {

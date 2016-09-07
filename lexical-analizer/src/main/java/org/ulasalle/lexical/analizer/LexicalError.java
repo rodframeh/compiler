@@ -13,6 +13,9 @@ public class LexicalError {
     }
 
     public void setDescription(ReadStatus readStatus) {
+        if(positionInCharacters>(characters.length()-1)){
+            positionInCharacters=0;
+        }
         switch (readStatus) {
             case UNRECOGNIZABLE:
                 this.description = "[Error][Lexico]: no se reconoce "
@@ -24,6 +27,11 @@ public class LexicalError {
                         + "la secuencia de caracteres escrita ['" 
                         + characters.charAt(positionInCharacters) + "']";
                 break;
+            default:
+                  this.description = "[Error][Lexico]: falto cerrar"
+                        + "la secuencia de caracteres escrita ['" 
+                        + characters.charAt(positionInCharacters) + "']";
+                    break;
         }
     }
 

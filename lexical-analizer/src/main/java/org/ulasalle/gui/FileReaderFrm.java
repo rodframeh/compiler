@@ -85,11 +85,11 @@ public class FileReaderFrm extends javax.swing.JFrame {
         contentPane = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(620, 600));
-        setMinimumSize(new java.awt.Dimension(620, 600));
-        setPreferredSize(new java.awt.Dimension(620, 600));
+        setMaximumSize(new java.awt.Dimension(620, 620));
+        setMinimumSize(new java.awt.Dimension(620, 620));
+        setPreferredSize(new java.awt.Dimension(620, 620));
         setResizable(false);
-        setSize(new java.awt.Dimension(620, 600));
+        setSize(new java.awt.Dimension(620, 620));
         getContentPane().setLayout(null);
 
         btnSearchFile.setText("Examinar...");
@@ -128,7 +128,7 @@ public class FileReaderFrm extends javax.swing.JFrame {
         jScrollPane4.setViewportView(jTable1);
 
         getContentPane().add(jScrollPane4);
-        jScrollPane4.setBounds(20, 210, 280, 360);
+        jScrollPane4.setBounds(20, 210, 260, 360);
 
         txtAreaDelimiter.setEditable(false);
         txtAreaDelimiter.setColumns(20);
@@ -161,7 +161,7 @@ public class FileReaderFrm extends javax.swing.JFrame {
         jScrollPane6.setViewportView(jTable3);
 
         getContentPane().add(jScrollPane6);
-        jScrollPane6.setBounds(330, 210, 280, 360);
+        jScrollPane6.setBounds(290, 210, 320, 360);
 
         contentPane.setName("contentPane"); // NOI18N
 
@@ -219,20 +219,19 @@ public class FileReaderFrm extends javax.swing.JFrame {
                     analyzer.getTokens().get(i).getLexema()};
                 tableModelTokens.addRow(data);
             }
-
             for (int i = 0; i < analyzer.getLexicalErrors().size(); i++) {
                 Object[] data = {
                     analyzer.getLexicalErrors().get(i).getDescription(),
                     analyzer.getLexicalErrors().get(i).getPositionInFile(),
                     analyzer.getLexicalErrors().get(i).getPositionInLine(),
                     analyzer.getLexicalErrors().get(i).getCharacters(),
-                    analyzer.getLexicalErrors().get(i).getCharacters()
-                    .charAt(analyzer.getLexicalErrors()
-                    .get(i).getPositionInCharacters())
+                    analyzer.getLexicalErrors().get(i).getCharacters().charAt(
+                            analyzer.getLexicalErrors().get(i)
+                                    .getPositionInCharacters())
+                    
                 };
                 tableModelErrors.addRow(data);
             }
-
         } catch (IOException ex) {
             Logger.getLogger(FileReaderFrm.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
