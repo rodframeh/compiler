@@ -14,31 +14,53 @@ import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import org.ulasalle.lexical.analizer.Analyzer;
-import org.ulasalle.source.file.SourceFileReader;import java.io.File;
+import org.ulasalle.source.file.SourceFileReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
+import javax.swing.ListModel;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableModel;
 import org.ulasalle.lexical.analizer.Analyzer;
 
 /**
  *
  * @author christianlp
  */
+
+
 public class FileReaderFrm extends javax.swing.JFrame {
-    
-    JFileChooser jfilechooser;
-    SourceFileReader sourceFileReader;
+
+    private JFileChooser jfilechooser;
+    private SourceFileReader sourceFileReader;
+    private DefaultTableModel tableModelTokens;
+    private DefaultTableModel tableModelErrors;
 
     /**
      * Creates new form FileReaderFrm
      */
     public FileReaderFrm() {
         initComponents();
+        tableModelTokens = new DefaultTableModel(
+                new String[]{"Tipo", "Lexema"}, 0) {
+            public boolean isCellEditable(int row, int column) {
+                return false;//This causes all cells to be not editable
+            }
+        };
+        jTable1.setModel(tableModelTokens);
+        tableModelErrors = new DefaultTableModel(
+                new String[]{"Descripcion", "Linea", "Posicion", "Cadena", "Caracter"}, 0) {
+            public boolean isCellEditable(int row, int column) {
+                return false;//This causes all cells to be not editable
+            }
+        };
+        jTable3.setModel(tableModelErrors);
     }
 
     /**
@@ -50,89 +72,112 @@ public class FileReaderFrm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        contentPane = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        txtInputFile = new javax.swing.JTextField();
         btnSearchFile = new javax.swing.JButton();
+        txtInputFile = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jScrollPane1 = new javax.swing.JScrollPane();
         txtAreaDelimiter = new javax.swing.JTextArea();
         btnExecuteFile = new javax.swing.JButton();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTable3 = new javax.swing.JTable();
+        contentPane = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel1.setText("Ruta de archivo");
-
-        txtInputFile.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        txtInputFile.setToolTipText("");
+        setMaximumSize(new java.awt.Dimension(620, 600));
+        setMinimumSize(new java.awt.Dimension(620, 600));
+        setPreferredSize(new java.awt.Dimension(620, 600));
+        setResizable(false);
+        setSize(new java.awt.Dimension(620, 600));
+        getContentPane().setLayout(null);
 
         btnSearchFile.setText("Examinar...");
         btnSearchFile.setToolTipText("");
+        btnSearchFile.setVerticalAlignment(javax.swing.SwingConstants.TOP);
         btnSearchFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSearchFileActionPerformed(evt);
             }
         });
+        getContentPane().add(btnSearchFile);
+        btnSearchFile.setBounds(359, 20, 110, 30);
 
+        txtInputFile.setEditable(false);
+        txtInputFile.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txtInputFile.setToolTipText("");
+        getContentPane().add(txtInputFile);
+        txtInputFile.setBounds(120, 20, 350, 30);
+
+        jLabel1.setText("Ruta de archivo");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(20, 20, 98, 30);
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jTable1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jScrollPane4.setViewportView(jTable1);
+
+        getContentPane().add(jScrollPane4);
+        jScrollPane4.setBounds(20, 210, 280, 360);
+
+        txtAreaDelimiter.setEditable(false);
         txtAreaDelimiter.setColumns(20);
         txtAreaDelimiter.setRows(5);
         jScrollPane1.setViewportView(txtAreaDelimiter);
 
-        btnExecuteFile.setText("Run");
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(20, 60, 590, 140);
+
+        btnExecuteFile.setText("Analizar");
         btnExecuteFile.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExecuteFileActionPerformed(evt);
             }
         });
+        getContentPane().add(btnExecuteFile);
+        btnExecuteFile.setBounds(480, 20, 130, 30);
+
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane6.setViewportView(jTable3);
+
+        getContentPane().add(jScrollPane6);
+        jScrollPane6.setBounds(330, 210, 280, 360);
+
+        contentPane.setName("contentPane"); // NOI18N
 
         javax.swing.GroupLayout contentPaneLayout = new javax.swing.GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
             contentPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(contentPaneLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(contentPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(contentPaneLayout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(2, 2, 2)
-                        .addComponent(txtInputFile, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnSearchFile, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(75, 75, 75))
-                    .addGroup(contentPaneLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 477, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnExecuteFile, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+            .addGap(0, 100, Short.MAX_VALUE)
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(contentPaneLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(contentPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txtInputFile, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSearchFile))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(contentPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnExecuteFile))
-                .addContainerGap(42, Short.MAX_VALUE))
+            .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(contentPane, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(contentPane, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(1, 1, 1))
-        );
+        getContentPane().add(contentPane);
+        contentPane.setBounds(260, 390, 100, 100);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -142,13 +187,18 @@ public class FileReaderFrm extends javax.swing.JFrame {
         jfilechooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         jfilechooser.setFileFilter(new FileNameExtensionFilter("*.Programa", "programa"));
         jfilechooser.removeChoosableFileFilter(jfilechooser.getAcceptAllFileFilter());
-        
         int selectionIndex = jfilechooser.showOpenDialog(contentPane);
-        if(selectionIndex == JFileChooser.APPROVE_OPTION){
+        if (selectionIndex == JFileChooser.APPROVE_OPTION) {
             try {
                 File file = jfilechooser.getSelectedFile();
-                sourceFileReader=new SourceFileReader();
+                sourceFileReader = new SourceFileReader();
                 sourceFileReader.setFile(file);
+
+                txtInputFile.setText(file.getPath());
+
+                for (int i = 0; i < sourceFileReader.getLines().size(); i++) {
+                    txtAreaDelimiter.append(sourceFileReader.getLines().get(i) + "\n");
+                }
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(FileReaderFrm.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
@@ -158,11 +208,31 @@ public class FileReaderFrm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSearchFileActionPerformed
 
     private void btnExecuteFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExecuteFileActionPerformed
+        tableModelTokens.getDataVector().clear();
         try {
-            List<String> lines=sourceFileReader.getLines();
-            Analyzer analyzer=new Analyzer();
+            List<String> lines = sourceFileReader.getLines();
+            Analyzer analyzer = new Analyzer();
             analyzer.setLines(lines);
             analyzer.analizeSource();
+            for (int i = 0; i < analyzer.getTokens().size(); i++) {
+                Object[] data = {analyzer.getTokens().get(i).getTypeToken(),
+                    analyzer.getTokens().get(i).getLexema()};
+                tableModelTokens.addRow(data);
+            }
+
+            for (int i = 0; i < analyzer.getLexicalErrors().size(); i++) {
+                Object[] data = {
+                    analyzer.getLexicalErrors().get(i).getDescription(),
+                    analyzer.getLexicalErrors().get(i).getPositionInFile(),
+                    analyzer.getLexicalErrors().get(i).getPositionInLine(),
+                    analyzer.getLexicalErrors().get(i).getCharacters(),
+                    analyzer.getLexicalErrors().get(i).getCharacters()
+                    .charAt(analyzer.getLexicalErrors()
+                    .get(i).getPositionInCharacters())
+                };
+                tableModelErrors.addRow(data);
+            }
+
         } catch (IOException ex) {
             Logger.getLogger(FileReaderFrm.class.getName()).log(Level.SEVERE, null, ex);
         } catch (Exception ex) {
@@ -211,6 +281,10 @@ public class FileReaderFrm extends javax.swing.JFrame {
     private javax.swing.JPanel contentPane;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable3;
     private javax.swing.JTextArea txtAreaDelimiter;
     private javax.swing.JTextField txtInputFile;
     // End of variables declaration//GEN-END:variables
