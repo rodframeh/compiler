@@ -76,8 +76,8 @@ public class AnalyzerTest {
         Analyzer instance = new Analyzer();
         instance.setLine("Programa ( entero ) { Entero variable=12; EscribirPantalla(\"holamundo\"); "
                 + "/*Comentario multilinea*/}");
-        instance.start();
-        instance.show();
+//        instance.start();
+//        instance.show();
     }
     
 }

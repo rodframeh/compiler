@@ -10,27 +10,38 @@ import java.util.logging.Logger;
 
 public class Analyzer {
 
+    private int numberLine;
+    private List<String> lines;
     private String line;
     // Lista enlazada de tokens
     private final List<Token> tokens = new LinkedList<>();
     // Lista enlazada de de erroresLexicos
     private final List<LexicalError> lexicalErrors = new LinkedList<>();
-    
-    public List<String> start() throws Exception {
+
+    public void analizeSource() throws Exception {
+        int i = 0;
+        for (String line : lines) {
+            this.line = line;
+            this.numberLine = i++;
+            analizeLine();
+        }
+        show();
+    }
+
+    public void analizeLine() throws Exception {
         //a eliminar posteriormente
-        int positionInFile = 0;//linea en el archivo 
-        
+
         //StringTokenizer separa cada caracter
         StringTokenizer stringTokenizer = new StringTokenizer(line);
         //necesarios
         //
         Reader reader = new Reader();
-        
+
         //Creacion de una pila
         Stack<String> stack = new Stack<>();
         //añado lexemas a mi stack 
         //Ingresa los tokens 
-        
+
         while (stringTokenizer.hasMoreTokens()) {
             stack.add(stringTokenizer.nextToken());
         }
@@ -57,7 +68,7 @@ public class Analyzer {
                         //si una parte del lexema es un token y la otra tambien
                         stack.push(characters.substring(
                                 reader.getPositionStop(), characters.length()));
-                        characters=characters.substring(0,reader.getPositionStop());
+                        characters = characters.substring(0, reader.getPositionStop());
                         token.setLexema(characters);
                     }
                     if (typeToken.equals(TypeToken.IDENTIFIER)) {
@@ -71,7 +82,7 @@ public class Analyzer {
                     tokens.add(token);
                 } else {
                     LexicalError lexicalError = new LexicalError();
-                    lexicalError.setPositionInFile(positionInFile);
+                    lexicalError.setPositionInFile(numberLine);
                     lexicalError.setDescription(reader.getReadStatus());
                     lexicalError.setCharacters(characters);
                     lexicalError.setPositionInCharacters(reader.getPositionStop());
@@ -82,11 +93,10 @@ public class Analyzer {
                 Logger.getLogger(Analyzer.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        return null;
     }
 
     //solo para test
-    public void show() {
+    private void show() {
         if (tokens != null) {
             tokens.stream().forEach((token) -> {
                 System.out.println(token.getLexema() + " - " + token.getTypeToken());
@@ -103,8 +113,7 @@ public class Analyzer {
             });
         }
     }
-    
-    
+
     public List<Token> getTokens() {
         return tokens;
     }
@@ -113,8 +122,12 @@ public class Analyzer {
         return lexicalErrors;
     }
 
-    public String getLine() {
-        return line;
+    public void setPositionInFile(int numberLine) {
+        this.numberLine = numberLine;
+    }
+
+    public void setLines(List<String> lines) {
+        this.lines = lines;
     }
 
     public void setLine(String line) {

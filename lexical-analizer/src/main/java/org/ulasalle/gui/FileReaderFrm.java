@@ -7,7 +7,20 @@ package org.ulasalle.gui;
 
 ;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import org.ulasalle.lexical.analizer.Analyzer;
+import org.ulasalle.source.file.SourceFileReader;import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import org.ulasalle.lexical.analizer.Analyzer;
@@ -19,7 +32,7 @@ import org.ulasalle.lexical.analizer.Analyzer;
 public class FileReaderFrm extends javax.swing.JFrame {
     
     JFileChooser jfilechooser;
-    Analyzer instance;
+    SourceFileReader sourceFileReader;
 
     /**
      * Creates new form FileReaderFrm
@@ -65,6 +78,11 @@ public class FileReaderFrm extends javax.swing.JFrame {
         jScrollPane1.setViewportView(txtAreaDelimiter);
 
         btnExecuteFile.setText("Run");
+        btnExecuteFile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExecuteFileActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout contentPaneLayout = new javax.swing.GroupLayout(contentPane);
         contentPane.setLayout(contentPaneLayout);
@@ -127,26 +145,30 @@ public class FileReaderFrm extends javax.swing.JFrame {
         
         int selectionIndex = jfilechooser.showOpenDialog(contentPane);
         if(selectionIndex == JFileChooser.APPROVE_OPTION){
-            File fichero = jfilechooser.getSelectedFile();
-            txtInputFile.setText(fichero.getAbsolutePath());
-            instance = new Analyzer();
             try {
-                FileReader fileReader = new FileReader(fichero);
-                String chainString = null;
-                int value = fileReader.read();
-                while(value!=-1){
-                    chainString+=(char)value;
-                    value = fileReader.read();
-                    instance.setLine(chainString);
-                    instance.start();
-                }
-                instance.show();
-                
-            } catch (Exception e) {
+                File file = jfilechooser.getSelectedFile();
+                sourceFileReader=new SourceFileReader();
+                sourceFileReader.setFile(file);
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(FileReaderFrm.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(FileReaderFrm.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
         }
     }//GEN-LAST:event_btnSearchFileActionPerformed
+
+    private void btnExecuteFileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExecuteFileActionPerformed
+        try {
+            List<String> lines=sourceFileReader.getLines();
+            Analyzer analyzer=new Analyzer();
+            analyzer.setLines(lines);
+            analyzer.analizeSource();
+        } catch (IOException ex) {
+            Logger.getLogger(FileReaderFrm.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(FileReaderFrm.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_btnExecuteFileActionPerformed
 
     /**
      * @param args the command line arguments

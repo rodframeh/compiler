@@ -51,7 +51,7 @@ public class Reader {
                     if (this.automata.getAlphabet()[j] == symbol) {
                         
                         //verifica si se puede mover a otro estado
-                        if (automata.getTransitionsAccepted()[this.currentState][j]) {
+                        if (automata.getTransitions()[this.currentState][j]!=-1) {
                             currentState = automata.getTransitions()[this.currentState][j];
                             this.typeToken = automata.getFinalState(this.currentState);
                             index++;
