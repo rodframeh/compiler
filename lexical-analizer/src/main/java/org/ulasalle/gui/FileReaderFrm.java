@@ -138,10 +138,9 @@ public class FileReaderFrm extends javax.swing.JFrame {
                     chainString+=(char)value;
                     value = fileReader.read();
                     instance.setLine(chainString);
-                    
                     instance.start();
                 }
-                txtAreaDelimiter.setText(instance.getLine());
+                instance.show();
                 
             } catch (Exception e) {
             }
