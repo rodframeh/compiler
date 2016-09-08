@@ -45,7 +45,11 @@ public class Reader {
                     this.currentState = 0;
                 }
                 //buscar y verifica si existe en el alfabeto
+                if(Character.isWhitespace(symbol)){
+                    index++;
+                }else{
                 for (int j = 0; j < this.automata.getLengthTransitions(); j++) {
+              
                     if (this.automata.getAlphabet()[j] == symbol) {
                         
                         //verifica si se puede mover a otro estado
@@ -64,6 +68,8 @@ public class Reader {
                     }
                 }
                 return this.readStatus = ReadStatus.UNRECOGNIZABLE;
+                }
+                
             } else {
                 return this.readStatus = ReadStatus.OUT_OF_RANGE;
             }

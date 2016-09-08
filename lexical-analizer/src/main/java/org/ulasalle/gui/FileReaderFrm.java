@@ -111,7 +111,7 @@ public class FileReaderFrm extends javax.swing.JFrame {
 
         jLabel1.setText("Ruta de archivo");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(20, 20, 98, 30);
+        jLabel1.setBounds(20, 20, 76, 30);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

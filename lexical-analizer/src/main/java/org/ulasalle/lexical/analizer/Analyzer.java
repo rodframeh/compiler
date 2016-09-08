@@ -57,13 +57,13 @@ public class Analyzer {
                     Token token = new Token();
                     //si se ha leido todo el token(palabra) por completo
                     if (reader.getReadStatus().equals(ReadStatus.COMPLETED)) {
-                        token.setLexema(characters);
+                        token.setLexema(characters.trim());
                     } else {
                         //si una parte del lexema es un token y la otra tambien
                         stack.push(characters.substring(
                                 reader.getIndex(), characters.length()));
                         characters = characters.substring(0, reader.getIndex());
-                        token.setLexema(characters);
+                        token.setLexema(characters.trim());
                     }
                     if (typeToken.equals(TypeToken.IDENTIFIER)) {
                         for (Keyword keyword : Keyword.values()) {
@@ -72,8 +72,10 @@ public class Analyzer {
                             }
                         }
                     }
-                    token.setTypeToken(typeToken);
-                    tokens.add(token);
+                
+                        token.setTypeToken(typeToken);
+                        tokens.add(token);
+                    
                 } else {
                     LexicalError lexicalError = new LexicalError();
                     lexicalError.setPositionInFile(numberLine);
