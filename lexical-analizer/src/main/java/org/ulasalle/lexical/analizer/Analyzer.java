@@ -28,12 +28,7 @@ public class Analyzer {
     }
 
     public void analizeLine() throws Exception {
-        //a eliminar posteriormente
 
-        //StringTokenizer separa cada caracter
-        StringTokenizer stringTokenizer = new StringTokenizer(line);
-        //necesarios
-        //
         Reader reader = new Reader();
 
         //Creacion de una pila
@@ -41,9 +36,9 @@ public class Analyzer {
         //añado lexemas a mi stack 
         //Ingresa los tokens 
 
-        while (stringTokenizer.hasMoreTokens()) {
-            stack.add(stringTokenizer.nextToken());
-        }
+     
+        stack.add(line);
+        
         //revierto la pila
         Collections.reverse(stack);
         //comienzo a consumir mi stack(leo, luego elimino)
