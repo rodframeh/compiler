@@ -4,7 +4,7 @@ public class Automata {
 
     private char[] alphabet;
     private int[][] transitions;
-    private final int lengthStates = 9;
+    private final int lengthStates = 10;
     private final int lengthTransitions = 83;
 
     public void build() {
@@ -77,10 +77,15 @@ public class Automata {
         }
         //                                                                 q4-q3
         transitions[4][70] = 3;
-        // agregamos operadores de coneccion logica                        q0-q6
-        for (int i = 71; i < 73; i++) {
-            transitions[0][i] = 6;
-        }
+        // agregamos operadores de coneccion logica
+        //                                                                 q0-q9
+        transitions[0][71] = 9;
+        //                                                                 q9-q3
+        transitions[9][71] = 3;
+        //                                                                 q0-q6
+        transitions[0][72] = 6;
+        //                                                                 q6-q3
+        transitions[6][72] = 3;
         //                                                                 q6-q3
         for (int i = 71; i < 73; i++) {
             transitions[6][i] = 3;
