@@ -1,157 +1,258 @@
 package org.ulasalle.lexical.analizer;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class Automata {
 
-    private char[] alphabet;
-    private int[][] transitions;
-    private final int lengthStates = 10;
-    private final int lengthTransitions = 83;
+    private Map<Integer, List<List<FuncionTransicion>>> delta;
 
-    public void build() {
-        loadAlphabet();
-        //reservamos memoria
-        this.transitions = new int[lengthStates][lengthTransitions];
-        //cargamos transiciones
-        prepareTransitions();
-        loadTransitions();
-    }
-    
-    
-    public TypeToken getFinalState(int state) {
-        switch (state) {
-            case 2:
-                return TypeToken.STRING_LITERAL;
-            case 3:
-            case 4:
-                return TypeToken.OPERATOR;
-            case 8:
-                return TypeToken.IDENTIFIER;
-            case 7:
-                return TypeToken.CONSTANT_INTEGER;
-            case 5:
-                return TypeToken.DELIMITER;
-            default:
-                return TypeToken.IS_NOT_FINAL;
-        }
+    private Map<Integer, TipoToken> conjuntoEstadosFinales;
+
+    public Automata() {
+        this.delta = new HashMap<>();
+
+        List<List<FuncionTransicion>> transitionOf0 = new ArrayList<>();
+        transitionOf0.add(getLetters(8));
+        transitionOf0.add(getSpecials(8));
+        transitionOf0.add(getNumbers(7));
+        transitionOf0.add(getDelimiters(5));
+        transitionOf0.add(getOperatorsBooleans(4));
+        transitionOf0.add(getOperators(3));
+        transitionOf0.add(getEqual(4));
+        transitionOf0.add(getAsterisk(3));
+        transitionOf0.add(getOperatorsBooleanAND(9));
+        transitionOf0.add(getOperatorsBooleanOR(6));
+        transitionOf0.add(getSlash(13));
+        transitionOf0.add(getQuote(1));
+
+        List<List<FuncionTransicion>> transitionOf1 = new ArrayList<>();
+        transitionOf1.add(getLetters(1));
+        transitionOf1.add(getSpecials(1));
+        transitionOf1.add(getNumbers(1));
+        transitionOf1.add(getDelimiters(1));
+        transitionOf1.add(getOperatorsBooleans(1));
+        transitionOf1.add(getEqual(1));
+        transitionOf1.add(getOperatorsBooleanOR(1));
+        transitionOf1.add(getOperatorsBooleanAND(1));
+        transitionOf1.add(getSlash(1));
+        transitionOf1.add(getOperators(1));
+        transitionOf1.add(getAsterisk(1));
+        transitionOf1.add(getQuote(2));
+        transitionOf1.add(getSpace(10));
+
+        List<List<FuncionTransicion>> transitionOf4 = new ArrayList<>();
+        transitionOf4.add(getEqual(3));
+
+        List<List<FuncionTransicion>> transitionOf6 = new ArrayList<>();
+        transitionOf6.add(getOperatorsBooleanOR(3));
+
+        List<List<FuncionTransicion>> transitionOf7 = new ArrayList<>();
+        transitionOf7.add(getNumbers(7));
+
+        List<List<FuncionTransicion>> transitionOf8 = new ArrayList<>();
+        transitionOf8.add(getLetters(8));
+        transitionOf8.add(getNumbers(8));
+
+        List<List<FuncionTransicion>> transitionOf9 = new ArrayList<>();
+        transitionOf9.add(getOperatorsBooleanAND(3));
+
+        List<List<FuncionTransicion>> transitionOf10 = new ArrayList<>();
+        transitionOf10.add(getLetters(10));
+        transitionOf10.add(getSpecials(10));
+        transitionOf10.add(getNumbers(10));
+        transitionOf10.add(getDelimiters(10));
+        transitionOf10.add(getOperatorsBooleans(10));
+        transitionOf10.add(getEqual(10));
+        transitionOf10.add(getOperatorsBooleanOR(10));
+        transitionOf10.add(getOperatorsBooleanAND(10));
+        transitionOf10.add(getSlash(10));
+        transitionOf10.add(getOperators(10));
+        transitionOf10.add(getQuote(10));
+        transitionOf10.add(getSpace(10));
+        transitionOf10.add(getAsterisk(11));
+
+        List<List<FuncionTransicion>> transitionOf11 = new ArrayList<>();
+        transitionOf11.add(getLetters(10));
+        transitionOf11.add(getSpecials(10));
+        transitionOf11.add(getNumbers(10));
+        transitionOf11.add(getDelimiters(10));
+        transitionOf11.add(getOperatorsBooleans(10));
+        transitionOf11.add(getEqual(10));
+        transitionOf11.add(getOperatorsBooleanOR(10));
+        transitionOf11.add(getOperatorsBooleanAND(10));
+        transitionOf11.add(getOperators(10));
+        transitionOf11.add(getQuote(10));
+        transitionOf11.add(getSpace(10));
+        transitionOf11.add(getSlash(12));
+
+        List<List<FuncionTransicion>> transitionOf13 = new ArrayList<>();
+        transitionOf13.add(getSlash(14));
+
+        List<List<FuncionTransicion>> transitionOf14 = new ArrayList<>();
+        transitionOf14.add(getLetters(10));
+        transitionOf14.add(getSpecials(10));
+        transitionOf14.add(getNumbers(10));
+        transitionOf14.add(getDelimiters(10));
+        transitionOf14.add(getOperatorsBooleans(10));
+        transitionOf14.add(getEqual(10));
+        transitionOf14.add(getOperatorsBooleanOR(10));
+        transitionOf14.add(getOperatorsBooleanAND(10));
+        transitionOf14.add(getOperators(10));
+        transitionOf14.add(getQuote(10));
+        transitionOf14.add(getSpace(10));
+		//salto de linea	
+
+        this.delta.put(0, transitionOf0);
+        this.delta.put(1, transitionOf1);
+        this.delta.put(4, transitionOf4);
+        this.delta.put(6, transitionOf6);
+        this.delta.put(7, transitionOf7);
+        this.delta.put(8, transitionOf8);
+        this.delta.put(9, transitionOf9);
+        this.delta.put(10, transitionOf10);
+        this.delta.put(11, transitionOf11);
+        this.delta.put(13, transitionOf13);
+        this.delta.put(14, transitionOf14);
+
+        this.conjuntoEstadosFinales.put(5, TipoToken.DELIMITADOR);
+        this.conjuntoEstadosFinales.put(2, TipoToken.LITERAL_CADENA);
+        this.conjuntoEstadosFinales.put(7, TipoToken.CONST_NUMERICA);
+        this.conjuntoEstadosFinales.put(8, TipoToken.IDENTIFICADOR);
+        this.conjuntoEstadosFinales.put(4, TipoToken.OPERADOR);
+        this.conjuntoEstadosFinales.put(3, TipoToken.OPERADOR);
+        this.conjuntoEstadosFinales.put(13, TipoToken.OPERADOR);
+        this.conjuntoEstadosFinales.put(15, TipoToken.COMENTARIO);
+        this.conjuntoEstadosFinales.put(12, TipoToken.COMENTARIO_MULTILINEA);
     }
 
-    private void prepareTransitions() {
-        //iniciamos las matrices en -1 (transitions) y en false (transitionsAccepted)
-        for (int i = 0; i < lengthStates; i++) {
-            for (int j = 0; j < lengthTransitions; j++) {
-                transitions[i][j] = -1;
+    private List<FuncionTransicion> getNumbers(int state) {
+        List<FuncionTransicion> transitions_09 = new ArrayList<>();
+        transitions_09.add(new FuncionTransicion(getCharacters_09(), state));
+        return transitions_09;
+    }
+
+    private List<FuncionTransicion> getSpecials(int state) {
+        List<FuncionTransicion> transitionsSpecial = new ArrayList<>();
+        transitionsSpecial.add(new FuncionTransicion(new char[]{'_', '$'}, state));
+        return transitionsSpecial;
+    }
+
+    private List<FuncionTransicion> getLetters(int state) {
+        List<FuncionTransicion> transitionsletters = new ArrayList<>();
+        transitionsletters.add(new FuncionTransicion(getCharacters_AZ(), state));
+        transitionsletters.add(new FuncionTransicion(getCharacters_az(), state));
+        return transitionsletters;
+    }
+
+    private List<FuncionTransicion> getDelimiters(int state) {
+        List<FuncionTransicion> transitionsDelimiters = new ArrayList<>();
+        transitionsDelimiters.add(new FuncionTransicion(new char[]{'(', ')', '{', '}', ',', ';'}, state));
+        return transitionsDelimiters;
+    }
+
+    private List<FuncionTransicion> getOperatorsBooleans(int state) {
+        List<FuncionTransicion> transitionsOperatorsBooleans = new ArrayList<>();
+        transitionsOperatorsBooleans.add(new FuncionTransicion(new char[]{'<', '>', '!'}, state));
+        return transitionsOperatorsBooleans;
+    }
+
+    private List<FuncionTransicion> getOperators(int state) {
+        List<FuncionTransicion> transitionsOperators = new ArrayList<>();
+        transitionsOperators.add(new FuncionTransicion(new char[]{'+', '-', '%'}, state));
+        return transitionsOperators;
+    }
+
+    private List<FuncionTransicion> getOperatorsBooleanAND(int state) {
+        List<FuncionTransicion> transitionsOperatorsBooleanAND = new ArrayList<>();
+        transitionsOperatorsBooleanAND.add(new FuncionTransicion(new char[]{'&'}, state));
+        return transitionsOperatorsBooleanAND;
+    }
+
+    private List<FuncionTransicion> getOperatorsBooleanOR(int state) {
+        List<FuncionTransicion> transitionsOperatorsBooleanOR = new ArrayList<>();
+        transitionsOperatorsBooleanOR.add(new FuncionTransicion(new char[]{'|'}, state));
+        return transitionsOperatorsBooleanOR;
+    }
+
+    private List<FuncionTransicion> getSlash(int state) {
+        List<FuncionTransicion> transitionsSlash = new ArrayList<>();
+        transitionsSlash.add(new FuncionTransicion(new char[]{'/'}, state));
+        return transitionsSlash;
+    }
+
+    private List<FuncionTransicion> getQuote(int state) {
+        List<FuncionTransicion> transitionsQuote = new ArrayList<>();
+        transitionsQuote.add(new FuncionTransicion(new char[]{'"'}, state));
+        return transitionsQuote;
+    }
+
+    private List<FuncionTransicion> getAsterisk(int state) {
+        List<FuncionTransicion> transitionsAsterisk = new ArrayList<>();
+        transitionsAsterisk.add(new FuncionTransicion(new char[]{'*'}, state));
+        return transitionsAsterisk;
+    }
+
+    private List<FuncionTransicion> getEqual(int state) {
+        List<FuncionTransicion> transitionsAsterisk = new ArrayList<>();
+        transitionsAsterisk.add(new FuncionTransicion(new char[]{'='}, state));
+        return transitionsAsterisk;
+    }
+
+    private List<FuncionTransicion> getSpace(int state) {
+        List<FuncionTransicion> transitionsSpace = new ArrayList<>();
+        transitionsSpace.add(new FuncionTransicion(new char[]{' '}, state));
+        return transitionsSpace;
+    }
+
+    public void show() {
+
+        for (Map.Entry hash : this.delta.entrySet()) {
+            for (List<FuncionTransicion> transitions : (List<List<FuncionTransicion>>) hash.getValue()) {
+                for (FuncionTransicion funcionTransicion : transitions) {
+                    System.out.print(hash.getKey() + " >> ");
+                    for (char character : funcionTransicion.getCaracteresAceptados()) {
+                        System.out.print(character + " ");
+                    }
+                    System.out.println(" >> \t" + funcionTransicion.getEstadoSiguiente());
+                }
             }
         }
     }
 
-    public void showTransitions() {
-        System.out.print("\t");
-        for (int i = 0; i < lengthTransitions; i++) {
-            System.out.print(alphabet[i] + "\t");
+    private char[] getCharacters_AZ() {
+        char[] caracteresAceptados = new char[26];
+        int i = 0;
+        for (char character = 'A'; character <= 'Z'; character++, i++) {
+            caracteresAceptados[i] = character;
         }
-        for (int i = 0; i < lengthStates; i++) {
-            System.out.print("\n" + i + "\t");
-            for (int j = 0; j < lengthTransitions; j++) {
-                System.out.print(transitions[i][j] + "\t");
-            }
-        }
-        System.out.print("\n");
+        return caracteresAceptados;
     }
 
-    private void loadTransitions() {
-        // agregamos comillas apertura                                     q0-q1
-        transitions[0][82] = 1;
-        // agregamos todo excepto comillas                                 q1-q1
-        for (int i = 0; i < 82; i++) {
-            transitions[1][i] = 1;
+    private char[] getCharacters_az() {
+        char[] caracteresAceptados = new char[26];
+        int i = 0;
+        for (char character = 'a'; character <= 'z'; character++, i++) {
+            caracteresAceptados[i] = character;
         }
-        // agregamos comillas cierre                                       q1-q2
-        transitions[1][82] = 2;
-        // agregamos operadores aritmeticos                                q0-q3
-        for (int i = 62; i < 67; i++) {
-            transitions[0][i] = 3;
-        }
-        // agregamos operadores logicos y asignacion                       q0-q4
-        for (int i = 67; i < 71; i++) {
-            transitions[0][i] = 4;
-        }
-        //                                                                 q4-q3
-        transitions[4][70] = 3;
-        // agregamos operadores de coneccion logica
-        //                                                                 q0-q9
-        transitions[0][71] = 9;
-        //                                                                 q9-q3
-        transitions[9][71] = 3;
-        //                                                                 q0-q6
-        transitions[0][72] = 6;
-        //                                                                 q6-q3
-        transitions[6][72] = 3;
-        //                                                                 q6-q3
-        for (int i = 71; i < 73; i++) {
-            transitions[6][i] = 3;
-        }
-        // agregamos identificadores                                       q0-q8
-        for (int i = 0; i < 52; i++) {
-            transitions[0][i] = 8;
-        }
-        //                                                                 q0-q8
-        for (int i = 79; i < 81; i++) {
-            transitions[0][i] = 8;
-        }
-        //                                                                 q8-q8
-        for (int i = 0; i < 62; i++) {
-            transitions[8][i] = 8;
-        }
-        // agregamos numeros                                               q0-q7
-        for (int i = 52; i < 62; i++) {
-            transitions[0][i] = 7;
-        }
-        //                                                                 q7-q7
-        for (int i = 52; i < 62; i++) {
-            transitions[7][i] = 7;
-        }
-        // agregamos delimitadores                                        q0-q5
-        for (int i = 73; i < 79; i++) {
-            transitions[0][i] = 5;
-        }
+        return caracteresAceptados;
     }
 
-    private void loadAlphabet() {
-        this.alphabet = new char[]{
-            // letras                                          52           0-51
-            'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
-            'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-            'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
-            'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-            // numeros                                         10          52-61
-            '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
-            //operadores aritmeticos                            5          62-66
-            '-', '+', '*', '/', '%',
-            //operadores logicos y asignacion                   4          67-70
-            '<', '>', '!', '=',
-            //operadores coneccion logica                       2          71-72
-            '&', '|',
-            //delimitadores                                     6          73-78
-            ',', ';', '{', '}', '(', ')',
-            //especiales                                        3          79-82
-            '_', '$',' ', '"'
-        };
+    private char[] getCharacters_09() {
+
+        char[] caracteresAceptados = new char[10];
+        int i = 0;
+        for (char character = '0'; character <= '9'; character++, i++) {
+            caracteresAceptados[i] = character;
+        }
+        return caracteresAceptados;
     }
 
-    public int getLengthStates() {
-        return lengthStates;
-    }
-
-    public int getLengthTransitions() {
-        return lengthTransitions;
-    }
-
-    public char[] getAlphabet() {
-        return alphabet;
-    }
-
-    public int[][] getTransitions() {
-        return transitions;
-    }
-
+    /*public boolean mover(char letra){
+		
+     if()
+     }
+     */
 }
