@@ -1,4 +1,4 @@
-package lexico;
+package org.ulasalle.lexical.analizer;
 
 import java.util.List;;
 

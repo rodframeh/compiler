@@ -6,14 +6,19 @@ import java.util.List;
 import java.util.Map;
 
 public class Automata {
+    
 
     private Map<Integer, List<List<FuncionTransicion>>> delta;
 
     private Map<Integer, TipoToken> conjuntoEstadosFinales;
 
+    private int estado;
+    
     public Automata() {
+        estado=-1;
         this.delta = new HashMap<>();
-
+        this.conjuntoEstadosFinales=new HashMap<>();
+        
         List<List<FuncionTransicion>> transitionOf0 = new ArrayList<>();
         transitionOf0.add(getLetters(8));
         transitionOf0.add(getSpecials(8));
@@ -208,7 +213,6 @@ public class Automata {
     }
 
     public void show() {
-
         for (Map.Entry hash : this.delta.entrySet()) {
             for (List<FuncionTransicion> transitions : (List<List<FuncionTransicion>>) hash.getValue()) {
                 for (FuncionTransicion funcionTransicion : transitions) {
@@ -250,9 +254,39 @@ public class Automata {
         return caracteresAceptados;
     }
 
-    /*public boolean mover(char letra){
-		
-     if()
+    
+    public boolean mover(char letra){
+        for (Map.Entry hash : this.delta.entrySet()) {
+            for (List<FuncionTransicion> transitions : (List<List<FuncionTransicion>>) hash.getValue()) {
+                for (FuncionTransicion funcionTransicion : transitions) {
+                    for (char character : funcionTransicion.getCaracteresAceptados()) {                        
+                        if(letra==character){
+                            estado= funcionTransicion.getEstadoSiguiente();
+                            return true;
+                        }
+                    }
+                    
+                }
+            }
+        }
+        return false;
+        
      }
-     */
+    
+    
+    public boolean esFinal(){
+        for(int i=0;i<conjuntoEstadosFinales.size();i++){
+            return this.conjuntoEstadosFinales.get(estado)!=null;
+        }
+        return false;
+    }
+     
+    
+    public TipoToken obtenerTipo(){
+        return this.conjuntoEstadosFinales.get(estado);
+    }
+    
+    public void reset(){
+        estado=-1;
+    }
 }
