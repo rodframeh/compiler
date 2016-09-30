@@ -22,10 +22,10 @@ public class AnalizadorLexico {
     private List<String> palabrasReservadas;
     private List<ErrorLexico> errorLexicos;
     private List<Token> tokens;
-    private boolean flag;
     
     public AnalizadorLexico(){
         palabrasReservadas=new ArrayList<>();
+        
         tokens=new ArrayList<>();
         errorLexicos=new ArrayList<>();
         palabrasReservadas.add("Programa");
@@ -48,53 +48,73 @@ public class AnalizadorLexico {
     public List<Token> getTokens() {
         return tokens;
     }
-
-    public void setTokens(List<Token> tokens) {
-        this.tokens = tokens;
-    }
-
     
-    
-    public void analizar(String path) throws IOException {
+    private StringBuilder leerArchivo(String path) throws IOException
+    {
         StringBuilder sourceCode = new StringBuilder();
-        try (Stream<String> sourceFileStream = Files.lines((new File(path)).toPath())) {
+        
+        try (Stream<String> sourceFileStream = Files.lines((new File(path)).toPath())) 
+        {
             sourceFileStream.forEach(lineStream -> sourceCode.append(lineStream).append("\n"));
         }
-     
-        int index = 0;
-        char character = sourceCode.charAt(index);
+        
+        return sourceCode;
+    }
+    
+    private boolean esBlanco( char c )
+    {
+        return c == ' ' || c == '\t' || c == '\n';
+    }
+    
+    public void analizar(String path) throws IOException 
+    {
+        StringBuilder codigoFuente = leerArchivo(path);
+        
         StringBuilder buffer = new StringBuilder();
         
-        if(automata.mover(character)){
-            buffer.append(character);
-        }else{
-            if(automata.esFinal()){
-                TipoToken tipoToken=automata.obtenerTipo();
-                if(tipoToken == TipoToken.IDENTIFICADOR){
-                    for(String palabraReservada:palabrasReservadas){
-                        if(buffer.toString().equals(palabraReservada)){
-                            tipoToken=TipoToken.PALABRA_RESERVADA;
-                        }
-                    }
+        for(int index = 0;index<codigoFuente.length();)
+        {
+            char caracter = codigoFuente.charAt(index);
+            if(automata.mover(caracter))
+            {
+                buffer.append(caracter);
+                index++;
+            }
+            else
+            {
+                if(automata.esFinal())
+                {
+                    String lexema = buffer.toString();
+                    TipoToken tipoToken=automata.obtenerTipo();
+
+                    if( tipoToken == TipoToken.IDENTIFICADOR && palabrasReservadas.stream().filter( p->p.equals(lexema) ).count()>0)
+                        tipoToken=TipoToken.PALABRA_RESERVADA;
+
+                    tokens.add(new Token(tipoToken, lexema));// reinicio todo
+                    buffer = new StringBuilder();
+                    automata.reset();
                 }
-                tokens.add(new Token(tipoToken, buffer.toString()));// reinicio todo
-                buffer=new StringBuilder();
-                automata.reset();
-                
-            }else{
-                if(buffer.length()>0){
-                    errorLexicos.add(new ErrorLexico(buffer.toString(), 0));
-                    index++;
-                }else{
-                    if(character==' '){
-                        while(character==' '){
-                            character=sourceCode.charAt(index++);
-                        }
-                    }else{
+                else
+                {
+                    if(buffer.length()>0)
+                    {
                         errorLexicos.add(new ErrorLexico(buffer.toString(), 0));
                         index++;
                     }
-                    
+                    else
+                    {
+                        if(esBlanco(caracter))
+                        {
+                            do  caracter=codigoFuente.charAt(++index);
+                            while(esBlanco(caracter));
+                        }
+                        else
+                        {
+                            errorLexicos.add(new ErrorLexico(buffer.toString(), 0));
+                            index++;
+                        }
+
+                    }
                 }
             }
         }
