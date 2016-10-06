@@ -7,18 +7,25 @@ import java.util.logging.Logger;
 public class App {
 
     public static void main(String[] args) {
+       Automata automata=new  Automata();
+       automata.mover(')');
+        
         try {
    
             AnalizadorLexico analizador = new AnalizadorLexico();
             
-            analizador.analizar("/home/christianlp/textoUno.programa");
-            for(Token token:analizador.getTokens()){
-                System.out.println(token);
+            
+            for(Token token:analizador.analizar("/home/christianlp/textoUno.programa")){
+                System.out.println(token.getLexema() +" - "+token.getTipoToken());
             }
             
         } catch (IOException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+ 
+
+
     }
 
 }
