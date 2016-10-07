@@ -4,28 +4,26 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class App {
+public class App
+{
 
-    public static void main(String[] args) {
-       Automata automata=new  Automata();
-       automata.mover(')');
-        
-        try {
-   
+    public static void main(String[] args) throws IOException
+    {
+        try
+        {
             AnalizadorLexico analizador = new AnalizadorLexico();
-            
-            
-            for(Token token:analizador.analizar("/home/christianlp/textoUno.programa")){
-                System.out.println(token.getLexema() +" - "+token.getTipoToken());
-            }
-            
-        } catch (IOException ex) {
+            ConjuntoLexico cl = analizador.analizar("/home/francisco/test.programa");
+
+            for (Token token : cl.getTokens())
+                System.out.println(token.getLexema() + " - " + token.getTipoToken());
+
+            for (ErrorLexico error : cl.getErroresLexicos())
+                System.out.println(error.getDescripcion());
+
+        } catch (IOException ex)
+        {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
-
- 
-
-
     }
 
 }
