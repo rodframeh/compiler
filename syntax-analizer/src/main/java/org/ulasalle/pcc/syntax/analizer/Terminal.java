@@ -11,27 +11,41 @@ import java.util.Objects;
  *
  * @author francisco
  */
-public class Terminal implements Simbolo
+public class Terminal extends Token implements Simbolo 
 {
 
-    private String valor;
-
-    public Terminal(String valor)
+    public Terminal()
     {
-        this.valor = valor;
     }
 
-    public String getValor()
+    public Terminal(TipoToken tipoToken)
     {
-        return valor;
+        super(tipoToken);
     }
 
+    public Terminal(String lexema)
+    {
+        super(lexema);
+    }
+
+    public Terminal(TipoToken tipoToken, String lexema)
+    {
+        super(tipoToken, lexema);
+    }
+    
+    public String getLexema()
+    {
+        return lexema;
+    }
+ 
     @Override
     public boolean equals(Object obj)
     {
-        if (obj == null || (getClass() != obj.getClass()))
+        if (obj == null || (getClass() != obj.getClass())){
             return false;
-        return Objects.equals(this.valor, ((Terminal) obj).valor);
+        }
+         System.out.println("lala"+((Terminal) obj).lexema);   
+        return Objects.equals(super.lexema, ((Terminal) obj).lexema) || Objects.equals(super.tipoToken, ((Terminal) obj).tipoToken);
     }
 
 }

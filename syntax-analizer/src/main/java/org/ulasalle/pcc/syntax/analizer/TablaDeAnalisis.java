@@ -115,8 +115,8 @@ public class TablaDeAnalisis
         terminales.add(new Terminal("="));
         terminales.add(new Terminal(","));
         terminales.add(new Terminal(";"));
-        terminales.add(new Terminal("&IDENTIFICADOR&"));
-        terminales.add(new Terminal("&CONSTANTE_NUMERICA&"));
+        terminales.add(new Terminal(TipoToken.IDENTIFICADOR));
+        terminales.add(new Terminal(TipoToken.CONST_NUMERICA));
     }
 
     public TablaDeAnalisis()
@@ -132,13 +132,15 @@ public class TablaDeAnalisis
         return reglasDeProduccion.get(0).getNoTerminalInicial();
     }
 
-    public int getIndiceDeReglaDeProduccion(Terminal terminal, NoTerminal noTerminal)
+    public int getIndiceDeReglaDeProduccion(Token token, NoTerminal noTerminal)
     {
-        for (int i = 0; i < terminales.size(); i++)
-            if (terminales.get(i).equals(terminal))
+        for (int i = 0; i < terminales.size(); i++){
+            //System.out.println("es igual: "+terminales.get(i).equals(token));
+            if (terminales.get(i).equals((Terminal)token))
                 for (int j = 0; j < noTerminales.size(); j++)
                     if (noTerminales.get(j).equals(noTerminal))
                         return exploradorDeReglas[j][i];
+        }
         return -1;
     }
 
@@ -146,14 +148,6 @@ public class TablaDeAnalisis
     {
         return reglasDeProduccion.get(indiceDeRegla).getDerivacion();
 
-    }
-
-    public boolean esLambda(NoTerminal noTerminal)
-    {
-        for (ReglaDeProduccion reglaDeProduccion : reglasDeProduccion)
-            if (reglaDeProduccion.getNoTerminalInicial().equals(noTerminal) && reglaDeProduccion.getDerivacion() == null)
-                return true;
-        return false;
     }
 
 }

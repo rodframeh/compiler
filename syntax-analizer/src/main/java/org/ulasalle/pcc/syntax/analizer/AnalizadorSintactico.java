@@ -29,24 +29,25 @@ public class AnalizadorSintactico
         {
             System.out.println("Indice: " + indiceDeTokens);
             if (pila.peek().getClass() == Terminal.class
-                    && tokens.get(indiceDeTokens).getLexema().equals(((Terminal) pila.peek()).getValor()))
+                    && tokens.get(indiceDeTokens).getLexema().equals(((Terminal) pila.peek()).getLexema()))
             {
-                System.out.println("Sacando:" + ((Terminal) pila.pop()).getValor());
+                System.out.println("Sacando:" + ((Terminal) pila.pop()).getLexema());
                 indiceDeTokens++;
             } else
             {
                 if (pila.peek().getClass() == Terminal.class)
                 {
-                    System.out.println(((Terminal) pila.peek()).getValor());
+                    System.out.println(((Terminal) pila.peek()).getLexema());
                     System.out.println("Error 1");
                     return;
                 }
-                if (tokens.get(indiceDeTokens).getTipoToken() == TipoToken.IDENTIFICADOR)
-                    tokens.get(indiceDeTokens).setLexema("&IDENTIFICADOR&");
-                else if (tokens.get(indiceDeTokens).getTipoToken() == TipoToken.CONST_NUMERICA)
-                    tokens.get(indiceDeTokens).setLexema("&CONSTANTE_NUMERICA&");
+                
+//                if (tokens.get(indiceDeTokens).getTipoToken() == TipoToken.IDENTIFICADOR)
+//                    tokens.get(indiceDeTokens).setLexema("&IDENTIFICADOR&");
+//                else if (tokens.get(indiceDeTokens).getTipoToken() == TipoToken.CONST_NUMERICA)
+//                    tokens.get(indiceDeTokens).setLexema("&CONSTANTE_NUMERICA&");
 
-                indiceDeRegla = tablaDeAnalisis.getIndiceDeReglaDeProduccion(new Terminal(tokens.get(indiceDeTokens).getLexema()), (NoTerminal) pila.peek());
+                indiceDeRegla = tablaDeAnalisis.getIndiceDeReglaDeProduccion( tokens.get(indiceDeTokens), (NoTerminal) pila.peek());
 
                 System.out.println("Regla: " + indiceDeRegla);
 
@@ -76,7 +77,7 @@ public class AnalizadorSintactico
     {
 
         for (Simbolo simbolo : pila)
-            System.out.print((simbolo instanceof Terminal ? ((Terminal) simbolo).getValor() : ((NoTerminal) simbolo).getNombre()));
+            System.out.print((simbolo instanceof Terminal ? ((Terminal) simbolo).getLexema() : ((NoTerminal) simbolo).getNombre()));
         System.out.println();
 
     }

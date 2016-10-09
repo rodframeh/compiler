@@ -12,19 +12,29 @@ package org.ulasalle.pcc.syntax.analizer;
 public class Token
 {
 
-    private TipoToken tipoToken;
-    private String lexema;
+    protected TipoToken tipoToken;
+    protected String lexema;
 
     public Token()
     {
     }
 
+    public Token(TipoToken tipoToken)
+    {
+        this.tipoToken = tipoToken;
+    }
+    
     public Token(TipoToken tipoToken, String lexema)
     {
         this.tipoToken = tipoToken;
         this.lexema = lexema;
     }
 
+    public Token(String lexema)
+    {
+        this.lexema = lexema;
+    }
+    
     public TipoToken getTipoToken()
     {
         return tipoToken;
