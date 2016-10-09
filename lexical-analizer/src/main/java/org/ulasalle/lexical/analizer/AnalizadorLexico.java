@@ -61,6 +61,7 @@ public class AnalizadorLexico
             if (tipoToken == TipoToken.IDENTIFICADOR && palabrasReservadas.stream().filter(p -> p.equals(lexema)).count() > 0)
                 tipoToken = TipoToken.PALABRA_RESERVADA;
             tokens.add(new Token(tipoToken, lexema));
+            
         }
     }
 
@@ -84,8 +85,15 @@ public class AnalizadorLexico
                 buffer.append(caracter);
                 if (index++ == codigoFuente.length() - 1)
                     agregarToken(buffer, tokens);
-            } else if (automata.esFinal())
-                agregarToken(buffer, tokens);
+            } 
+            else if (automata.esFinal())
+            {
+//                int temp=(index+1)>(codigoFuente.length()-1) ? codigoFuente.length()-1: index+1;
+//                if(codigoFuente.charAt(temp)==' ' || automata.obtenerTipo()==TipoToken.DELIMITADOR)
+                    agregarToken(buffer, tokens);
+//                else 
+//                    errores.add(new ErrorLexico(buffer + "" + caracter, caracter, linea));
+            }  
             else if (esBlanco(caracter))
                 do
                 {

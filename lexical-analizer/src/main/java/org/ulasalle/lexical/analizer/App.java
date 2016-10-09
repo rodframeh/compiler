@@ -12,7 +12,7 @@ public class App
         try
         {
             AnalizadorLexico analizador = new AnalizadorLexico();
-            ConjuntoLexico cl = analizador.analizar("/home/francisco/test.programa");
+            ConjuntoLexico cl = analizador.analizar("/home/christianlp/textoUno.programa");
 
             for (Token token : cl.getTokens())
                 System.out.println(token.getLexema() + " - " + token.getTipoToken());
