@@ -49,7 +49,7 @@ public class TablaAnalisis
         reglasDeProduccion.add(new ReglaProduccion(new NoTerminal("<RD*>"), new ArrayList<Simbolo>()));
 
         derivacion = new ArrayList<>();
-        derivacion.add(new Terminal(TipoToken.IDENTIFICADOR,"&IDENTIFICADOR&"));
+        derivacion.add(new Terminal(TipoToken.IDENTIFICADOR));
         derivacion.add(new NoTerminal("<A>"));
         reglasDeProduccion.add(new ReglaProduccion(new NoTerminal("<VA>"), derivacion));
 
@@ -65,68 +65,15 @@ public class TablaAnalisis
         reglasDeProduccion.add(new ReglaProduccion(new NoTerminal("<TD>"), derivacion));
 
         derivacion = new ArrayList<>();
-        derivacion.add(new Terminal(TipoToken.CONST_NUMERICA,"&CONSTANTE_NUMERICA&"));
+        derivacion.add(new Terminal(TipoToken.CONST_NUMERICA));
         reglasDeProduccion.add(new ReglaProduccion(new NoTerminal("<EM>"), derivacion));
 
     }
 
-    private void llenarExploradorDeReglas()
-    {
-        exploradorDeReglas = new int[][]
-        {
-            {
-                0, 1, 1, 1, 1, 1
-            },
-            {
-                2, -1, -1, -1, -1, -1
-            },
-            {
-                8, -1, -1, -1, -1, -1
-            },
-            {
-                -1, -1, -1, -1, 5, -1
-            },
-            {
-                4, 4, 3, 4, 4, 4
-            },
-            {
-                7, 6, 7, 7, 7, 7
-            },
-            {
-                -1, -1, -1, -1, -1, 9
-            }
-        };
-    }
-
-    private void llenarListaDeNoTerminales()
-    {
-        noTerminales = new ArrayList<>();
-        noTerminales.add(new NoTerminal("<DC>"));
-        noTerminales.add(new NoTerminal("<SD>"));
-        noTerminales.add(new NoTerminal("<TD>"));
-        noTerminales.add(new NoTerminal("<VA>"));
-        noTerminales.add(new NoTerminal("<RD*>"));
-        noTerminales.add(new NoTerminal("<A>"));
-        noTerminales.add(new NoTerminal("<EM>"));
-    }
-
-    private void llenarListaDeTerminales()
-    {
-        terminales = new ArrayList<>();
-        terminales.add(new Terminal("int"));
-        terminales.add(new Terminal("="));
-        terminales.add(new Terminal(","));
-        terminales.add(new Terminal(";"));
-        terminales.add(new Terminal(TipoToken.IDENTIFICADOR));
-        terminales.add(new Terminal(TipoToken.CONST_NUMERICA));
-    }
-
     public TablaAnalisis()
     {
-//        llenarListaDeTerminales();
-//        llenarListaDeNoTerminales();
-//        llenarExploradorDeReglas();
         llenarReglasDeProduccion();
+        generarExploradorDeReglas();
     }
 
     public Simbolo getNoTerminalBase()
@@ -136,11 +83,14 @@ public class TablaAnalisis
 
     public int encontrarIndiceReglaProduccion(Terminal terminal, NoTerminal noTerminal)
     {
-        for (int i = 0; i < terminales.size(); i++){
-            if (terminales.get(i).equals(terminal))
-                for (int j = 0; j < noTerminales.size(); j++)
-                    if (noTerminales.get(j).equals(noTerminal))
+        for (int i = 0; i < terminales.size(); i++) {
+            if (terminales.get(i).equals(terminal)) {
+                for (int j = 0; j < noTerminales.size(); j++) {
+                    if (noTerminales.get(j).equals(noTerminal)) {
                         return exploradorDeReglas[j][i];
+                    }
+                }
+            }
         }
         return -1;
     }
@@ -151,90 +101,124 @@ public class TablaAnalisis
 
     }
 
-    public void generarExploradorDeReglas()
+    private void generarSimbolos()
     {
-        List<Terminal> terminales=new LinkedList<>();
-        List<NoTerminal> noTerminales=new LinkedList<>();       
-        for(ReglaProduccion reglaProduccion:reglasDeProduccion)
-        {
-            boolean existeNoTerminal=false;
-                for (NoTerminal noTerminal: noTerminales)
-                    {
-                        if(noTerminal.equals(reglaProduccion.getNoTerminalInicial()))
-                        {
-                            existeNoTerminal=true;
+        terminales=new LinkedList<>();
+        noTerminales=new LinkedList<>();
+          for (ReglaProduccion reglaProduccion : reglasDeProduccion) {
+            boolean existeNoTerminal = false;
+            for (NoTerminal noTerminal : noTerminales) {
+                if (noTerminal.equals(reglaProduccion.getNoTerminalInicial())) {
+                    existeNoTerminal = true;
+                }
+            }
+            if (!existeNoTerminal) {
+                noTerminales.add(reglaProduccion.getNoTerminalInicial());
+            }
+            for (Simbolo simbolo : reglaProduccion.getDerivacion()) {
+                if (simbolo instanceof Terminal) {
+                    boolean existeTerminal = false;
+                    for (Terminal terminal : terminales) {
+                        if (terminal.equals(simbolo)) {
+                            existeTerminal = true;
                         }
                     }
-                if(!existeNoTerminal)noTerminales.add(reglaProduccion.getNoTerminalInicial());
-            for (Simbolo simbolo: reglaProduccion.getDerivacion())
-            {
-                if(simbolo instanceof Terminal)
-                {
-                    boolean existeTerminal=false;
-                    for (Terminal terminal: terminales)
-                    {
-                        if(terminal.equals(simbolo))
-                        {
-                            existeTerminal=true;
-                        }
+                    if (!existeTerminal) {
+                        terminales.add((Terminal) simbolo);
                     }
-                    if(!existeTerminal) terminales.add((Terminal) simbolo);
                 }
             }
         }
-        Arrays.stream(terminales.toArray()).forEach(t -> System.out.println(((Terminal)t).getLexema()));
-        Arrays.stream(noTerminales.toArray()).forEach(t -> System.out.println(((NoTerminal)t).getNombre()));
-        
-        
-        int [][] exploradorDeReglas=new int[noTerminales.size()][terminales.size()];
-        for(int i=0;i<noTerminales.size();i++)
-        {
-            for(int j=0;j<terminales.size();j++)
-            {
-                exploradorDeReglas[i][j]=-1;
-            }
-        }
-        
-        for(int i=0;i<noTerminales.size();i++)
-        {
-            for(int j=0;j<terminales.size();j++)
-            {
-                System.out.print(exploradorDeReglas[i][j]+" ");
-            }
-            System.out.println();
-        }
-        
-        
-        
-        
-//        for(int i=0;i<noTerminales.size();i++)
-//        {
-//            for(int j=0;j<terminales.size();j++)
-//            {
-////falta
-//                Simbolo simbolo=reglasDeProduccion.get(i).getDerivacion().get(0);
-//                if(simbolo instanceof Terminal)
-//                {
-//                    Terminal terminal=(Terminal) simbolo;
-//                    if (terminal.equals(terminales.get(j)))
-//                    {
-//                        exploradorDeReglas[i][j]=i;
-//                    }
-//                }
-//            }
-//        }
-        
-        
-        
-        for(int i=0;i<noTerminales.size();i++)
-        {
-            for(int j=0;j<terminales.size();j++)
-            {
-                System.out.print(exploradorDeReglas[i][j]+" ");
-            }
-            System.out.println();
-        }
-        
-    } 
+    }
     
+    private void imprimirSimbolos()
+    {
+        System.out.println("Terminales:");
+        Arrays.stream(terminales.toArray()).forEach(t -> System.out.println((((Terminal) t).getLexema()) == null?((Terminal) t).getTipoToken():((Terminal) t).getLexema()));
+        System.out.println("No terminales:");
+        Arrays.stream(noTerminales.toArray()).forEach(t -> System.out.println(((NoTerminal) t).getNombre()));
+
+    }
+    
+    private void generarMatriz()
+    {
+        exploradorDeReglas = new int[noTerminales.size()][terminales.size()];
+        for (int i = 0; i < noTerminales.size(); i++) {
+            for (int j = 0; j < terminales.size(); j++) {
+                exploradorDeReglas[i][j] = -1;
+            }
+        }
+    }
+    
+    private void imprimirMatriz()
+    {
+        System.out.println("Matriz vacia:");
+        for (int i = 0; i < noTerminales.size(); i++) {
+            for (int j = 0; j < terminales.size(); j++) {
+                System.out.print(exploradorDeReglas[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+ 
+  
+    
+    private int encontrarReglaDeProduccion(NoTerminal noTerminal,Terminal terminal)
+    {
+        for(int i=0;i<reglasDeProduccion.size();i++)
+        {
+            if(reglasDeProduccion.get(i).getNoTerminalInicial().equals(noTerminal))
+            {
+                if(reglasDeProduccion.get(i).getDerivacion().size()>0)
+                {
+                    Simbolo simboloDerivado= reglasDeProduccion.get(i).getDerivacion().get(0);
+                    if(simboloDerivado instanceof Terminal)
+                    {
+                        if(terminal.equals(reglasDeProduccion.get(i).getDerivacion().get(0)))
+                        {
+                            return i;
+                        } 
+                    }
+                    else if(simboloDerivado instanceof NoTerminal)
+                    {
+                        NoTerminal noTerminalDerivado=(NoTerminal)simboloDerivado;
+                        if (encontrarReglaDeProduccion(noTerminalDerivado,terminal)!=-1)
+                        {
+                            return i;
+                        }
+                    }
+                }
+                else
+                {
+                    return i;
+                }    
+            }
+        }
+        return -1;
+    }
+    
+    private void generarExploradorDeReglas()
+    {
+        generarSimbolos();
+        imprimirSimbolos();
+        generarMatriz();
+        imprimirMatriz();
+
+        for (int i = 0; i < noTerminales.size(); i++) {
+            for (int j = 0; j < terminales.size(); j++) {
+                exploradorDeReglas[i][j]=encontrarReglaDeProduccion(noTerminales.get(i), terminales.get(j));
+            }
+        }
+
+        System.out.println("Matriz llena:");
+
+        for (int i = 0; i < noTerminales.size(); i++) {
+            for (int j = 0; j < terminales.size(); j++) {
+                System.out.print(exploradorDeReglas[i][j] + " ");
+            }
+            System.out.println();
+        }
+
+    }
+
 }
