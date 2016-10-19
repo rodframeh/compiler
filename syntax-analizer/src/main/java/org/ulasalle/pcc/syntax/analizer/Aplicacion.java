@@ -20,16 +20,18 @@ public class Aplicacion
      */
     public static void main(String[] args)
     {
-        List<Token> tokens = new ArrayList<Token>();
-        tokens.add(new Token(TipoToken.PALABRA_RESERVADA, "int"));
-        tokens.add(new Token(TipoToken.IDENTIFICADOR, "bc"));
-        tokens.add(new Token(TipoToken.DELIMITADOR, ";"));
-        tokens.add(new Token(TipoToken.PALABRA_RESERVADA, "int"));
-        tokens.add(new Token(TipoToken.IDENTIFICADOR, "ab"));
-        tokens.add(new Token(TipoToken.DELIMITADOR, ";"));
-        AnalizadorSintactico sintactico = new AnalizadorSintactico();
-        sintactico.analizar(tokens);
+//        List<Token> tokens = new ArrayList<Token>();
+//        tokens.add(new Token(TipoToken.PALABRA_RESERVADA, "int"));
+//        tokens.add(new Token(TipoToken.IDENTIFICADOR, "bc"));
+//        tokens.add(new Token(TipoToken.DELIMITADOR, ";"));
+//        tokens.add(new Token(TipoToken.PALABRA_RESERVADA, "int"));
+//        tokens.add(new Token(TipoToken.IDENTIFICADOR, "ab"));
+//        tokens.add(new Token(TipoToken.DELIMITADOR, ";"));
+//        AnalizadorSintactico sintactico = new AnalizadorSintactico();
+//        sintactico.analizar(tokens);
 
+        TablaAnalisis tablaAnalisis=new TablaAnalisis();
+        tablaAnalisis.generarExploradorDeReglas();
     }
 
 }

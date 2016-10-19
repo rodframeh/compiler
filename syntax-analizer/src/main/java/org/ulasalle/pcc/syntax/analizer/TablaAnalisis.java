@@ -6,6 +6,8 @@
 package org.ulasalle.pcc.syntax.analizer;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -121,9 +123,9 @@ public class TablaAnalisis
 
     public TablaAnalisis()
     {
-        llenarListaDeTerminales();
-        llenarListaDeNoTerminales();
-        llenarExploradorDeReglas();
+//        llenarListaDeTerminales();
+//        llenarListaDeNoTerminales();
+//        llenarExploradorDeReglas();
         llenarReglasDeProduccion();
     }
 
@@ -149,4 +151,90 @@ public class TablaAnalisis
 
     }
 
+    public void generarExploradorDeReglas()
+    {
+        List<Terminal> terminales=new LinkedList<>();
+        List<NoTerminal> noTerminales=new LinkedList<>();       
+        for(ReglaProduccion reglaProduccion:reglasDeProduccion)
+        {
+            boolean existeNoTerminal=false;
+                for (NoTerminal noTerminal: noTerminales)
+                    {
+                        if(noTerminal.equals(reglaProduccion.getNoTerminalInicial()))
+                        {
+                            existeNoTerminal=true;
+                        }
+                    }
+                if(!existeNoTerminal)noTerminales.add(reglaProduccion.getNoTerminalInicial());
+            for (Simbolo simbolo: reglaProduccion.getDerivacion())
+            {
+                if(simbolo instanceof Terminal)
+                {
+                    boolean existeTerminal=false;
+                    for (Terminal terminal: terminales)
+                    {
+                        if(terminal.equals(simbolo))
+                        {
+                            existeTerminal=true;
+                        }
+                    }
+                    if(!existeTerminal) terminales.add((Terminal) simbolo);
+                }
+            }
+        }
+        Arrays.stream(terminales.toArray()).forEach(t -> System.out.println(((Terminal)t).getLexema()));
+        Arrays.stream(noTerminales.toArray()).forEach(t -> System.out.println(((NoTerminal)t).getNombre()));
+        
+        
+        int [][] exploradorDeReglas=new int[noTerminales.size()][terminales.size()];
+        for(int i=0;i<noTerminales.size();i++)
+        {
+            for(int j=0;j<terminales.size();j++)
+            {
+                exploradorDeReglas[i][j]=-1;
+            }
+        }
+        
+        for(int i=0;i<noTerminales.size();i++)
+        {
+            for(int j=0;j<terminales.size();j++)
+            {
+                System.out.print(exploradorDeReglas[i][j]+" ");
+            }
+            System.out.println();
+        }
+        
+        
+        
+        
+//        for(int i=0;i<noTerminales.size();i++)
+//        {
+//            for(int j=0;j<terminales.size();j++)
+//            {
+////falta
+//                Simbolo simbolo=reglasDeProduccion.get(i).getDerivacion().get(0);
+//                if(simbolo instanceof Terminal)
+//                {
+//                    Terminal terminal=(Terminal) simbolo;
+//                    if (terminal.equals(terminales.get(j)))
+//                    {
+//                        exploradorDeReglas[i][j]=i;
+//                    }
+//                }
+//            }
+//        }
+        
+        
+        
+        for(int i=0;i<noTerminales.size();i++)
+        {
+            for(int j=0;j<terminales.size();j++)
+            {
+                System.out.print(exploradorDeReglas[i][j]+" ");
+            }
+            System.out.println();
+        }
+        
+    } 
+    
 }

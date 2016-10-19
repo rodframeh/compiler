@@ -46,7 +46,7 @@ public class Terminal extends Token implements Simbolo
             return super.equals(obj);
         }
         final Terminal other=(Terminal) obj;
-        return Objects.equals(super.getLexema(), other.getLexema()) || Objects.equals(super.getTipoToken(), other.getTipoToken());
+        return Objects.equals(super.getLexema(), other.getLexema()) || (super.getTipoToken()!=null && Objects.equals(super.getTipoToken(), other.getTipoToken()));
     }
 
 }
