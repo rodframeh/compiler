@@ -12,13 +12,13 @@ import java.util.List;
  *
  * @author francisco
  */
-public class TablaDeAnalisis
+public class TablaAnalisis
 {
 
     private List<Terminal> terminales;
     private List<NoTerminal> noTerminales;
     private int[][] exploradorDeReglas;
-    private List<ReglaDeProduccion> reglasDeProduccion;
+    private List<ReglaProduccion> reglasDeProduccion;
 
     private void llenarReglasDeProduccion()
     {
@@ -27,44 +27,44 @@ public class TablaDeAnalisis
 
         derivacion.add(new NoTerminal("<SD>"));
         derivacion.add(new NoTerminal("<DC>"));
-        reglasDeProduccion.add(new ReglaDeProduccion(new NoTerminal("<DC>"), derivacion));
+        reglasDeProduccion.add(new ReglaProduccion(new NoTerminal("<DC>"), derivacion));
 
-        reglasDeProduccion.add(new ReglaDeProduccion(new NoTerminal("<DC>"), new ArrayList<Simbolo>()));
+        reglasDeProduccion.add(new ReglaProduccion(new NoTerminal("<DC>"), new ArrayList<Simbolo>()));
 
         derivacion = new ArrayList<>();
         derivacion.add(new NoTerminal("<TD>"));
         derivacion.add(new NoTerminal("<VA>"));
         derivacion.add(new NoTerminal("<RD*>"));
         derivacion.add(new Terminal(";"));
-        reglasDeProduccion.add(new ReglaDeProduccion(new NoTerminal("<SD>"), derivacion));
+        reglasDeProduccion.add(new ReglaProduccion(new NoTerminal("<SD>"), derivacion));
 
         derivacion = new ArrayList<>();
         derivacion.add(new Terminal(","));
         derivacion.add(new NoTerminal("<VA>"));
         derivacion.add(new NoTerminal("<RD*>"));
-        reglasDeProduccion.add(new ReglaDeProduccion(new NoTerminal("<RD*>"), derivacion));
+        reglasDeProduccion.add(new ReglaProduccion(new NoTerminal("<RD*>"), derivacion));
 
-        reglasDeProduccion.add(new ReglaDeProduccion(new NoTerminal("<RD*>"), new ArrayList<Simbolo>()));
+        reglasDeProduccion.add(new ReglaProduccion(new NoTerminal("<RD*>"), new ArrayList<Simbolo>()));
 
         derivacion = new ArrayList<>();
-        derivacion.add(new Terminal("&IDENTIFICADOR&"));
+        derivacion.add(new Terminal(TipoToken.IDENTIFICADOR,"&IDENTIFICADOR&"));
         derivacion.add(new NoTerminal("<A>"));
-        reglasDeProduccion.add(new ReglaDeProduccion(new NoTerminal("<VA>"), derivacion));
+        reglasDeProduccion.add(new ReglaProduccion(new NoTerminal("<VA>"), derivacion));
 
         derivacion = new ArrayList<>();
         derivacion.add(new Terminal("="));
         derivacion.add(new NoTerminal("<EM>"));
-        reglasDeProduccion.add(new ReglaDeProduccion(new NoTerminal("<A>"), derivacion));
+        reglasDeProduccion.add(new ReglaProduccion(new NoTerminal("<A>"), derivacion));
 
-        reglasDeProduccion.add(new ReglaDeProduccion(new NoTerminal("<A>"), new ArrayList<Simbolo>()));
+        reglasDeProduccion.add(new ReglaProduccion(new NoTerminal("<A>"), new ArrayList<Simbolo>()));
 
         derivacion = new ArrayList<>();
         derivacion.add(new Terminal("int"));
-        reglasDeProduccion.add(new ReglaDeProduccion(new NoTerminal("<TD>"), derivacion));
+        reglasDeProduccion.add(new ReglaProduccion(new NoTerminal("<TD>"), derivacion));
 
         derivacion = new ArrayList<>();
-        derivacion.add(new Terminal("&CONSTANTE_NUMERICA&"));
-        reglasDeProduccion.add(new ReglaDeProduccion(new NoTerminal("<EM>"), derivacion));
+        derivacion.add(new Terminal(TipoToken.CONST_NUMERICA,"&CONSTANTE_NUMERICA&"));
+        reglasDeProduccion.add(new ReglaProduccion(new NoTerminal("<EM>"), derivacion));
 
     }
 
@@ -119,7 +119,7 @@ public class TablaDeAnalisis
         terminales.add(new Terminal(TipoToken.CONST_NUMERICA));
     }
 
-    public TablaDeAnalisis()
+    public TablaAnalisis()
     {
         llenarListaDeTerminales();
         llenarListaDeNoTerminales();
@@ -132,11 +132,10 @@ public class TablaDeAnalisis
         return reglasDeProduccion.get(0).getNoTerminalInicial();
     }
 
-    public int getIndiceDeReglaDeProduccion(Token token, NoTerminal noTerminal)
+    public int encontrarIndiceReglaProduccion(Terminal terminal, NoTerminal noTerminal)
     {
         for (int i = 0; i < terminales.size(); i++){
-            //System.out.println("es igual: "+terminales.get(i).equals(token));
-            if (terminales.get(i).equals((Terminal)token))
+            if (terminales.get(i).equals(terminal))
                 for (int j = 0; j < noTerminales.size(); j++)
                     if (noTerminales.get(j).equals(noTerminal))
                         return exploradorDeReglas[j][i];

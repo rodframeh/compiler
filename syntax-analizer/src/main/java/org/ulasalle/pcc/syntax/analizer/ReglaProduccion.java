@@ -11,13 +11,13 @@ import java.util.List;
  *
  * @author francisco
  */
-public class ReglaDeProduccion
+public class ReglaProduccion
 {
 
     private NoTerminal noTerminalInicial;
     private List<Simbolo> derivacion;
 
-    public ReglaDeProduccion(NoTerminal noTerminalInicial, List<Simbolo> derivacion)
+    public ReglaProduccion(NoTerminal noTerminalInicial, List<Simbolo> derivacion)
     {
         this.noTerminalInicial = noTerminalInicial;
         this.derivacion = derivacion;

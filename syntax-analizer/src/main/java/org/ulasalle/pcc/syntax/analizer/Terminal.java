@@ -14,8 +14,9 @@ import java.util.Objects;
 public class Terminal extends Token implements Simbolo 
 {
 
-    public Terminal()
+    public Terminal(Token token)
     {
+        super(token);
     }
 
     public Terminal(TipoToken tipoToken)
@@ -32,20 +33,20 @@ public class Terminal extends Token implements Simbolo
     {
         super(tipoToken, lexema);
     }
-    
-    public String getLexema()
-    {
-        return lexema;
-    }
  
     @Override
     public boolean equals(Object obj)
     {
-        if (obj == null || (getClass() != obj.getClass())){
+        if (obj == null )
+        {
             return false;
         }
-         System.out.println("lala"+((Terminal) obj).lexema);   
-        return Objects.equals(super.lexema, ((Terminal) obj).lexema) || Objects.equals(super.tipoToken, ((Terminal) obj).tipoToken);
+        if(!(obj instanceof Terminal))
+        {
+            return super.equals(obj);
+        }
+        final Terminal other=(Terminal) obj;
+        return Objects.equals(super.getLexema(), other.getLexema()) || Objects.equals(super.getTipoToken(), other.getTipoToken());
     }
 
 }

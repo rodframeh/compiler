@@ -19,60 +19,53 @@ public class AnalizadorSintactico
     public void analizar(List<Token> tokens)
     {
         Stack<Simbolo> pila = new Stack<>();
-        TablaDeAnalisis tablaDeAnalisis = new TablaDeAnalisis();
-        //insertamos no terminal base de la pila
-        pila.add(tablaDeAnalisis.getNoTerminalBase());
-        int indiceDeTokens = 0;
-        int indiceDeRegla = -1;
-
-        while (indiceDeTokens < tokens.size())
-        {
-            System.out.println("Indice: " + indiceDeTokens);
-            if (pila.peek().getClass() == Terminal.class
-                    && tokens.get(indiceDeTokens).getLexema().equals(((Terminal) pila.peek()).getLexema()))
+        TablaAnalisis tablaAnalisis = new TablaAnalisis();
+        pila.add(tablaAnalisis.getNoTerminalBase());
+        int indiceTokens = 0;
+        while (!pila.empty())
+            if (esAceptadoPorPila(pila, tokens.get(indiceTokens)))
             {
-                System.out.println("Sacando:" + ((Terminal) pila.pop()).getLexema());
-                indiceDeTokens++;
+                pila.pop();
+                if ((indiceTokens + 1) < tokens.size())
+                    indiceTokens++;
             } else
-            {
-                if (pila.peek().getClass() == Terminal.class)
-                {
-                    System.out.println(((Terminal) pila.peek()).getLexema());
-                    System.out.println("Error 1");
-                    return;
-                }
-                
-//                if (tokens.get(indiceDeTokens).getTipoToken() == TipoToken.IDENTIFICADOR)
-//                    tokens.get(indiceDeTokens).setLexema("&IDENTIFICADOR&");
-//                else if (tokens.get(indiceDeTokens).getTipoToken() == TipoToken.CONST_NUMERICA)
-//                    tokens.get(indiceDeTokens).setLexema("&CONSTANTE_NUMERICA&");
-
-                indiceDeRegla = tablaDeAnalisis.getIndiceDeReglaDeProduccion( tokens.get(indiceDeTokens), (NoTerminal) pila.peek());
-
-                System.out.println("Regla: " + indiceDeRegla);
-
-                if (indiceDeRegla == -1)
-                {
-                    System.out.println("Error 2");
-                    return;
-                } else
-                    if (pila.peek().getClass() == NoTerminal.class)
-                    {
-                        pila.pop();
-                        List<Simbolo> simbolos = tablaDeAnalisis.getReglaDeProduccion(indiceDeRegla);
-                        //Collections.reverse(simbolos);
-                        for (int i = (simbolos.size() - 1); i >= 0; i--)
-                            pila.add(simbolos.get(i));
-                        //pila.addAll(simbolos);
-                        imprimirPila(pila);
-                    }
-            }
-
-        }
+                derivarToken(pila, tablaAnalisis,tokens.get(indiceTokens));
         if (pila.empty())
             System.out.println("Esta vacia");
     }
 
+    private boolean esAceptadoPorPila(Stack<Simbolo> pila, Token token)
+    {
+        return pila.peek().getClass() == Terminal.class && ((Terminal) pila.peek()).equals(token);
+    }
+    
+    private void derivarToken(Stack<Simbolo> pila, TablaAnalisis tablaAnalisis, Token token)
+    {
+        if (pila.peek().getClass() == Terminal.class)
+        {
+            System.out.println("Error 1");
+            return;
+        }
+        int indiceRegla = tablaAnalisis.encontrarIndiceReglaProduccion(new Terminal(token), (NoTerminal) pila.peek());
+        if (indiceRegla == -1)
+        {
+            System.out.println("Error 2");
+            return;
+        } else reemplazarSimbolos(pila, tablaAnalisis, indiceRegla);
+    }
+
+    private void reemplazarSimbolos(Stack<Simbolo> pila, TablaAnalisis tablaAnalisis,int indiceRegla)
+    {
+        if (pila.peek().getClass() == NoTerminal.class)
+        {
+            pila.pop();
+            List<Simbolo> simbolos = tablaAnalisis.getReglaDeProduccion(indiceRegla);
+            for (int i = (simbolos.size() - 1); i >= 0; i--)
+                pila.add(simbolos.get(i));
+            imprimirPila(pila);
+        }
+    }
+    
     private void imprimirPila(Stack<Simbolo> pila)
     {
 

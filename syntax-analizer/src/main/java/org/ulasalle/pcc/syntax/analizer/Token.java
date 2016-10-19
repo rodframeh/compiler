@@ -5,6 +5,8 @@
  */
 package org.ulasalle.pcc.syntax.analizer;
 
+import java.util.Objects;
+
 /**
  *
  * @author francisco
@@ -12,13 +14,19 @@ package org.ulasalle.pcc.syntax.analizer;
 public class Token
 {
 
-    protected TipoToken tipoToken;
-    protected String lexema;
+    private TipoToken tipoToken;
+    private String lexema;
 
     public Token()
     {
     }
 
+    public Token(Token token)
+    {
+        this.lexema=token.lexema;
+        this.tipoToken=token.tipoToken;
+    }
+    
     public Token(TipoToken tipoToken)
     {
         this.tipoToken = tipoToken;
@@ -55,4 +63,17 @@ public class Token
         this.lexema = lexema;
     }
 
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (this == obj)
+            return true;
+        if ( obj == null || (getClass() != obj.getClass() && !(obj instanceof Token)))
+        {
+            return false;
+        }
+        final Token other = (Token) obj;
+        return Objects.equals(getLexema(), other.getLexema()) || Objects.equals(getTipoToken(), other.getTipoToken());
+    }
+    
 }
