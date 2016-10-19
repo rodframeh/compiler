@@ -5,7 +5,6 @@
  */
 package org.ulasalle.pcc.syntax.analizer;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
 
@@ -16,10 +15,16 @@ import java.util.Stack;
 public class AnalizadorSintactico
 {
 
+    private TablaAnalisis tablaAnalisis;
+    
+    public AnalizadorSintactico()
+    {
+        if(tablaAnalisis==null) tablaAnalisis= new TablaAnalisis();
+    }
+    
     public void analizar(List<Token> tokens)
     {
         Stack<Simbolo> pila = new Stack<>();
-        TablaAnalisis tablaAnalisis = new TablaAnalisis();
         pila.add(tablaAnalisis.getNoTerminalBase());
         int indiceTokens = 0;
         while (!pila.empty())

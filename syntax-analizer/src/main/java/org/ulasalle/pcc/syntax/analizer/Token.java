@@ -73,7 +73,7 @@ public class Token
             return false;
         }
         final Token other = (Token) obj;
-        return Objects.equals(getLexema(), other.getLexema()) || Objects.equals(getTipoToken(), other.getTipoToken());
+        return (this.lexema!=null && Objects.equals(getLexema(), other.getLexema())) || (this.tipoToken!=null && Objects.equals(getTipoToken(), other.getTipoToken()));
     }
     
 }
