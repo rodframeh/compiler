@@ -5,15 +5,18 @@
  */
 package org.ulasalle.compiler.syntax.analizer;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
+import org.ulasalle.compiler.util.Analizador;
+import org.ulasalle.compiler.util.Respuesta;
 import org.ulasalle.compiler.util.Token;
 
 /**
  *
  * @author francisco
  */
-public class AnalizadorSintactico
+public class AnalizadorSintactico //implements Analizador
 {
 
     private static TablaAnalisis tablaAnalisis;
@@ -24,7 +27,12 @@ public class AnalizadorSintactico
             tablaAnalisis = new TablaAnalisis();
     }
 
-    public void analizar(List<Token> tokens)
+    /**
+     *
+     * @param tokens
+     * @return
+     */
+    public Respuesta analizar(List<Token> tokens)
     {
         Stack<Simbolo> pila = new Stack<>();
         pila.add(tablaAnalisis.getNoTerminalBase());
@@ -41,7 +49,7 @@ public class AnalizadorSintactico
                 if (resultado == 1)
                     if ((indiceTokens + 1) < tokens.size())
                     indiceTokens++;
-                    else return;
+                    else break;
                 else if (resultado == 2)
                     pila.pop();
                 else if (pila.isEmpty() && (indiceTokens + 1) < tokens.size())
@@ -50,6 +58,7 @@ public class AnalizadorSintactico
             }
         if (pila.empty())
             System.out.println("Esta vacia");
+        return new RespuestaSintactica("nombreArchivo", new ArrayList<Cuadruplo>(), new ArrayList<ErrorSintactico>());
     }
 
     private boolean esAceptadoPorPila(Stack<Simbolo> pila, Token token)

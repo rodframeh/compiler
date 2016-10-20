@@ -1,5 +1,6 @@
 package org.ulasalle.compiler.lexical.analizer;
 
+import org.ulasalle.compiler.util.Respuesta;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -13,7 +14,7 @@ import org.ulasalle.compiler.util.Token;
  *
  * @author christianlp
  */
-public class AnalizadorLexico
+public class AnalizadorLexico //implements Analizador
 {
 
     private Automata automata;
@@ -67,7 +68,7 @@ public class AnalizadorLexico
         return caracter == ' ' || caracter == '\t' || caracter == '\n';
     }
 
-    public ConjuntoLexico analizar(String rutaArchivo) throws IOException
+    public Respuesta analizar(String rutaArchivo) throws IOException
     {
         List<Token> tokens = new ArrayList<>();
         List<ErrorLexico> errores = new ArrayList<>();
@@ -97,7 +98,7 @@ public class AnalizadorLexico
                 index++;
             }
         }
-        return new ConjuntoLexico((new File(rutaArchivo)).getName(), tokens, errores);
+        return new RespuestaLexica((new File(rutaArchivo)).getName(), tokens, errores);
     }
 
 }

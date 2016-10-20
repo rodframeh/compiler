@@ -11,7 +11,7 @@ import java.util.Objects;
  *
  * @author francisco
  */
-public class Token
+public class Token implements Resultado
 {
 
     private TipoToken tipoToken;
