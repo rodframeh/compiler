@@ -6,7 +6,6 @@
 package org.ulasalle.compiler.lexical.analizer;
 
 import java.util.List;
-import org.ulasalle.compiler.util.Error;
 import org.ulasalle.compiler.util.Respuesta;
 import org.ulasalle.compiler.util.Token;
 

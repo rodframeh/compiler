@@ -26,6 +26,27 @@ public class AnalizadorSintactico //implements Analizador
             tablaAnalisis = new TablaAnalisis();
     }
 
+    public int controlarErrores(List<Token> tokens,List<ErrorSintactico> errores,Stack<Simbolo> pila,int indiceTokens)
+    {
+        TipoError tipo = derivarToken(pila, tablaAnalisis, tokens.get(indiceTokens));
+        if (tipo == TipoError.TOKEN_IRRECONOCIBLE)
+        {
+            errores.add(new ErrorSintactico(tipo, tokens.get(indiceTokens)));
+            if ((indiceTokens + 1) < tokens.size())
+                indiceTokens++;
+            else
+                return -1;
+        } else if (tipo == TipoError.NOTERMINAL_IRRECONOCIBLE)
+        {
+            errores.add(new ErrorSintactico(tipo, tokens.get(indiceTokens)));
+            pila.pop();
+        } else if (pila.isEmpty() && (indiceTokens + 1) < tokens.size())
+        {
+            tipo = TipoError.TOKENS_SIN_LEER;
+            errores.add(new ErrorSintactico(tipo, tokens.get(indiceTokens)));
+        }
+        return indiceTokens;
+    }
     /**
      *
      * @param tokens
@@ -33,7 +54,7 @@ public class AnalizadorSintactico //implements Analizador
      */
     public Respuesta analizar(List<Token> tokens)
     {
-        List<ErrorSintactico> errores=new ArrayList<>();
+        List<ErrorSintactico> errores = new ArrayList<>();
         Stack<Simbolo> pila = new Stack<>();
         pila.add(tablaAnalisis.getNoTerminalBase());
         int indiceTokens = 0;
@@ -45,24 +66,8 @@ public class AnalizadorSintactico //implements Analizador
                     indiceTokens++;
             } else
             {
-                TipoError tipo = derivarToken(pila, tablaAnalisis, tokens.get(indiceTokens));
-                if (tipo == TipoError.TOKEN_IRRECONOCIBLE)
-                {
-                    errores.add(new ErrorSintactico(tipo, tokens.get(indiceTokens)));
-                    if ((indiceTokens + 1) < tokens.size())
-                    indiceTokens++;
-                    else break;
-                }
-                else if (tipo==TipoError.NOTERMINAL_IRRECONOCIBLE)
-                {
-                    errores.add(new ErrorSintactico(tipo, tokens.get(indiceTokens)));
-                    pila.pop();
-                }
-                else if (pila.isEmpty() && (indiceTokens + 1) < tokens.size())
-                {
-                    tipo=TipoError.TOKENS_SIN_LEER;
-                    errores.add(new ErrorSintactico(tipo, tokens.get(indiceTokens)));
-                }
+                indiceTokens=controlarErrores(tokens, errores, pila, indiceTokens);
+                if(indiceTokens==-1) break;
             }
         if (pila.empty())
             System.out.println("Esta vacia");
@@ -77,14 +82,11 @@ public class AnalizadorSintactico //implements Analizador
     private TipoError derivarToken(Stack<Simbolo> pila, TablaAnalisis tablaAnalisis, Token token)
     {
         if (pila.peek().getClass() == Terminal.class)
-        {
             return TipoError.TOKEN_IRRECONOCIBLE;
-        }
         int indiceRegla = tablaAnalisis.encontrarIndiceReglaProduccion(new Terminal(token), (NoTerminal) pila.peek());
         if (indiceRegla == -1)
-        {
             return TipoError.NOTERMINAL_IRRECONOCIBLE;
-        } else
+        else
             reemplazarSimbolos(pila, tablaAnalisis, indiceRegla);
         return TipoError.SIN_ERRORES;
     }
