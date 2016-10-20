@@ -10,9 +10,10 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.ulasalle.compiler.lexical.analizer.AnalizadorLexico;
-import org.ulasalle.compiler.util.Respuesta;
 import org.ulasalle.compiler.lexical.analizer.ErrorLexico;
+import org.ulasalle.compiler.util.Respuesta;
 import org.ulasalle.compiler.syntax.analizer.AnalizadorSintactico;
+import org.ulasalle.compiler.syntax.analizer.ErrorSintactico;
 import org.ulasalle.compiler.util.Token;
 
 /**
@@ -27,19 +28,26 @@ public class Aplicacion
         try
         {
             AnalizadorLexico lexico = new AnalizadorLexico();
-            Respuesta respuesta = lexico.analizar("/home/francisco/programa.programa");
-            
-//                        for (Token token : conjuntoLexico.getTokens())
-//                System.out.println(token.getLexema() + " - " + token.getTipoToken());
-//
-//            for (ErrorLexico error : conjuntoLexico.getErroresLexicos())
-//                System.out.println(error.getDescripcion());
+            Respuesta respuestaLexico = lexico.analizar("/home/francisco/programa.programa");
+            List<Token> tokens=(List<Token>) respuestaLexico.getResultados();
+            tokens.forEach((token) ->
+            {
+                System.out.println(token.getLexema() + " - " + token.getTipoToken());
+            });
+            List<ErrorLexico> erroresLexicos =(List<ErrorLexico>) respuestaLexico.getErrores();
+            erroresLexicos.forEach((error) ->
+            {
+                System.out.println(error.getDescripcion());
+            });
             
             AnalizadorSintactico sintactico = new AnalizadorSintactico();
-            sintactico.analizar((List<Token>) respuesta.getResultados());
-            
-
-            
+            Respuesta respuestaSintactico =sintactico.analizar(tokens);
+            List<ErrorSintactico> erroresSintacticos = (List<ErrorSintactico>) respuestaSintactico.getErrores();
+            erroresSintacticos.forEach((error)->
+            {
+                System.out.println(error.getDescripcion());
+            });
+             
         } 
         catch (IOException ex)
         {
