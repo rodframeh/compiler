@@ -5,7 +5,7 @@ import java.util.List;
  *
  * @author francisco
  */
-public abstract class Respuesta 
+public abstract class Respuesta
 {
 
     private String nombreArchivo;

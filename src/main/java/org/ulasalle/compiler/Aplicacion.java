@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.ulasalle.compiler;
 
 import java.io.IOException;
@@ -28,7 +23,7 @@ public class Aplicacion
         try
         {
             AnalizadorLexico lexico = new AnalizadorLexico();
-            Respuesta respuestaLexico = lexico.analizar("/home/francisco/programa.programa");
+            Respuesta respuestaLexico = lexico.analizar("/home/christianlp/textoUno.programa");
             List<Token> tokens=(List<Token>) respuestaLexico.getResultados();
             tokens.forEach((token) ->
             {

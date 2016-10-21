@@ -1,11 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.ulasalle.compiler.syntax.analizer;
-
-import java.util.List;
 
 /**
  *
@@ -14,22 +7,22 @@ import java.util.List;
 public class ReglaProduccion
 {
 
-    private NoTerminal noTerminalInicial;
+    private NoTerminal noTerminal;
     private Simbolo[] derivacion;
 
     public ReglaProduccion()
     {
     }
     
-    public ReglaProduccion(NoTerminal noTerminalInicial, Simbolo[] derivacion)
+    public ReglaProduccion(NoTerminal noTerminal, Simbolo[] derivacion)
     {
-        this.noTerminalInicial = noTerminalInicial;
+        this.noTerminal = noTerminal;
         this.derivacion = derivacion;
     }
 
-    public NoTerminal getNoTerminalInicial()
+    public NoTerminal getNoTerminal()
     {
-        return noTerminalInicial;
+        return noTerminal;
     }
 
     public Simbolo[] getDerivacion()

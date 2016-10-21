@@ -38,6 +38,7 @@ public class ErrorLexico implements Error
         return caracter;
     }
 
+    @Override
     public String getDescripcion()
     {
         String detalles;

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.ulasalle.compiler.syntax.analizer;
 
 import java.util.ArrayList;
@@ -26,27 +21,6 @@ public class AnalizadorSintactico //implements Analizador
             tablaAnalisis = new TablaAnalisis();
     }
 
-    public int controlarErrores(List<Token> tokens,List<ErrorSintactico> errores,Stack<Simbolo> pila,int indiceTokens)
-    {
-        TipoError tipo = derivarToken(pila, tablaAnalisis, tokens.get(indiceTokens));
-        if (tipo == TipoError.TOKEN_IRRECONOCIBLE)
-        {
-            errores.add(new ErrorSintactico(tipo, tokens.get(indiceTokens)));
-            if ((indiceTokens + 1) < tokens.size())
-                indiceTokens++;
-            else
-                return -1;
-        } else if (tipo == TipoError.NOTERMINAL_IRRECONOCIBLE)
-        {
-            errores.add(new ErrorSintactico(tipo, tokens.get(indiceTokens)));
-            pila.pop();
-        } else if (pila.isEmpty() && (indiceTokens + 1) < tokens.size())
-        {
-            tipo = TipoError.TOKENS_SIN_LEER;
-            errores.add(new ErrorSintactico(tipo, tokens.get(indiceTokens)));
-        }
-        return indiceTokens;
-    }
     /**
      *
      * @param tokens
@@ -54,7 +28,6 @@ public class AnalizadorSintactico //implements Analizador
      */
     public Respuesta analizar(List<Token> tokens)
     {
-        List<ErrorSintactico> errores = new ArrayList<>();
         Stack<Simbolo> pila = new Stack<>();
         pila.add(tablaAnalisis.getNoTerminalBase());
         int indiceTokens = 0;
@@ -66,12 +39,20 @@ public class AnalizadorSintactico //implements Analizador
                     indiceTokens++;
             } else
             {
-                indiceTokens=controlarErrores(tokens, errores, pila, indiceTokens);
-                if(indiceTokens==-1) break;
+                short resultado = derivarToken(pila, tablaAnalisis, tokens.get(indiceTokens));
+                if (resultado == 1)
+                    if ((indiceTokens + 1) < tokens.size())
+                    indiceTokens++;
+                    else break;
+                else if (resultado == 2)
+                    pila.pop();
+                else if (pila.isEmpty() && (indiceTokens + 1) < tokens.size())
+                    System.out.println("error 3 " + (indiceTokens + 1));
+
             }
         if (pila.empty())
             System.out.println("Esta vacia");
-        return new RespuestaSintactica("nombreArchivo", new ArrayList<Cuadruplo>(), errores);
+        return new RespuestaSintactica("nombreArchivo", new ArrayList<Cuadruplo>(), new ArrayList<ErrorSintactico>());
     }
 
     private boolean esAceptadoPorPila(Stack<Simbolo> pila, Token token)
@@ -79,16 +60,21 @@ public class AnalizadorSintactico //implements Analizador
         return pila.peek().getClass() == Terminal.class && ((Terminal) pila.peek()).equals(token);
     }
 
-    private TipoError derivarToken(Stack<Simbolo> pila, TablaAnalisis tablaAnalisis, Token token)
+    private short derivarToken(Stack<Simbolo> pila, TablaAnalisis tablaAnalisis, Token token)
     {
         if (pila.peek().getClass() == Terminal.class)
-            return TipoError.TOKEN_IRRECONOCIBLE;
+        {
+            System.out.println("Error 1");
+            return 1;
+        }
         int indiceRegla = tablaAnalisis.encontrarIndiceReglaProduccion(new Terminal(token), (NoTerminal) pila.peek());
         if (indiceRegla == -1)
-            return TipoError.NOTERMINAL_IRRECONOCIBLE;
-        else
+        {
+            System.out.println("Error 2");
+            return 2;
+        } else
             reemplazarSimbolos(pila, tablaAnalisis, indiceRegla);
-        return TipoError.SIN_ERRORES;
+        return 0;
     }
 
     private void reemplazarSimbolos(Stack<Simbolo> pila, TablaAnalisis tablaAnalisis, int indiceRegla)

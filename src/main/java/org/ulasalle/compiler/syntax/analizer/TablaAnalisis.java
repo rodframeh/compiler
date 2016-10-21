@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.ulasalle.compiler.syntax.analizer;
 
 import java.io.IOException;
@@ -45,7 +40,7 @@ public class TablaAnalisis
 
     public Simbolo getNoTerminalBase()
     {
-        return reglasDeProduccion[0].getNoTerminalInicial();
+        return reglasDeProduccion[0].getNoTerminal();
     }
 
     public int encontrarIndiceReglaProduccion(Terminal terminal, NoTerminal noTerminal)
@@ -82,10 +77,10 @@ public class TablaAnalisis
     {
         boolean existeNoTerminal = false;
         for (NoTerminal noTerminal : noTerminales)
-            if (noTerminal.equals(reglaProduccion.getNoTerminalInicial()))
+            if (noTerminal.equals(reglaProduccion.getNoTerminal()))
                 existeNoTerminal = true;
         if (!existeNoTerminal)
-            noTerminales.add(reglaProduccion.getNoTerminalInicial());
+            noTerminales.add(reglaProduccion.getNoTerminal());
     }
 
     private void generarSimbolos()
@@ -110,7 +105,7 @@ public class TablaAnalisis
     private int encontrarReglaDeProduccion(NoTerminal noTerminal, Terminal terminal)
     {
         for (int i = 0; i < reglasDeProduccion.length; i++)
-            if (reglasDeProduccion[i].getNoTerminalInicial().equals(noTerminal))
+            if (reglasDeProduccion[i].getNoTerminal().equals(noTerminal))
                 if (reglasDeProduccion[i].getDerivacion().length > 0)
                 {
                     Simbolo simboloDerivado = reglasDeProduccion[i].getDerivacion()[0];
