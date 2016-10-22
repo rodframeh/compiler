@@ -23,7 +23,7 @@ public class Aplicacion
         try
         {
             AnalizadorLexico lexico = new AnalizadorLexico();
-            Respuesta respuestaLexico = lexico.analizar("/home/christianlp/textoUno.programa");
+            Respuesta respuestaLexico = lexico.analizar("examples/Example01.programa");
             List<Token> tokens=(List<Token>) respuestaLexico.getResultados();
             tokens.forEach((token) ->
             {

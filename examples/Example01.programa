@@ -1,4 +1,4 @@
-programa()
+Programa()
 {
   funcion( entero a, entero b);
   entero a,b,c,defg;
