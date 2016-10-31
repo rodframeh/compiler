@@ -26,12 +26,41 @@ public class AnalizadorSintactico //implements Analizador
             tablaAnalisis = new TablaAnalisis();
     }
 
-    private int encontrarFinError(List<Token> tokens,int indiceTokens)
+    private int encontrarFinError(List<Token> tokens,int indiceTokens, Stack<Simbolo> pila)
     {
-        for(Token token: tokens)
+        for(;indiceTokens<tokens.size();indiceTokens++)
         {
-            if(token.getLexema().equals(",") || token.getLexema().equals("}"))
-                return indiceTokens;
+            if(tokens.get(indiceTokens).getLexema().equals(";") )
+            {
+                while(!pila.isEmpty()){
+                    if(pila.peek() instanceof NoTerminal)
+                    {
+                        int indiceReglaProduccion=tablaAnalisis.encontrarIndiceReglaProduccion(new Terminal(";"),(NoTerminal) pila.peek());
+                        if(indiceReglaProduccion==-1)
+                        {
+                            pila.pop();
+                        }
+                        else
+                        {
+                            this.reemplazarSimbolos(pila, tablaAnalisis, indiceTokens);
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        if(((Terminal)pila.peek()).equals(new Terminal(";")))
+                        {
+                            pila.pop();
+                            break;
+                        }
+                        else
+                        {
+                            pila.pop();
+                        }
+                    }
+                }
+                return ++indiceTokens;
+            }
             else
                 indiceTokens++;
         }
@@ -46,7 +75,7 @@ public class AnalizadorSintactico //implements Analizador
             errores.add(new ErrorSintactico(tipo, tokens.get(indiceTokens)));
             if ((indiceTokens + 1) < tokens.size())
             {
-                indiceTokens=encontrarFinError(tokens, indiceTokens);
+                indiceTokens=encontrarFinError(tokens, indiceTokens,pila);
                 if((indiceTokens + 1) > tokens.size()) return -1;
                 return indiceTokens;
             }
@@ -97,8 +126,10 @@ public class AnalizadorSintactico //implements Analizador
 
     private TipoError derivarToken(Stack<Simbolo> pila, TablaAnalisis tablaAnalisis, Token token)
     {
-        if (pila.peek().getClass() == Terminal.class)
+        if (pila.peek().getClass() == Terminal.class){
+            System.out.println("entro!!!");
             return TipoError.TOKEN_IRRECONOCIBLE;
+        }
         int indiceRegla = tablaAnalisis.encontrarIndiceReglaProduccion(new Terminal(token), (NoTerminal) pila.peek());
         if (indiceRegla == -1)
             return TipoError.NOTERMINAL_IRRECONOCIBLE;
@@ -109,7 +140,7 @@ public class AnalizadorSintactico //implements Analizador
 
     private void reemplazarSimbolos(Stack<Simbolo> pila, TablaAnalisis tablaAnalisis, int indiceRegla)
     {
-        if (pila.peek().getClass() == NoTerminal.class)
+        if (pila.peek().getClass() == NoTerminal.class)//sacarlo a un nivel superior
         {
             pila.pop();
             Simbolo[] simbolos = tablaAnalisis.getReglaDeProduccion(indiceRegla);
