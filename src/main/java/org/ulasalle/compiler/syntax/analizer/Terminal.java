@@ -18,7 +18,7 @@ import org.ulasalle.compiler.util.Token;
 @JsonDeserialize(as= Terminal.class)
 public class Terminal extends Token implements Simbolo 
 {
-
+    private int indiceRegla;
     public Terminal()
     {
     }
@@ -60,6 +60,18 @@ public class Terminal extends Token implements Simbolo
                 ||
                 (super.getTipoToken()!=null
                 && Objects.equals(super.getTipoToken(), other.getTipoToken()));
+    }
+
+    @Override
+    public int getIndiceRegla()
+    {
+        return this.indiceRegla;
+    }
+
+    @Override
+    public void setIndiceRegla(int indiceRegla)
+    {
+        this.indiceRegla=indiceRegla;
     }
 
 }

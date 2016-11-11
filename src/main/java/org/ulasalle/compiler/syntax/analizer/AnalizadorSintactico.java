@@ -26,7 +26,7 @@ public class AnalizadorSintactico //implements Analizador
             tablaAnalisis = new TablaAnalisis();
     }
 
-    private int encontrarFinError(List<Token> tokens,int indiceTokens, Stack<Simbolo> pila)
+    private int encontrarFinError(List<Token> tokens,int indiceTokens, Stack<Simbolo> pila,List<Cuadruplo> cuadruplos,Stack<PlantillaControl> plantillas)
     {
         for(;indiceTokens<tokens.size();indiceTokens++)
         {
@@ -42,7 +42,7 @@ public class AnalizadorSintactico //implements Analizador
                         }
                         else
                         {
-                            this.reemplazarSimbolos(pila, tablaAnalisis, indiceTokens);
+                            this.reemplazarSimbolos(pila, tablaAnalisis, indiceTokens,cuadruplos,plantillas);
                             break;
                         }
                     }
@@ -67,15 +67,15 @@ public class AnalizadorSintactico //implements Analizador
         return indiceTokens;
     }
     
-    private int controlarErrores(List<Token> tokens,List<ErrorSintactico> errores,Stack<Simbolo> pila,int indiceTokens)
+    private int controlarErrores(List<Token> tokens,List<ErrorSintactico> errores,Stack<Simbolo> pila,int indiceTokens,List<Cuadruplo> cuadruplos,Stack<PlantillaControl> plantillas)
     {
-        TipoError tipo = derivarToken(pila, tablaAnalisis, tokens.get(indiceTokens));
+        TipoError tipo = derivarToken(pila, tablaAnalisis, tokens.get(indiceTokens),cuadruplos,plantillas);
         if (tipo == TipoError.TOKEN_IRRECONOCIBLE)
         {
             errores.add(new ErrorSintactico(tipo, tokens.get(indiceTokens)));
             if ((indiceTokens + 1) < tokens.size())
             {
-                indiceTokens=encontrarFinError(tokens, indiceTokens,pila);
+                indiceTokens=encontrarFinError(tokens, indiceTokens,pila,cuadruplos,plantillas);
                 if((indiceTokens + 1) > tokens.size()) return -1;
                 return indiceTokens;
             }
@@ -92,26 +92,30 @@ public class AnalizadorSintactico //implements Analizador
         }
         return indiceTokens;
     }
-    /**
-     *
-     * @param tokens
-     * @return
-     */
+
+    private void setCuadruplo(Simbolo simbolo,List<Cuadruplo> cuadruplos,Stack<PlantillaControl> plantillas)
+    {
+        
+        //plantillas.peek().
+    }
+    
     public Respuesta analizar(List<Token> tokens)
     {
         List<ErrorSintactico> errores = new ArrayList<>();
+        List<Cuadruplo> cuadruplos=new ArrayList<>();
         Stack<Simbolo> pila = new Stack<>();
+        Stack<PlantillaControl> plantillas =new Stack<>();
         pila.add(tablaAnalisis.getNoTerminalBase());
         int indiceTokens = 0;
         while (!pila.empty())
             if (esAceptadoPorPila(pila, tokens.get(indiceTokens)))
             {
-                pila.pop();
+                setCuadruplo(pila.pop(),cuadruplos,plantillas);
                 if ((indiceTokens + 1) < tokens.size())
                     indiceTokens++;
             } else
             {
-                indiceTokens=controlarErrores(tokens, errores, pila, indiceTokens);
+                indiceTokens=controlarErrores(tokens, errores, pila, indiceTokens,cuadruplos,plantillas);
                 if(indiceTokens==-1) break;
             }
         if (pila.empty())
@@ -124,7 +128,7 @@ public class AnalizadorSintactico //implements Analizador
         return pila.peek().getClass() == Terminal.class && ((Terminal) pila.peek()).equals(token);
     }
 
-    private TipoError derivarToken(Stack<Simbolo> pila, TablaAnalisis tablaAnalisis, Token token)
+    private TipoError derivarToken(Stack<Simbolo> pila, TablaAnalisis tablaAnalisis, Token token,List<Cuadruplo> cuadruplos,Stack<PlantillaControl> plantillas)
     {
         if (pila.peek().getClass() == Terminal.class){
             System.out.println("entro!!!");
@@ -134,15 +138,15 @@ public class AnalizadorSintactico //implements Analizador
         if (indiceRegla == -1)
             return TipoError.NOTERMINAL_IRRECONOCIBLE;
         else
-            reemplazarSimbolos(pila, tablaAnalisis, indiceRegla);
+            reemplazarSimbolos(pila, tablaAnalisis, indiceRegla,cuadruplos,plantillas);
         return TipoError.SIN_ERRORES;
     }
 
-    private void reemplazarSimbolos(Stack<Simbolo> pila, TablaAnalisis tablaAnalisis, int indiceRegla)
+    private void reemplazarSimbolos(Stack<Simbolo> pila, TablaAnalisis tablaAnalisis, int indiceRegla,List<Cuadruplo> cuadruplos,Stack<PlantillaControl> plantillas)
     {
         if (pila.peek().getClass() == NoTerminal.class)//sacarlo a un nivel superior
         {
-            pila.pop();
+            setCuadruplo(pila.pop(), cuadruplos,plantillas);
             Simbolo[] simbolos = tablaAnalisis.getReglaDeProduccion(indiceRegla);
             for (int i = (simbolos.length - 1); i >= 0; i--)
                 pila.add(simbolos[i]);

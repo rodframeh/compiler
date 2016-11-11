@@ -17,7 +17,8 @@ public class NoTerminal implements Simbolo
 {
 
     private String valor;
-
+    private int indiceRegla;
+    
     public NoTerminal()
     {
     }
@@ -38,6 +39,18 @@ public class NoTerminal implements Simbolo
         if (obj == null || (getClass() != obj.getClass()))
             return false;
         return Objects.equals(this.valor, ((NoTerminal) obj).valor);
+    }
+
+    @Override
+    public int getIndiceRegla()
+    {
+        return this.indiceRegla;
+    }
+    
+    @Override
+    public void setIndiceRegla(int indiceRegla)
+    {
+        this.indiceRegla=indiceRegla;
     }
 
 }

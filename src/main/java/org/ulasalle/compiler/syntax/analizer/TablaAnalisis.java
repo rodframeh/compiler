@@ -60,7 +60,12 @@ public class TablaAnalisis
 
     public Simbolo[] getReglaDeProduccion(int indiceDeRegla)
     {
-        return reglasDeProduccion[indiceDeRegla].getDerivacion();
+        Simbolo[] simbolos=reglasDeProduccion[indiceDeRegla].getDerivacion();
+        for(Simbolo simbolo:simbolos)
+        {
+            simbolo.setIndiceRegla(indiceDeRegla);
+        }
+        return simbolos;
 
     }
 

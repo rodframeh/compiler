@@ -15,5 +15,6 @@ import org.ulasalle.compiler.util.SimboloDeserializer;
 @JsonDeserialize(using = SimboloDeserializer.class)
 public interface Simbolo
 {
-
+    public int getIndiceRegla();
+    public void setIndiceRegla(int indiceRegla);
 }

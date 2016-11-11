@@ -51,11 +51,18 @@ public class Aplicacion
 //            Logger.getLogger(Aplicacion.class.getName()).log(Level.SEVERE, null, ex);
 //        }
         List<Token> tokens=new ArrayList<>();
+        tokens.add(new Token(TipoToken.IDENTIFICADOR, "Programa"));
+        tokens.add(new Token(TipoToken.DELIMITADOR, "("));
+        tokens.add(new Token(TipoToken.DELIMITADOR, ")"));
+        tokens.add(new Token(TipoToken.DELIMITADOR, "{"));
+        tokens.add(new Token(TipoToken.PALABRA_RESERVADA, "entero"));
         tokens.add(new Token(TipoToken.IDENTIFICADOR, "a"));
         tokens.add(new Token(TipoToken.OPERADOR, "="));
         tokens.add(new Token(TipoToken.CONST_NUMERICA, "5"));
         tokens.add(new Token(TipoToken.OPERADOR,"*"));
         tokens.add(new Token(TipoToken.CONST_NUMERICA, "7"));
+        tokens.add(new Token(TipoToken.DELIMITADOR, ";"));
+        tokens.add(new Token(TipoToken.DELIMITADOR, "}"));
         
         AnalizadorSintactico sintactico=new AnalizadorSintactico();
         sintactico.analizar(tokens);
