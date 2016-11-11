@@ -1,5 +1,5 @@
 Programa()
 {
     entero a;;
-    mientras(4>6)
+    Mientras(4>6)
 }

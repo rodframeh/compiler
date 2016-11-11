@@ -1,46 +1,7 @@
-/*
-*
-*
-*
-*
-*
-*
-*
-*
-*/
-
-programa()
+Programa()
 {
-  entero var1 = 2; // var tipo
-  entero var2 = 5; /*var*/
-  
-  funcion( entero a, entero b);
-  entero a,b,c,defg;
-  a = ( 50 + 8 ) * d - ( c + defg);
-  //comenario linea
-  si(a>b){
-    a=1;
-    MostrarPantalla("El nuevo valor de A es 1");
-  }osino{
-    MostrarPantalla("El nuevo valor de B sera 2");
-    b=2
-  }
-  mientras((6==6)|| (a!=3)){
+  entero a = 7;
+  Mientras( 6==6 ||  a!=3 || a>6 || a<8 || a>=6){
     a=10;
-    MostrarPantalla("El nuevo valor de A es 10");
-    /**/
-  }
-  mientras ( a+1 > c )
-  {
-  //comenario linea
-  MostrarPantalla("hola mundo");
-    entero d , z, o;
-    mientras ( )
-    {//hola amigos
-      /*
-	abc
-      */
-      //comenario linea
-    }
   }
 }

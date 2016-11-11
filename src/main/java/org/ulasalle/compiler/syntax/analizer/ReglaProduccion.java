@@ -13,15 +13,17 @@ public class ReglaProduccion
 
     private NoTerminal noTerminal;
     private Simbolo[] derivacion;
+    private Simbolo[] plantilla;
 
     public ReglaProduccion()
     {
     }
     
-    public ReglaProduccion(NoTerminal noTerminal, Simbolo[] derivacion)
+    public ReglaProduccion(NoTerminal noTerminal, Simbolo[] derivacion, Simbolo[] plantilla)
     {
         this.noTerminal = noTerminal;
         this.derivacion = derivacion;
+        this.plantilla=plantilla;
     }
 
     public NoTerminal getNoTerminal()
@@ -34,4 +36,11 @@ public class ReglaProduccion
         return derivacion;
     }
 
+    public Simbolo[] getPlantilla()
+    {
+        return plantilla;
+    }
+
+    
+    
 }

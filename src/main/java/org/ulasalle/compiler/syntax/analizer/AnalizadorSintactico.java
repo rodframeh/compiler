@@ -67,7 +67,7 @@ public class AnalizadorSintactico //implements Analizador
         return indiceTokens;
     }
     
-    public int controlarErrores(List<Token> tokens,List<ErrorSintactico> errores,Stack<Simbolo> pila,int indiceTokens)
+    private int controlarErrores(List<Token> tokens,List<ErrorSintactico> errores,Stack<Simbolo> pila,int indiceTokens)
     {
         TipoError tipo = derivarToken(pila, tablaAnalisis, tokens.get(indiceTokens));
         if (tipo == TipoError.TOKEN_IRRECONOCIBLE)

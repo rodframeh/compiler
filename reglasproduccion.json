@@ -1,215 +1,768 @@
 [
-    {"noTerminal":{"valor":"<P>"   }, 
-        "derivacion":[     
-            {"tipoToken":null,"lexema":"Programa"},
-            {"tipoToken":null,"lexema":"("},
-            {"tipoToken":null,"lexema":")"},
-            {"valor":"<BS>"}                      
-        ]},
-    {"noTerminal":{"valor":"<BS>"  }, 
-        "derivacion":[     
-            {"tipoToken":null,"lexema":"{"},
-            {"valor":"<S*>"},
-            {"tipoToken":null,"lexema":"}"}                                                            
-        ]},
-    {"noTerminal":{"valor":"<S*>"  }, 
-        "derivacion":[     
-            {"valor":"<S>"},
-            {"valor":"<S*>"}
-        ]},
-    {"noTerminal":{"valor":"<S*>"  },  "derivacion":[]},
-    {"noTerminal":{"valor":"<S>"  }, 
-        "derivacion":[     
-            {"valor":"<SD>"}
-        ]},
-    {"noTerminal":{"valor":"<S>"  }, 
-        "derivacion":[     
-            {"valor":"<SA>"}
-        ]},
-    {"noTerminal":{"valor":"<S>"  }, 
-        "derivacion":[     
-            {"valor":"<SC>"}
-        ]},
-    {"noTerminal":{"valor":"<S>"  }, 
-        "derivacion":[     
-            {"valor":"<SM>"}
-        ]},
-    {"noTerminal":{"valor":"<S>"  }, 
-        "derivacion":[     
-            {"valor":"<SL>"}
-        ]},
-    {"noTerminal":{"valor":"<S>"  }, 
-        "derivacion":[     
-            {"valor":"<SE>"}
-        ]},
-    {"noTerminal":{"valor":"<S>"  }, 
-        "derivacion":[     
-            {"valor":"<SHM>"}
-        ]},
-    {"noTerminal":{"valor":"<SD>"   }, 
-        "derivacion":[
-            {"valor":"<TD>"},
-            {"valor":"<VA>"},
-            {"valor":"<RD*>"},
-            {"tipoToken":null,"lexema":";"}
-        ]},
-    {"noTerminal":{"valor":"<RD*>"  }, 
-        "derivacion":[
-            {"tipoToken":null,"lexema":","},
-            {"valor":"<VA>"},
-            {"valor":"<RD*>"}
-        ]},
-    {"noTerminal":{"valor":"<RD*>"  }, "derivacion":[]},
-    {"noTerminal":{"valor":"<VA>"   },
-        "derivacion":[
-            {"tipoToken":"IDENTIFICADOR","lexema":null},
-            {"valor":"<A>"}
-        ]},
-    {"noTerminal":{"valor":"<A>"    }, 
-        "derivacion":[
-            {"tipoToken":null,"lexema":"="},
-            {"valor":"<EM>"}
-        ]},
-    {"noTerminal":{"valor":"<A>"    }, "derivacion":[]},
-    {"noTerminal":{"valor":"<TD>"   }, 
-        "derivacion":[
-            {"tipoToken":null,"lexema":"entero"}
-        ]},
-    {"noTerminal":{"valor":"<SA>"    }, 
-        "derivacion":[
-            {"tipoToken":"IDENTIFICADOR","lexema":null},
-            {"tipoToken":null,"lexema":"="},
-            {"valor":"<EM>"},
-            {"tipoToken":null,"lexema":";"}
-        ]},
-    {"noTerminal":{"valor":"<SM>"    }, 
-        "derivacion":[
-            {"tipoToken":null,"lexema":"Mientras"},
-            {"tipoToken":null,"lexema":"("},
-            {"valor":"<EM>"},
-            {"tipoToken":null,"lexema":")"},
-            {"valor":"<SubB>"}
-        ]},
-    {"noTerminal":{"valor":"<SubB>"    }, 
-        "derivacion":[
-            {"valor":"<S>"}
-        ]},
-    {"noTerminal":{"valor":"<SubB>"    }, 
-        "derivacion":[
-            {"valor":"<BS>"}
-        ]},
-    {"noTerminal":{"valor":"<SC>"    }, 
-        "derivacion":[
-            {"tipoToken":null,"lexema":"Si"},
-            {"tipoToken":null,"lexema":"("},
-            {"valor":"<EM>"},
-            {"tipoToken":null,"lexema":")"},
-            {"valor":"<SubB>"},
-            {"valor":"<ELSE>"}
-        ]},
-    {"noTerminal":{"valor":"<ELSE>"    }, 
-        "derivacion":[
-            {"tipoToken":null,"lexema":"Osino"},
-            {"valor":"<SubB>"}
-        ]},
-    {"noTerminal":{"valor":"<ELSE>"    }, "derivacion":[]},
-    {"noTerminal":{"valor":"<SHM>"    }, 
-        "derivacion":[
-            {"tipoToken":null,"lexema":"Hacer"},
-            {"valor":"<SubB>"},
-            {"tipoToken":null,"lexema":"Mientras"},
-            {"tipoToken":null,"lexema":"("},
-            {"valor":"<EM>"},
-            {"tipoToken":null,"lexema":")"},
-            {"tipoToken":null,"lexema":";"}
-        ]},
-    {"noTerminal":{"valor":"<EM>"    }, 
-        "derivacion":[
-            {"valor":"<T>"},
-            {"valor":"<T*>"}
-        ]},
-    {"noTerminal":{"valor":"<T*>"    }, 
-        "derivacion":[
-            {"valor":"<op1>"},
-            {"valor":"<T>"},
-            {"valor":"<T*>"}
-        ]},
-    {"noTerminal":{"valor":"<T*>"    }, "derivacion":[]},
-    {"noTerminal":{"valor":"<op1>"    }, 
-        "derivacion":[
-            {"tipoToken":null,"lexema":"+"}
-        ]},
-    {"noTerminal":{"valor":"<op1>"    }, 
-        "derivacion":[
-            {"tipoToken":null,"lexema":"-"}
-        ]},
-    {"noTerminal":{"valor":"<T>"    }, 
-        "derivacion":[
-            {"valor":"<F>"},
-            {"valor":"<F*>"}
-        ]},
-    {"noTerminal":{"valor":"<F*>"    }, 
-        "derivacion":[
-            {"valor":"<op2>"},
-            {"valor":"<F>"},
-            {"valor":"<F*>"}
-        ]},
-    {"noTerminal":{"valor":"<F*>"    }, "derivacion":[]},
-    {"noTerminal":{"valor":"<F>"    }, 
-        "derivacion":[
-            {"tipoToken":null,"lexema":"("},
-            {"valor":"<EM>"},
-            {"tipoToken":null,"lexema":")"}
-        ]},
-    {"noTerminal":{"valor":"<F>"    }, 
-        "derivacion":[
-            {"tipoToken":"CONST_NUMERICA","lexema":null}
-        ]},
-    {"noTerminal":{"valor":"<F>"    }, 
-        "derivacion":[
-            {"tipoToken":"IDENTIFICADOR","lexema":null}
-        ]},
-    {"noTerminal":{"valor":"<op2>"    }, 
-        "derivacion":[
-            {"tipoToken":null,"lexema":"*"}
-        ]},
-    {"noTerminal":{"valor":"<op2>"    }, 
-        "derivacion":[
-            {"tipoToken":null,"lexema":"/"}
-        ]},
-    {"noTerminal":{"valor":"<op2>"    }, 
-        "derivacion":[
-            {"tipoToken":null,"lexema":"%"}
-        ]},
-    {"noTerminal":{"valor":"<SL>"    }, 
-        "derivacion":[
-            {"tipoToken":null,"lexema":"LeerTeclado"},
-            {"tipoToken":null,"lexema":"("},
-            {"tipoToken":"IDENTIFICADOR","lexema":null},
-            {"tipoToken":null,"lexema":")"}
-        ]},
-    {"noTerminal":{"valor":"<SE>"    }, 
-        "derivacion":[
-            {"tipoToken":null,"lexema":"EscribirPantalla"},
-            {"tipoToken":null,"lexema":"("},
-            {"valor":"<E>"},
-            {"tipoToken":null,"lexema":")"},
-            {"tipoToken":null,"lexema":";"}
-        ]},
-       {"noTerminal":{"valor":"<E>"    }, 
-        "derivacion":[
-            {"valor":"<EM>"}
-        ]},
-       {"noTerminal":{"valor":"<E>"    }, 
-        "derivacion":[
-            {"tipoToken":"IDENTIFICADOR","lexema":null}
-        ]},
-		{"noTerminal":{"valor":"<E>"    }, 
-        "derivacion":[
-            {"tipoToken":"LITERAL_CADENA","lexema":null}
-        ]},
-		{"noTerminal":{"valor":"<E>"    }, 
-        "derivacion":[
-            {"tipoToken":"CONST_NUMERICA","lexema":null}
-        ]}
+  {
+    "noTerminal": {
+      "valor": "<P>"
+    },
+    "derivacion": [
+      {
+        "tipoToken": null,
+        "lexema": "Programa"
+      },
+      {
+        "tipoToken": null,
+        "lexema": "("
+      },
+      {
+        "tipoToken": null,
+        "lexema": ")"
+      },
+      {
+        "valor": "<BS>"
+      }
+    ],
+    "plantilla":[]
+  },
+  {
+    "noTerminal": {
+      "valor": "<BS>"
+    },
+    "derivacion": [
+      {
+        "tipoToken": null,
+        "lexema": "{"
+      },
+      {
+        "valor": "<S*>"
+      },
+      {
+        "tipoToken": null,
+        "lexema": "}"
+      }
+    ],
+    "plantilla":[]
+  },
+  {
+    "noTerminal": {
+      "valor": "<S*>"
+    },
+    "derivacion": [
+      {
+        "valor": "<S>"
+      },
+      {
+        "valor": "<S*>"
+      }
+    ],    "plantilla":[]
+  },
+  {
+    "noTerminal": {
+      "valor": "<S*>"
+    },
+    "derivacion": []
+  },
+  {
+    "noTerminal": {
+      "valor": "<S>"
+    },
+    "derivacion": [
+      {
+        "valor": "<SD>"
+      }
+    ],    "plantilla":[]
+  },
+  {
+    "noTerminal": {
+      "valor": "<S>"
+    },
+    "derivacion": [
+      {
+        "valor": "<SA>"
+      }
+    ],    "plantilla":[]
+  },
+  {
+    "noTerminal": {
+      "valor": "<S>"
+    },
+    "derivacion": [
+      {
+        "valor": "<SC>"
+      }
+    ],    "plantilla":[]
+  },
+  {
+    "noTerminal": {
+      "valor": "<S>"
+    },
+    "derivacion": [
+      {
+        "valor": "<SM>"
+      }
+    ],    "plantilla":[]
+  },
+  {
+    "noTerminal": {
+      "valor": "<S>"
+    },
+    "derivacion": [
+      {
+        "valor": "<SL>"
+      }
+    ],    "plantilla":[]
+  },
+  {
+    "noTerminal": {
+      "valor": "<S>"
+    },
+    "derivacion": [
+      {
+        "valor": "<SE>"
+      }
+    ],    "plantilla":[]
+  },
+  {
+    "noTerminal": {
+      "valor": "<S>"
+    },
+    "derivacion": [
+      {
+        "valor": "<SHM>"
+      }
+    ],    "plantilla":[]
+  },
+  {
+    "noTerminal": {
+      "valor": "<SD>"
+    },
+    "derivacion": [
+      {
+        "valor": "<TD>"
+      },
+      {
+        "valor": "<VA>"
+      },
+      {
+        "valor": "<RD*>"
+      },
+      {
+        "tipoToken": null,
+        "lexema": ";"
+      }
+    ],    "plantilla":[]
+  },
+  {
+    "noTerminal": {
+      "valor": "<RD*>"
+    },
+    "derivacion": [
+      {
+        "tipoToken": null,
+        "lexema": ","
+      },
+      {
+        "valor": "<VA>"
+      },
+      {
+        "valor": "<RD*>"
+      }
+    ],    "plantilla":[]
+  },
+  {
+    "noTerminal": {
+      "valor": "<RD*>"
+    },
+    "derivacion": []
+  },
+  {
+    "noTerminal": {
+      "valor": "<VA>"
+    },
+    "derivacion": [
+      {
+        "tipoToken": "IDENTIFICADOR",
+        "lexema": null
+      },
+      {
+        "valor": "<A>"
+      }
+    ],    "plantilla":[]
+  },
+  {
+    "noTerminal": {
+      "valor": "<A>"
+    },
+    "derivacion": [
+      {
+        "tipoToken": null,
+        "lexema": "="
+      },
+      {
+        "valor": "<EM>"
+      }
+    ],    "plantilla":[]
+  },
+  {
+    "noTerminal": {
+      "valor": "<A>"
+    },
+    "derivacion": []
+  },
+  {
+    "noTerminal": {
+      "valor": "<TD>"
+    },
+    "derivacion": [
+      {
+        "tipoToken": null,
+        "lexema": "entero"
+      }
+    ],    "plantilla":[]
+  },
+  {
+    "noTerminal": {
+      "valor": "<SA>"
+    },
+    "derivacion": [
+      {
+        "tipoToken": "IDENTIFICADOR",
+        "lexema": null
+      },
+      {
+        "tipoToken": null,
+        "lexema": "="
+      },
+      {
+        "valor": "<EM>"
+      },
+      {
+        "tipoToken": null,
+        "lexema": ";"
+      }
+    ],    "plantilla":[]
+  },
+  {
+    "noTerminal": {
+      "valor": "<SM>"
+    },
+    "derivacion": [
+      {
+        "tipoToken": null,
+        "lexema": "Mientras"
+      },
+      {
+        "tipoToken": null,
+        "lexema": "("
+      },
+      {
+        "valor": "<EM>"
+      },
+      {
+        "tipoToken": null,
+        "lexema": ")"
+      },
+      {
+        "valor": "<SubB>"
+      }
+    ],    "plantilla":[]
+  },
+  {
+    "noTerminal": {
+      "valor": "<SubB>"
+    },
+    "derivacion": [
+      {
+        "valor": "<S>"
+      }
+    ],    "plantilla":[]
+  },
+  {
+    "noTerminal": {
+      "valor": "<SubB>"
+    },
+    "derivacion": [
+      {
+        "valor": "<BS>"
+      }
+    ],    "plantilla":[]
+  },
+  {
+    "noTerminal": {
+      "valor": "<SC>"
+    },
+    "derivacion": [
+      {
+        "tipoToken": null,
+        "lexema": "Si"
+      },
+      {
+        "tipoToken": null,
+        "lexema": "("
+      },
+      {
+        "valor": "<EM>"
+      },
+      {
+        "tipoToken": null,
+        "lexema": ")"
+      },
+      {
+        "valor": "<SubB>"
+      },
+      {
+        "valor": "<ELSE>"
+      }
+    ],    "plantilla":[]
+  },
+  {
+    "noTerminal": {
+      "valor": "<ELSE>"
+    },
+    "derivacion": [
+      {
+        "tipoToken": null,
+        "lexema": "Osino"
+      },
+      {
+        "valor": "<SubB>"
+      }
+    ],    "plantilla":[]
+  },
+  {
+    "noTerminal": {
+      "valor": "<ELSE>"
+    },
+    "derivacion": []
+  },
+  {
+    "noTerminal": {
+      "valor": "<SHM>"
+    },
+    "derivacion": [
+      {
+        "tipoToken": null,
+        "lexema": "Hacer"
+      },
+      {
+        "valor": "<SubB>"
+      },
+      {
+        "tipoToken": null,
+        "lexema": "Mientras"
+      },
+      {
+        "tipoToken": null,
+        "lexema": "("
+      },
+      {
+        "valor": "<EM>"
+      },
+      {
+        "tipoToken": null,
+        "lexema": ")"
+      },
+      {
+        "tipoToken": null,
+        "lexema": ";"
+      }
+    ],    "plantilla":[]
+  },
+  {
+    "noTerminal": {
+      "valor": "<EM>"
+    },
+    "derivacion": [
+      {
+        "valor": "<EXP*>"
+      },
+      {
+        "valor": "<EXPB>"
+      },
+      {
+        "valor": "<OL>"
+      }
+    ],    "plantilla":[]
+  },
+  {
+    "noTerminal": {
+      "valor": "<EXPB>"
+    },
+    "derivacion": [
+      {
+        "valor": "<OP3>"
+      },
+      {
+        "valor": "<EXP*>"
+      }
+    ],    "plantilla":[]
+  },
+  {
+    "noTerminal": {
+      "valor": "<OL>"
+    },
+    "derivacion": [
+      {
+        "valor": "<OP4>"
+      },
+      {
+        "valor": "<EM>"
+      }
+    ],    "plantilla":[]
+  },
+  {
+    "noTerminal": {
+      "valor": "<OL>"
+    },
+    "derivacion": []
+  },
+  {
+    "noTerminal": {
+      "valor": "<OP4>"
+    },
+    "derivacion": [
+      {
+        "tipoToken": null,
+        "lexema": "||"
+      }
+    ],    "plantilla":[]
+  },
+  {
+    "noTerminal": {
+      "valor": "<OP4>"
+    },
+    "derivacion": [
+      {
+        "tipoToken": null,
+        "lexema": "&&"
+      }
+    ],    "plantilla":[]
+  },
+  {
+    "noTerminal": {
+      "valor": "<EXPB>"
+    },
+    "derivacion": []
+  },
+  {
+    "noTerminal": {
+      "valor": "<EXP*>"
+    },
+    "derivacion": [
+      {
+        "valor": "<T>"
+      },
+      {
+        "valor": "<T*>"
+      }
+    ],    "plantilla":[]
+  },
+  {
+    "noTerminal": {
+      "valor": "<T*>"
+    },
+    "derivacion": [
+      {
+        "valor": "<op1>"
+      },
+      {
+        "valor": "<T>"
+      },
+      {
+        "valor": "<T*>"
+      }
+    ],    "plantilla":[]
+  },
+  {
+    "noTerminal": {
+      "valor": "<T*>"
+    },
+    "derivacion": []
+  },
+  {
+    "noTerminal": {
+      "valor": "<op1>"
+    },
+    "derivacion": [
+      {
+        "tipoToken": null,
+        "lexema": "+"
+      }
+    ],    "plantilla":[]
+  },
+  {
+    "noTerminal": {
+      "valor": "<op1>"
+    },
+    "derivacion": [
+      {
+        "tipoToken": null,
+        "lexema": "-"
+      }
+    ],    "plantilla":[]
+  },
+  {
+    "noTerminal": {
+      "valor": "<T>"
+    },
+    "derivacion": [
+      {
+        "valor": "<F>"
+      },
+      {
+        "valor": "<F*>"
+      }
+    ],    "plantilla":[]
+  },
+  {
+    "noTerminal": {
+      "valor": "<F*>"
+    },
+    "derivacion": [
+      {
+        "valor": "<op2>"
+      },
+      {
+        "valor": "<F>"
+      },
+      {
+        "valor": "<F*>"
+      }
+    ],    "plantilla":[]
+  },
+  {
+    "noTerminal": {
+      "valor": "<F*>"
+    },
+    "derivacion": []
+  },
+  {
+    "noTerminal": {
+      "valor": "<F>"
+    },
+    "derivacion": [
+      {
+        "tipoToken": null,
+        "lexema": "("
+      },
+      {
+        "valor": "<EXP*>"
+      },
+      {
+        "tipoToken": null,
+        "lexema": ")"
+      }
+    ],    "plantilla":[]
+  },
+  {
+    "noTerminal": {
+      "valor": "<F>"
+    },
+    "derivacion": [
+      {
+        "tipoToken": "CONST_NUMERICA",
+        "lexema": null
+      }
+    ],    "plantilla":[]
+  },
+  {
+    "noTerminal": {
+      "valor": "<F>"
+    },
+    "derivacion": [
+      {
+        "tipoToken": "IDENTIFICADOR",
+        "lexema": null
+      }
+    ],    "plantilla":[]
+  },
+  {
+    "noTerminal": {
+      "valor": "<OP3>"
+    },
+    "derivacion": [
+      {
+        "tipoToken": null,
+        "lexema": "=="
+      }
+    ],    "plantilla":[]
+  },
+  {
+    "noTerminal": {
+      "valor": "<OP3>"
+    },
+    "derivacion": [
+      {
+        "tipoToken": null,
+        "lexema": "!="
+      }
+    ],    "plantilla":[]
+  },
+  {
+    "noTerminal": {
+      "valor": "<OP3>"
+    },
+    "derivacion": [
+      {
+        "tipoToken": null,
+        "lexema": "<"
+      }
+    ],    "plantilla":[]
+  },
+  {
+    "noTerminal": {
+      "valor": "<OP3>"
+    },
+    "derivacion": [
+      {
+        "tipoToken": null,
+        "lexema": ">"
+      }
+    ],    "plantilla":[]
+  },
+  {
+    "noTerminal": {
+      "valor": "<OP3>"
+    },
+    "derivacion": [
+      {
+        "tipoToken": null,
+        "lexema": "<="
+      }
+    ],    "plantilla":[]
+  },
+  {
+    "noTerminal": {
+      "valor": "<OP3>"
+    },
+    "derivacion": [
+      {
+        "tipoToken": null,
+        "lexema": ">="
+      }
+    ],    "plantilla":[]
+  },
+  {
+    "noTerminal": {
+      "valor": "<op2>"
+    },
+    "derivacion": [
+      {
+        "tipoToken": null,
+        "lexema": "*"
+      }
+    ],    "plantilla":[]
+  },
+  {
+    "noTerminal": {
+      "valor": "<op2>"
+    },
+    "derivacion": [
+      {
+        "tipoToken": null,
+        "lexema": "/"
+      }
+    ],    "plantilla":[]
+  },
+  {
+    "noTerminal": {
+      "valor": "<op2>"
+    },
+    "derivacion": [
+      {
+        "tipoToken": null,
+        "lexema": "%"
+      }
+    ],    "plantilla":[]
+  },
+  {
+    "noTerminal": {
+      "valor": "<SL>"
+    },
+    "derivacion": [
+      {
+        "tipoToken": null,
+        "lexema": "LeerTeclado"
+      },
+      {
+        "tipoToken": null,
+        "lexema": "("
+      },
+      {
+        "tipoToken": "IDENTIFICADOR",
+        "lexema": null
+      },
+      {
+        "tipoToken": null,
+        "lexema": ")"
+      }
+    ],    "plantilla":[]
+  },
+  {
+    "noTerminal": {
+      "valor": "<SE>"
+    },
+    "derivacion": [
+      {
+        "tipoToken": null,
+        "lexema": "EscribirPantalla"
+      },
+      {
+        "tipoToken": null,
+        "lexema": "("
+      },
+      {
+        "valor": "<E>"
+      },
+      {
+        "tipoToken": null,
+        "lexema": ")"
+      },
+      {
+        "tipoToken": null,
+        "lexema": ";"
+      }
+    ],    "plantilla":[]
+  },
+  {
+    "noTerminal": {
+      "valor": "<E>"
+    },
+    "derivacion": [
+      {
+        "valor": "<EM>"
+      }
+    ],    "plantilla":[]
+  },
+  {
+    "noTerminal": {
+      "valor": "<E>"
+    },
+    "derivacion": [
+      {
+        "tipoToken": "IDENTIFICADOR",
+        "lexema": null
+      }
+    ],    "plantilla":[]
+  },
+  {
+    "noTerminal": {
+      "valor": "<E>"
+    },
+    "derivacion": [
+      {
+        "tipoToken": "LITERAL_CADENA",
+        "lexema": null
+      }
+    ],    "plantilla":[]
+  },
+  {
+    "noTerminal": {
+      "valor": "<E>"
+    },
+    "derivacion": [
+      {
+        "tipoToken": "CONST_NUMERICA",
+        "lexema": null
+      }
+    ],    "plantilla":[]
+  }
 ]
