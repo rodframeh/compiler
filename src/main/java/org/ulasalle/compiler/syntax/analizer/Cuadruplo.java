@@ -22,7 +22,7 @@ public class Cuadruplo implements Resultado
     public Cuadruplo()
     {
     }
-
+    
     public int getBloque()
     {
         return bloque;

@@ -20,7 +20,7 @@
         "valor": "<BS>"
       }
     ],
-    "plantilla":[]
+    "plantilla":[],"nuevoBloque":false
   },
   {
     "noTerminal": {
@@ -39,7 +39,7 @@
         "lexema": "}"
       }
     ],
-    "plantilla":[]
+    "plantilla":[],"nuevoBloque":false
   },
   {
     "noTerminal": {
@@ -52,7 +52,7 @@
       {
         "valor": "<S*>"
       }
-    ],    "plantilla":[]
+    ],    "plantilla":[],"nuevoBloque":false
   },
   {
     "noTerminal": {
@@ -68,7 +68,7 @@
       {
         "valor": "<SD>"
       }
-    ],    "plantilla":[]
+    ],    "plantilla":[],"nuevoBloque":false
   },
   {
     "noTerminal": {
@@ -78,7 +78,7 @@
       {
         "valor": "<SA>"
       }
-    ],    "plantilla":[]
+    ],    "plantilla":[],"nuevoBloque":false
   },
   {
     "noTerminal": {
@@ -88,7 +88,7 @@
       {
         "valor": "<SC>"
       }
-    ],    "plantilla":[]
+    ],    "plantilla":[],"nuevoBloque":false
   },
   {
     "noTerminal": {
@@ -98,7 +98,7 @@
       {
         "valor": "<SM>"
       }
-    ],    "plantilla":[]
+    ],    "plantilla":[],"nuevoBloque":false
   },
   {
     "noTerminal": {
@@ -108,7 +108,7 @@
       {
         "valor": "<SL>"
       }
-    ],    "plantilla":[]
+    ],    "plantilla":[],"nuevoBloque":false
   },
   {
     "noTerminal": {
@@ -118,7 +118,7 @@
       {
         "valor": "<SE>"
       }
-    ],    "plantilla":[]
+    ],    "plantilla":[],"nuevoBloque":false
   },
   {
     "noTerminal": {
@@ -128,7 +128,7 @@
       {
         "valor": "<SHM>"
       }
-    ],    "plantilla":[]
+    ],    "plantilla":[],"nuevoBloque":false
   },
   {
     "noTerminal": {
@@ -148,7 +148,7 @@
         "tipoToken": null,
         "lexema": ";"
       }
-    ],    "plantilla":[]
+    ],    "plantilla":[],"nuevoBloque":false
   },
   {
     "noTerminal": {
@@ -165,7 +165,7 @@
       {
         "valor": "<RD*>"
       }
-    ],    "plantilla":[]
+    ],    "plantilla":[],"nuevoBloque":false
   },
   {
     "noTerminal": {
@@ -185,7 +185,7 @@
       {
         "valor": "<A>"
       }
-    ],    "plantilla":[]
+    ],    "plantilla":[],"nuevoBloque":false
   },
   {
     "noTerminal": {
@@ -199,7 +199,7 @@
       {
         "valor": "<EM>"
       }
-    ],    "plantilla":[]
+    ],    "plantilla":[],"nuevoBloque":false
   },
   {
     "noTerminal": {
@@ -216,7 +216,7 @@
         "tipoToken": null,
         "lexema": "entero"
       }
-    ],    "plantilla":[]
+    ],    "plantilla":[],"nuevoBloque":false
   },
   {
     "noTerminal": {
@@ -238,7 +238,18 @@
         "tipoToken": null,
         "lexema": ";"
       }
-    ],    "plantilla":[]
+    ], 
+    "plantilla":[
+        {
+            "tipoToken": "IDENTIFICADOR",
+            "lexema": null
+        },  {
+            "valor": "<EM>"
+        },{
+            "tipoToken": null,
+            "lexema": "="
+        },null
+    ],"nuevoBloque":false
   },
   {
     "noTerminal": {
@@ -263,7 +274,7 @@
       {
         "valor": "<SubB>"
       }
-    ],    "plantilla":[]
+    ],    "plantilla":[],"nuevoBloque":false
   },
   {
     "noTerminal": {
@@ -273,7 +284,7 @@
       {
         "valor": "<S>"
       }
-    ],    "plantilla":[]
+    ],    "plantilla":[],"nuevoBloque":false
   },
   {
     "noTerminal": {
@@ -283,7 +294,7 @@
       {
         "valor": "<BS>"
       }
-    ],    "plantilla":[]
+    ],    "plantilla":[],"nuevoBloque":false
   },
   {
     "noTerminal": {
@@ -311,7 +322,7 @@
       {
         "valor": "<ELSE>"
       }
-    ],    "plantilla":[]
+    ],    "plantilla":[],"nuevoBloque":false
   },
   {
     "noTerminal": {
@@ -325,7 +336,7 @@
       {
         "valor": "<SubB>"
       }
-    ],    "plantilla":[]
+    ],    "plantilla":[],"nuevoBloque":false
   },
   {
     "noTerminal": {
@@ -364,7 +375,7 @@
         "tipoToken": null,
         "lexema": ";"
       }
-    ],    "plantilla":[]
+    ],    "plantilla":[],"nuevoBloque":false
   },
   {
     "noTerminal": {
@@ -380,7 +391,7 @@
       {
         "valor": "<OL>"
       }
-    ],    "plantilla":[]
+    ],    "plantilla":[],"nuevoBloque":false
   },
   {
     "noTerminal": {
@@ -393,7 +404,7 @@
       {
         "valor": "<EXP*>"
       }
-    ],    "plantilla":[]
+    ],    "plantilla":[],"nuevoBloque":false
   },
   {
     "noTerminal": {
@@ -406,7 +417,7 @@
       {
         "valor": "<EM>"
       }
-    ],    "plantilla":[]
+    ],    "plantilla":[],"nuevoBloque":false
   },
   {
     "noTerminal": {
@@ -423,7 +434,7 @@
         "tipoToken": null,
         "lexema": "||"
       }
-    ],    "plantilla":[]
+    ],    "plantilla":[],"nuevoBloque":false
   },
   {
     "noTerminal": {
@@ -434,7 +445,7 @@
         "tipoToken": null,
         "lexema": "&&"
       }
-    ],    "plantilla":[]
+    ],    "plantilla":[],"nuevoBloque":false
   },
   {
     "noTerminal": {
@@ -453,7 +464,7 @@
       {
         "valor": "<T*>"
       }
-    ],    "plantilla":[]
+    ],    "plantilla":[],"nuevoBloque":false
   },
   {
     "noTerminal": {
@@ -469,7 +480,7 @@
       {
         "valor": "<T*>"
       }
-    ],    "plantilla":[]
+    ],    "plantilla":[],"nuevoBloque":false
   },
   {
     "noTerminal": {
@@ -486,7 +497,7 @@
         "tipoToken": null,
         "lexema": "+"
       }
-    ],    "plantilla":[]
+    ],    "plantilla":[],"nuevoBloque":false
   },
   {
     "noTerminal": {
@@ -497,7 +508,7 @@
         "tipoToken": null,
         "lexema": "-"
       }
-    ],    "plantilla":[]
+    ],    "plantilla":[],"nuevoBloque":false
   },
   {
     "noTerminal": {
@@ -510,7 +521,7 @@
       {
         "valor": "<F*>"
       }
-    ],    "plantilla":[]
+    ],    "plantilla":[],"nuevoBloque":false
   },
   {
     "noTerminal": {
@@ -526,7 +537,7 @@
       {
         "valor": "<F*>"
       }
-    ],    "plantilla":[]
+    ],    "plantilla":[],"nuevoBloque":false
   },
   {
     "noTerminal": {
@@ -550,7 +561,7 @@
         "tipoToken": null,
         "lexema": ")"
       }
-    ],    "plantilla":[]
+    ],    "plantilla":[],"nuevoBloque":false
   },
   {
     "noTerminal": {
@@ -561,7 +572,7 @@
         "tipoToken": "CONST_NUMERICA",
         "lexema": null
       }
-    ],    "plantilla":[]
+    ],    "plantilla":[],"nuevoBloque":false
   },
   {
     "noTerminal": {
@@ -572,7 +583,7 @@
         "tipoToken": "IDENTIFICADOR",
         "lexema": null
       }
-    ],    "plantilla":[]
+    ],    "plantilla":[],"nuevoBloque":false
   },
   {
     "noTerminal": {
@@ -583,7 +594,7 @@
         "tipoToken": null,
         "lexema": "=="
       }
-    ],    "plantilla":[]
+    ],    "plantilla":[],"nuevoBloque":false
   },
   {
     "noTerminal": {
@@ -594,7 +605,7 @@
         "tipoToken": null,
         "lexema": "!="
       }
-    ],    "plantilla":[]
+    ],    "plantilla":[],"nuevoBloque":false
   },
   {
     "noTerminal": {
@@ -605,7 +616,7 @@
         "tipoToken": null,
         "lexema": "<"
       }
-    ],    "plantilla":[]
+    ],    "plantilla":[],"nuevoBloque":false
   },
   {
     "noTerminal": {
@@ -616,7 +627,7 @@
         "tipoToken": null,
         "lexema": ">"
       }
-    ],    "plantilla":[]
+    ],    "plantilla":[],"nuevoBloque":false
   },
   {
     "noTerminal": {
@@ -627,7 +638,7 @@
         "tipoToken": null,
         "lexema": "<="
       }
-    ],    "plantilla":[]
+    ],    "plantilla":[],"nuevoBloque":false
   },
   {
     "noTerminal": {
@@ -638,7 +649,7 @@
         "tipoToken": null,
         "lexema": ">="
       }
-    ],    "plantilla":[]
+    ],    "plantilla":[],"nuevoBloque":false
   },
   {
     "noTerminal": {
@@ -649,7 +660,7 @@
         "tipoToken": null,
         "lexema": "*"
       }
-    ],    "plantilla":[]
+    ],    "plantilla":[],"nuevoBloque":false
   },
   {
     "noTerminal": {
@@ -660,7 +671,7 @@
         "tipoToken": null,
         "lexema": "/"
       }
-    ],    "plantilla":[]
+    ],    "plantilla":[],"nuevoBloque":false
   },
   {
     "noTerminal": {
@@ -671,7 +682,7 @@
         "tipoToken": null,
         "lexema": "%"
       }
-    ],    "plantilla":[]
+    ],    "plantilla":[],"nuevoBloque":false
   },
   {
     "noTerminal": {
@@ -694,7 +705,7 @@
         "tipoToken": null,
         "lexema": ")"
       }
-    ],    "plantilla":[]
+    ],    "plantilla":[],"nuevoBloque":false
   },
   {
     "noTerminal": {
@@ -720,7 +731,7 @@
         "tipoToken": null,
         "lexema": ";"
       }
-    ],    "plantilla":[]
+    ],    "plantilla":[],"nuevoBloque":false
   },
   {
     "noTerminal": {
@@ -730,7 +741,7 @@
       {
         "valor": "<EM>"
       }
-    ],    "plantilla":[]
+    ],    "plantilla":[],"nuevoBloque":false
   },
   {
     "noTerminal": {
@@ -741,7 +752,7 @@
         "tipoToken": "IDENTIFICADOR",
         "lexema": null
       }
-    ],    "plantilla":[]
+    ],    "plantilla":[],"nuevoBloque":false
   },
   {
     "noTerminal": {
@@ -752,7 +763,7 @@
         "tipoToken": "LITERAL_CADENA",
         "lexema": null
       }
-    ],    "plantilla":[]
+    ],    "plantilla":[],"nuevoBloque":false
   },
   {
     "noTerminal": {
@@ -763,6 +774,6 @@
         "tipoToken": "CONST_NUMERICA",
         "lexema": null
       }
-    ],    "plantilla":[]
+    ],    "plantilla":[],"nuevoBloque":false
   }
 ]

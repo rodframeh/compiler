@@ -69,6 +69,12 @@ public class TablaAnalisis
 
     }
 
+    public Simbolo[] getPlantilla(int indiceRegla)
+    {
+        return reglasDeProduccion[indiceRegla].getPlantilla();
+    }
+    
+    
     private void agregarTerminales(ReglaProduccion reglaProduccion)
     {
         for (Simbolo simbolo : reglaProduccion.getDerivacion())

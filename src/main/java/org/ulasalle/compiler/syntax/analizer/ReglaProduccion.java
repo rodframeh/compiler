@@ -14,7 +14,8 @@ public class ReglaProduccion
     private NoTerminal noTerminal;
     private Simbolo[] derivacion;
     private Simbolo[] plantilla;
-
+    private boolean nuevoBloque;
+    
     public ReglaProduccion()
     {
     }
@@ -41,6 +42,12 @@ public class ReglaProduccion
         return plantilla;
     }
 
-    
+    public boolean isNuevoBloque() {
+        return nuevoBloque;
+    }
+
+    public void setNuevoBloque(boolean nuevoBloque) {
+        this.nuevoBloque = nuevoBloque;
+    }
     
 }

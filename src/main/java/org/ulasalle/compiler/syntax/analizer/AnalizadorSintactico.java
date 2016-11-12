@@ -5,6 +5,7 @@
  */
 package org.ulasalle.compiler.syntax.analizer;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
@@ -93,9 +94,75 @@ public class AnalizadorSintactico //implements Analizador
         return indiceTokens;
     }
 
-    private void setCuadruplo(Simbolo simbolo,List<Cuadruplo> cuadruplos,Stack<PlantillaControl> plantillas)
+    private void setCuadruplo(Simbolo simbolo,List<Cuadruplo> cuadruplos,Stack<PlantillaControl> plantillasControl)
     {
+        int indiceRegla=simbolo.getIndiceRegla();
+        Simbolo[] plantilla=tablaAnalisis.getPlantilla(indiceRegla);
         
+        if(plantillasControl.empty())
+        {
+            
+            if(plantilla!=null)plantillasControl.add(new PlantillaControl(indiceRegla, plantilla,false,0));
+            cuadruplos.add(new Cuadruplo());
+        }
+        else 
+        {
+            if(plantillasControl.peek().getIndiceRegla()!=simbolo.getIndiceRegla())
+            {
+                if(plantilla!=null)plantillasControl.add(new PlantillaControl(indiceRegla, plantilla,false,0));
+                cuadruplos.add(new Cuadruplo());
+            }
+            else
+            {
+                for(int i=0;i<plantilla.length;i++)
+                {
+                    if(plantilla[i]!=null)
+                    {
+                        if(plantilla[i].getClass() == Terminal.class && ((Terminal) plantilla[i]).equals(simbolo))
+                        {
+                                switch(i)
+                                {
+                                    case 0:
+                                        cuadruplos.get(cuadruplos.size()-1).setResultado(simbolo);
+                                        break;
+                                    case 1:
+                                        cuadruplos.get(cuadruplos.size()-1).setOperando1(simbolo);
+                                        break;
+                                    case 2:
+                                        cuadruplos.get(cuadruplos.size()-1).setOperacion(simbolo);
+                                        break;
+                                    case 3:
+                                        cuadruplos.get(cuadruplos.size()-1).setOperando2(simbolo);
+                                        break;
+                                }
+                                plantilla[i]=null;
+                                break;
+                        }
+                        else if(plantilla[i].getClass() == NoTerminal.class && ((NoTerminal) plantilla[i]).equals(simbolo))
+                        {
+                                switch(i)
+                                {
+                                    case 0:
+                                        cuadruplos.get(cuadruplos.size()-1).setResultado(simbolo);
+                                        break;
+                                    case 1:
+                                        cuadruplos.get(cuadruplos.size()-1).setOperando1(simbolo);
+                                        break;
+                                    case 2:
+                                        cuadruplos.get(cuadruplos.size()-1).setOperacion(simbolo);
+                                        break;
+                                    case 3:
+                                        cuadruplos.get(cuadruplos.size()-1).setOperando2(simbolo);
+                                        break;
+                                }
+                                plantilla[i]=null;
+                                break;
+                        }
+                        
+                    }   
+                }
+            }
+        }
         //plantillas.peek().
     }
     
@@ -120,7 +187,7 @@ public class AnalizadorSintactico //implements Analizador
             }
         if (pila.empty())
             System.out.println("Esta vacia");
-        return new RespuestaSintactica("nombreArchivo", new ArrayList<Cuadruplo>(), errores);
+        return new RespuestaSintactica("nombreArchivo", new ArrayList<>(), errores);
     }
 
     private boolean esAceptadoPorPila(Stack<Simbolo> pila, Token token)
