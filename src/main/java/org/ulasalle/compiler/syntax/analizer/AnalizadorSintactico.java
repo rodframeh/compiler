@@ -99,18 +99,25 @@ public class AnalizadorSintactico //implements Analizador
         int indiceRegla=simbolo.getIndiceRegla();
         Simbolo[] plantilla=tablaAnalisis.getPlantilla(indiceRegla);
         
+        if(simbolo instanceof NoTerminal){
+            System.out.println(((NoTerminal) simbolo).getValor());
+        }
+        
         if(plantillasControl.empty())
         {
-            
-            if(plantilla!=null)plantillasControl.add(new PlantillaControl(indiceRegla, plantilla,false,0));
-            cuadruplos.add(new Cuadruplo());
+            if(plantilla!=null && plantilla.length>0){
+                plantillasControl.add(new PlantillaControl(indiceRegla, plantilla,false,0));
+                cuadruplos.add(new Cuadruplo());
+            }
         }
         else 
         {
             if(plantillasControl.peek().getIndiceRegla()!=simbolo.getIndiceRegla())
             {
-                if(plantilla!=null)plantillasControl.add(new PlantillaControl(indiceRegla, plantilla,false,0));
-                cuadruplos.add(new Cuadruplo());
+                if(plantilla!=null && plantilla.length>0){
+                    plantillasControl.add(new PlantillaControl(indiceRegla, plantilla,false,0));
+                    cuadruplos.add(new Cuadruplo());
+                }
             }
             else
             {
@@ -187,6 +194,7 @@ public class AnalizadorSintactico //implements Analizador
             }
         if (pila.empty())
             System.out.println("Esta vacia");
+        imprimirCuadruplos(cuadruplos);
         return new RespuestaSintactica("nombreArchivo", new ArrayList<>(), errores);
     }
 
@@ -228,4 +236,25 @@ public class AnalizadorSintactico //implements Analizador
         System.out.println();
     }
 
+    private void imprimirCuadruplos(List<Cuadruplo> cuadruplos)
+    {
+        cuadruplos.stream().forEach(
+                cuadruplo-> {
+                    System.out.println(
+                            cuadruplo.getBloque()
+                                    +"\t"+getContenido(cuadruplo.getResultado())
+                                    +"\t"+getContenido(cuadruplo.getOperando1())
+                                    +"\t"+getContenido(cuadruplo.getOperacion())
+                                    +"\t"+getContenido(cuadruplo.getOperando2())
+                    );
+                }
+        );
+    }
+    
+    private String getContenido(Simbolo simbolo)
+    {   
+        if(simbolo==null) return "vacio";
+        return simbolo instanceof Terminal?((Terminal) simbolo).getLexema():((NoTerminal) simbolo).getValor();
+    }
+    
 }

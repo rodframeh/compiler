@@ -59,6 +59,10 @@ public class Aplicacion
         tokens.add(new Token(TipoToken.IDENTIFICADOR, "a"));
         tokens.add(new Token(TipoToken.OPERADOR, "="));
         tokens.add(new Token(TipoToken.CONST_NUMERICA, "5"));
+                tokens.add(new Token(TipoToken.DELIMITADOR, ";"));
+                  tokens.add(new Token(TipoToken.IDENTIFICADOR, "a"));
+        tokens.add(new Token(TipoToken.OPERADOR, "="));
+                          tokens.add(new Token(TipoToken.IDENTIFICADOR, "a"));
         tokens.add(new Token(TipoToken.OPERADOR,"*"));
         tokens.add(new Token(TipoToken.CONST_NUMERICA, "7"));
         tokens.add(new Token(TipoToken.DELIMITADOR, ";"));
