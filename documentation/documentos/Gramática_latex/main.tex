@@ -1,0 +1,140 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[sc]{mathpazo}
+\usepackage[T1]{fontenc}
+\usepackage{color}
+\begin{document}
+
+\section*{Compilador en Java}
+
+\section{Gramática}
+
+\begin{enumerate}
+\item $R0:     \textcolor{red}{<P>}        \rightarrow   Programa()<BS>$
+\item $R1:     \textcolor{red}{<BS>}        \rightarrow   {<S*>}$
+\item $R2:     \textcolor{red}{<S*>}        \rightarrow   <S><S*>$
+\item $R3:     \textcolor{red}{<S*>}        \rightarrow   \lambda$
+\item $R4:     \textcolor{red}{<S>}        \rightarrow   <SD>$
+\item $R5:     \textcolor{red}{<S>}        \rightarrow   <SA>$
+\item $R6:     \textcolor{red}{<S>}        \rightarrow   <SC>$
+\item $R7:     \textcolor{red}{<S>}        \rightarrow   <SM>$
+\item $R8:     \textcolor{red}{<S>}        \rightarrow   <SL>$
+\item $R9:     \textcolor{red}{<S>}        \rightarrow   <SE>$
+\item $R10:    \textcolor{red}{<S>}        \rightarrow   <SHM>$
+\item $R11:     \textcolor{red}{<SD>}        \rightarrow   <TD><VA><RD*>;$
+\item $R12:     \textcolor{red}{<RD*>}        \rightarrow   ,<VA><RD*>$
+\item $R13:     \textcolor{red}{<RD*>}        \rightarrow   \lambda $
+\item $R14:     \textcolor{red}{<VA>}        \rightarrow   IDENTIFICADOR<A>$
+\item $R15:     \textcolor{red}{<A>}        \rightarrow   =<EM>$
+\item $R16:     \textcolor{red}{<A>}        \rightarrow   \lambda$
+\item $R17:     \textcolor{red}{<TD> }       \rightarrow   entero$
+\item $R18:    \textcolor{red}{<SA> }       \rightarrow   IDENTIFICADOR=<EM>;$
+\item $R19:    \textcolor{red}{<SM> }       \rightarrow   Mientras(<EM>)<SubB>$
+\item $R20:   \textcolor{red}{ <SubB>}    \rightarrow   <S>$
+\item $R21:   \textcolor{red}{ <SubB>   } \rightarrow   <BS>$
+\item $R22:  \textcolor{red}{  <SC> }       \rightarrow   Si(<EM>)<SubB><ELSE>$
+\item $R23:    \textcolor{red}{<ELSE>}    \rightarrow   Osino<SubB>$
+\item $R24:    \textcolor{red}{<ELSE> }   \rightarrow   \lambda$
+\item $R25:   \textcolor{red}{ <SHM> }   \rightarrow   Hacer<subB>Mientras(<EM>);$
+\item $R26:    \textcolor{red}{<EM> }   \rightarrow   <EXP*><EXPB><OL>$
+\item $R27:    \textcolor{red}{ <EXP*> }       \rightarrow   <T><T*>$
+\item $R28:     \textcolor{red}{<T*>  }      \rightarrow   \lambda$
+\item $R29:    \textcolor{red}{<T*>}        \rightarrow   <OP1><T><T*>$
+\item $R30:    \textcolor{red}{ <OP1>  }      \rightarrow   + $
+\item $R31:     \textcolor{red}{<OP1>   }     \rightarrow   - $
+\item $R32:    \textcolor{red}{ <T>}        \rightarrow   <F><F*> $
+\item $R33:     \textcolor{red}{<F*>}        \rightarrow   <OP2><F><F*> $
+\item $R34:     \textcolor{red}{<F*> }       \rightarrow   \lambda $
+\item $R35:     \textcolor{red}{<F>}        \rightarrow   (<EM>)  $ 
+\item $R36:     \textcolor{red}{<F> }       \rightarrow   CONST_NUMERICA $ 
+\item $R37:     \textcolor{red}{<F>    }    \rightarrow   IDENTIFICADOR $
+\item $R38:     \textcolor{red}{<OP2>}        \rightarrow   / $
+\item $R39:     \textcolor{red}{<OP2> }       \rightarrow   \% $
+\item $R40:     \textcolor{red}{<OP2> }       \rightarrow   * $
+\item $R41:    \textcolor{red}{ <SL>   }   \rightarrow   LeerTeclado(IDENTIFICADOR);$
+\item $R42:     \textcolor{red}{<SE>}        \rightarrow   EscribirPantalla(<EM>); $
+\item $R43:     \textcolor{red}{<EXPB>}        \rightarrow   <OP3><EXP*> $
+\item $R44:     \textcolor{red}{<OP3>}        \rightarrow  = $
+\item $R44:     \textcolor{red}{<OP3>}        \rightarrow  == $
+\item $R45:     \textcolor{red}{<OP3>}        \rightarrow  != $
+\item $R46:     \textcolor{red}{<OP3>}        \rightarrow  <= $
+\item $R47:     \textcolor{red}{<OP3>}        \rightarrow  >= $
+\item $R48:     \textcolor{red}{<OP3>}        \rightarrow  < $
+\item $R49:     \textcolor{red}{<OP3>}        \rightarrow  > $
+\item $R50:     \textcolor{red}{<EXPB>}        \rightarrow   \lambda $
+\item $R51:     \textcolor{red}{<OL*> }       \rightarrow   <OP4><EM> $
+\item $R52:    \textcolor{red}{ <OP4*>}        \rightarrow   || $
+\item $R53:     \textcolor{red}{<OP4*>}        \rightarrow   \&\& $
+\item $R54:    \textcolor{red}{<OL>}        \rightarrow   \lambda $
+\end{enumerate}
+
+\subsection*{Terminología}
+
+\begin{enumerate}
+	\item Terminal
+	\begin{itemize}                                                                                                          
+			\item Programa
+\item $($
+\item $)$
+\item $ \lbrace $
+\item $ \rbrace $
+\item $;$
+\item $,$
+\item $=$
+\item $Si$
+\item $Osino$
+\item $Hacer$
+\item $Mientras$
+\item $+$
+\item $-$
+\item $/$
+\item $*$
+\item $\%$
+\item $LeerTeclado$
+\item $EscribirPantalla$
+\item $IDENTIFICADOR$
+\item $CONST$\textunderscore $NUMERICA$
+\item $LITERAL$\textunderscore $CADENA$
+
+	\end{itemize}
+	
+		\item No Terminales
+	\begin{itemize}
+			\item Programa
+\item $<P>Programa$
+\item $<BS>($bloque de sentencias$)$
+\item $ <S*>($Lista de sentencias$) $
+\item $ <SD> ($Sentencia de declaración$)  $
+\item $ <TD>($tipo de dato$) $
+\item $ <VA>($variable asignada$) $
+\item $<RD*>($resto de datos$)$
+\item $<A>($asignación$)$
+\item $<EM>($expresión matemática$)$
+\item $<EXP*>($expresión matemática sub$)$
+\item $<SA>($sentencia de asignación$)$
+\item $<SC>($sentencia de condicional$)$
+\item $<SM>($sentencia de mientras$)$
+\item $<SL>($sentencia de lectura$)$
+\item $<SE>($sentencia de escritura$)$
+\item $<SubB>($sub bloque$)$
+\item $<ELSE>($condicional alternativa$)$
+\item $<SHM>($sentencia hacer mientras$)$
+\item $<T>($Término$)$
+\item $<T*>($Lista de Término$)$
+\item $<OP1>($Operadores nivel 1$)$
+\item $<OP2>($Operadores nivel 2$)$
+\item $<OP3>($Operadores nivel 3$)$
+\item $<OP4>($Operadores nivel 4$)$
+\item $<F>($Factor$)$
+\item $<F*>($Lista de Factores$)$
+\item $<E>($escribir$)$
+\item $<OL>($Operación Lógica$)$
+\item $<EXPB>($Expresión Booleana$)$
+	\end{itemize}
+\item lamdba 
+\begin{itemize}
+\item lambda ($ \lambda $ ) o vacío.
+\end{itemize}	
+	
+\end{enumerate}
+\end{document}

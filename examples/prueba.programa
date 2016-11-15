@@ -1,0 +1,41 @@
+Programa()
+{
+  entero a;
+  entero b;
+  entero c = 5;
+  entero defg = 1;
+  entero d = 10;
+  a =  50 + 8 * d - c + defg;
+  //comenario linea
+  Si( a > b)
+    a = 1;
+    MostrarPantalla("El nuevo valor de A es 1");
+  Osino
+    MostrarPantalla("El nuevo valor de B sera 2");
+    b = 2;
+  
+  mientras(6==6 || a!=3)
+    a=10;
+    MostrarPantalla("El nuevo valor de A es 10");
+    /**/
+  
+    Mientras(a && b)
+        MostrarPantalla("Son iguales");
+
+
+  
+   
+  mientras ( a+1 > c )
+  {
+  //comenario linea
+  MostrarPantalla("hola mundo");
+    entero d , z, o;
+    mientras ( )
+    {//hola amigos
+      /*
+	abc
+      */
+      //comenario linea
+    }
+  }
+}
