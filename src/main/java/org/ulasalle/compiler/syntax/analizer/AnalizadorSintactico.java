@@ -99,8 +99,8 @@ public class AnalizadorSintactico //implements Analizador
         int indiceRegla=simbolo.getIndiceRegla();
         Simbolo[] plantilla=tablaAnalisis.getPlantilla(indiceRegla);
         
-        if(simbolo instanceof NoTerminal){
-            System.out.println(((NoTerminal) simbolo).getValor());
+        if(simbolo instanceof  Terminal){
+            System.out.println(((Terminal) simbolo).getLexema());
         }
         
         if(plantillasControl.empty())
