@@ -1,0 +1,91 @@
+programa(){
+entero a;
+entero b;
+a=a>1 && b<1;
+
+}
+
+
+programa(){
+//error
+entero a;
+entero b;
+a=a+b;
+b=b+a;
+a+b;
+}
+
+programa(){
+
+entero a;
+entero b;
+a=a+b;
+b=b+a;
+mostrarPantalla(abc);
+escribirTeclado();
+}
+programa(){
+
+entero a;
+a=a+2/g*6-5+k;
+a = a>=2+6*5<g*2<=8+9 && 5+6*86-0||2/5-6;
+
+}
+programa(){
+
+/*jsahdajd*/
+a=b;
+// comentario x //
+
+}
+programa(){
+si(a<5 || b>4)
+{
+	entero a=0+5*8;
+}
+Osino{
+	entero b=8*5;
+}
+}
+
+programa(){
+si(a<5 || b>4)
+	entero a=0+5*8;
+Osino
+	entero b=8*5;
+
+}
+
+programa(){
+mientras(a>b || a)
+{
+	entero a=0+5*8;
+}
+
+}
+
+programa(){
+mientras(a>b && a)
+{
+	entero a=0+5*8;
+}
+
+}
+
+programa(){
+mientras(a>b && a>3*5)
+{
+	entero a=0+5*8;
+}
+
+}
+
+
+programa(){
+mientras(a>b && a>3*5)
+{
+	entero a=0+5*8;
+si(a+1)
+}
+
+}
