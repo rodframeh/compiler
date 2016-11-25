@@ -1,16 +1,14 @@
-package org.ulasalle.compiler.util;
+package org.ulasalle.compiler.syntax.analizer;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.ulasalle.compiler.syntax.analizer.NoTerminal;
 import org.ulasalle.compiler.syntax.analizer.ReglaProduccion;
-import org.ulasalle.compiler.syntax.analizer.Simbolo;
+import org.ulasalle.compiler.util.Simbolo;
 import org.ulasalle.compiler.syntax.analizer.Terminal;
 import org.ulasalle.compiler.util.CargadorPropiedades;
 
@@ -69,10 +67,21 @@ public class TablaAnalisis
         return simbolos;
     }
     
+    private Simbolo[] copiarSimbolos(Simbolo[] simbolos)
+    {
+        Simbolo[] nuevos=new Simbolo[simbolos.length];
+        for(int i=0;i<simbolos.length;i++)
+        {
+            nuevos[i]=simbolos[i].copiarValor();
+        }
+        return nuevos;
+    }
+    
 
     public Simbolo[] generarReglaProduccion(int indiceDeRegla)
     {
-        Simbolo[] simbolos=this.reglasProduccion[indiceDeRegla].getDerivacion();
+        Simbolo[] simbolos=copiarSimbolos(this.reglasProduccion[indiceDeRegla].getDerivacion());
+        
         for(Simbolo simbolo:simbolos)
         {
             simbolo.setIndiceRegla(indiceDeRegla);
@@ -182,5 +191,32 @@ public class TablaAnalisis
             System.out.println();
         }
     }
+    
+    private String convertirAString(Simbolo simbolo)
+    {
+        if (simbolo == null)
+            return "vacio";
+        else
+        {
+            if(simbolo instanceof Terminal)
+            {
+                Terminal terminal=((Terminal) simbolo);
+                return terminal.getLexema()==null ? terminal.getTipoToken().toString() : terminal.getLexema();
+            }
+            else
+                return ((NoTerminal) simbolo).getValor();
+        }
+    }
+
+    private String convertirAString(Simbolo[] simbolos)
+    {
+        String cadena="";
+        for(Simbolo simbolo:simbolos)
+        {
+            cadena+=convertirAString(simbolo);
+        }
+        return cadena.trim();
+    }
+    
 
 }

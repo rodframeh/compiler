@@ -1,5 +1,7 @@
 package org.ulasalle.compiler.syntax.analizer;
 
+import org.ulasalle.compiler.util.Simbolo;
+
 public class Temporal
 {
     private Simbolo simbolo;

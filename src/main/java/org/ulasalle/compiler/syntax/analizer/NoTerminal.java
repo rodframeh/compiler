@@ -1,5 +1,6 @@
 package org.ulasalle.compiler.syntax.analizer;
 
+import org.ulasalle.compiler.util.Simbolo;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.util.Objects;
 
@@ -86,6 +87,18 @@ public class NoTerminal implements Simbolo
     public void setPadre(Simbolo padre)
     {
         this.padre = padre;
+    }
+
+    @Override
+    public Simbolo copiarValor()
+    {
+        NoTerminal noTerminal=new NoTerminal();
+        noTerminal.idRegla=this.idRegla;
+        noTerminal.idSimbolo=this.idSimbolo;
+        noTerminal.indiceRegla=this.indiceRegla;
+        noTerminal.padre=this.padre;
+        noTerminal.valor=this.valor;
+        return noTerminal;
     }
 
    

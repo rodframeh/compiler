@@ -13,7 +13,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.io.IOException;
 import org.ulasalle.compiler.syntax.analizer.NoTerminal;
-import org.ulasalle.compiler.syntax.analizer.Simbolo;
 import org.ulasalle.compiler.syntax.analizer.Terminal;
 
 /**

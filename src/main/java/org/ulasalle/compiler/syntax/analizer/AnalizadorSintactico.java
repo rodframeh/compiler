@@ -1,13 +1,13 @@
 package org.ulasalle.compiler.syntax.analizer;
 
-import org.ulasalle.compiler.util.TablaAnalisis;
+import org.ulasalle.compiler.util.Simbolo;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 import org.ulasalle.compiler.util.Respuesta;
 import org.ulasalle.compiler.util.Token;
 
-public class AnalizadorSintactico //implements Analizador
+public class AnalizadorSintactico
 {
 
     private static TablaAnalisis tablaAnalisis;
@@ -18,7 +18,7 @@ public class AnalizadorSintactico //implements Analizador
             tablaAnalisis = new TablaAnalisis();
     }
 
-    private int encontrarFinError(List<Token> tokens, int indiceTokens, Stack<Simbolo> pila, List<Cuadruplo> cuadruplos,Temporal temporal)
+    private int encontrarFinError(List<Token> tokens, int indiceTokens, Stack<Simbolo> pila, List<Cuadruplo> cuadruplos, Temporal temporal)
     {
         for (; indiceTokens < tokens.size(); indiceTokens++)
             if (tokens.get(indiceTokens).getLexema().equals(";"))
@@ -31,250 +31,183 @@ public class AnalizadorSintactico //implements Analizador
                             pila.pop();
                         else
                         {
-                            this.reemplazarSimbolos(pila, tablaAnalisis, indiceTokens, cuadruplos,temporal);
+                            this.reemplazarSimbolos(pila, tablaAnalisis, indiceTokens, cuadruplos, temporal);
                             break;
                         }
+                    } else if (((Terminal) pila.peek()).equals(new Terminal(";")))
+                    {
+                        pila.pop();
+                        break;
                     } else
-                        if (((Terminal) pila.peek()).equals(new Terminal(";")))
-                        {
-                            pila.pop();
-                            break;
-                        } else
-                            pila.pop();
+                        pila.pop();
                 return ++indiceTokens;
             } else
                 indiceTokens++;
         return indiceTokens;
     }
 
-    private void construirCuadruplo(Simbolo simbolo, Simbolo[] plantilla, List<Cuadruplo> cuadruplos,int indiceCuadruplo)
+    private void configurarCuadruplo(int i, List<Cuadruplo> cuadruplos, int indiceCuadruplo, Simbolo simbolo)
+    {
+        switch (i)
+        {
+            case 0:
+                cuadruplos.get(indiceCuadruplo).setResultado(simbolo);
+                break;
+            case 1:
+                cuadruplos.get(indiceCuadruplo).setOperando1(simbolo);
+                break;
+            case 2:
+                cuadruplos.get(indiceCuadruplo).setOperacion(simbolo);
+                break;
+            case 3:
+                cuadruplos.get(indiceCuadruplo).setOperando2(simbolo);
+                break;
+        }
+    }
+
+    private void construirCuadruplo(Simbolo simbolo, Simbolo[] plantilla, List<Cuadruplo> cuadruplos, int indiceCuadruplo)
     {
         for (int i = 0; i < plantilla.length; i++)
-        {    
             if (plantilla[i] != null)
-            {   
                 if (simbolo instanceof Terminal && plantilla[i] instanceof Terminal && ((Terminal) plantilla[i]).equals(simbolo))
                 {
-                    switch (i)
-                    {
-                        case 0:
-                            cuadruplos.get(indiceCuadruplo).setResultado(simbolo);
-                            break;
-                        case 1:
-                            cuadruplos.get(indiceCuadruplo).setOperando1(simbolo);
-                            break;
-                        case 2:
-                            cuadruplos.get(indiceCuadruplo).setOperacion(simbolo);
-                            break;
-                        case 3:
-                            cuadruplos.get(indiceCuadruplo).setOperando2(simbolo);
-                            break;
-                    }
+                    configurarCuadruplo(i, cuadruplos, indiceCuadruplo, simbolo);
                     break;
-                } else{
-                    if (simbolo instanceof NoTerminal) 
-                    {   
-                        if (plantilla[i] instanceof NoTerminal )
-                        {
-                            if(((NoTerminal) plantilla[i]).equals(simbolo))
-                            {
-                                Simbolo s=(NoTerminal) simbolo;
-                                switch (i)
-                                {
-                                    case 0:
-                                        cuadruplos.get(indiceCuadruplo).setResultado(s);
-                                        break;
-                                    case 1:
-                                        cuadruplos.get(indiceCuadruplo).setOperando1(s);
-                                        break;
-                                    case 2:
-                                        cuadruplos.get(indiceCuadruplo).setOperacion(s);
-                                        break;
-                                    case 3:
-                                        cuadruplos.get(indiceCuadruplo).setOperando2(s);
-                                        break;
-                                }
-                                //System.out.println(i+":(3):"+((NoTerminal) simbolo).getValor()+"::"+((NoTerminal) plantilla[i]).getValor()+"::::"+convertirAString(plantilla));
-                                break;
-                            }
-                            else
-                            {
-                               // System.out.println(i+":(2):"+((NoTerminal) simbolo).getValor()+"::"+((NoTerminal) plantilla[i]).getValor()+"::::"+convertirAString(plantilla));
-                            } 
-                        }
-                        else
-                            {
-                               // System.out.println(i+":(1):"+((NoTerminal) simbolo).getValor());
-                            } 
-                    }
-                        
-//                    else
-//                    {
-//                        if(simbolo instanceof  Terminal){
-//                            System.out.println(((Terminal) simbolo).getLexema());
-//                        }else{
-//                            if(i==0)
-//                                System.out.println(((NoTerminal) simbolo).getValor()+"::"+((NoTerminal) plantilla[i]).getValor());
-//                        }
-//                    }
+                } else if (simbolo instanceof NoTerminal && plantilla[i] instanceof NoTerminal && ((NoTerminal) plantilla[i]).equals(simbolo))
+                {
+                    configurarCuadruplo(i, cuadruplos, indiceCuadruplo, simbolo);
+                    break;
                 }
-            }    
-        }
     }
 
-    private void generarCuadruplo(Simbolo simbolo, List<Cuadruplo> cuadruplos,Temporal temporal)
+    private void crearCuadruplo(Simbolo simbolo, Simbolo[] plantilla, List<Cuadruplo> cuadruplos)
     {
-        int indiceRegla = simbolo.getIndiceRegla();
-        Simbolo[] plantilla = tablaAnalisis.getPlantilla(indiceRegla);
-        if(temporal.getSimbolo()!=null)
-        {
-            for(int indiceCuadruplo=0;indiceCuadruplo<cuadruplos.size();indiceCuadruplo++)
-            {
-                if(temporal.getSimbolo().getPadre()!=null && cuadruplos.get(indiceCuadruplo).getPadre()!=null && cuadruplos.get(indiceCuadruplo).getPadre().equals(temporal.getSimbolo().getPadre()))
-                {
-              //      System.out.println(convertirAString(temporal.getSimbolo())+"->"+convertirAString(tablaAnalisis.getReglaProduccion(cuadruplos.get(indiceCuadruplo).getIndiceRegla())));
-//                    if(temporal.getSimbolo() instanceof  Terminal){
-//                        System.out.println(((Terminal) temporal.getSimbolo()).getLexema());
-//                    }else{
-//                        System.out.println(((NoTerminal) temporal.getSimbolo()).getValor());
-//                    }
-                    construirCuadruplo(temporal.getSimbolo(), tablaAnalisis.getPlantilla(temporal.getSimbolo().getIndiceRegla()), cuadruplos,indiceCuadruplo);
-                }
-            }
-        }
-        
-        if(plantilla.length>0)
-        {
-            if(cuadruplos.isEmpty())
-            {
-                Cuadruplo cuadruplo=new Cuadruplo();
-                cuadruplo.setIdRegla(simbolo.getIdRegla());
-                cuadruplo.setIndiceRegla(indiceRegla);
-                cuadruplo.setPadre(simbolo.getPadre());
-                cuadruplos.add(cuadruplo);
-                construirCuadruplo(simbolo, plantilla, cuadruplos,0);
-            }
+        Cuadruplo cuadruplo = new Cuadruplo();
+        cuadruplo.setIdRegla(simbolo.getIdRegla());
+        cuadruplo.setIndiceRegla(simbolo.getIndiceRegla());
+        cuadruplo.setResultado(simbolo.getPadre());
+        if (plantilla[2] != null)
+            cuadruplo.setOperacion(plantilla[2]);
+        cuadruplos.add(cuadruplo);
+        construirCuadruplo(simbolo, plantilla, cuadruplos, cuadruplos.size() - 1 == 0 ? 0 : cuadruplos.size() - 1);
+    }
+
+    private void generarCuadruplo(Simbolo simbolo, List<Cuadruplo> cuadruplos)
+    {
+        Simbolo[] plantilla = tablaAnalisis.getPlantilla(simbolo.getIndiceRegla());
+        if (plantilla.length > 0)
+            if (cuadruplos.isEmpty())
+                crearCuadruplo(simbolo, plantilla, cuadruplos);
             else
             {
-//                if(simbolo instanceof  Terminal){
-//                    System.out.println(((Terminal) simbolo).getLexema()+"::"+cuadruplos.get(cuadruplos.size()-1).getIdRegla()+":"+simbolo.getIdRegla()+":::"+cuadruplos.get(cuadruplos.size()-1).getIndiceRegla()+"::"+simbolo.getIndiceRegla()+"::"+convertirSimbolosAString(plantilla));
-//                }else{
-//                    System.out.println(((NoTerminal) simbolo).getValor()+"::"+cuadruplos.get(cuadruplos.size()-1).getIdRegla()+":"+simbolo.getIdRegla()+":::"+cuadruplos.get(cuadruplos.size()-1).getIndiceRegla()+"::"+simbolo.getIndiceRegla()+"::"+convertirSimbolosAString(plantilla));
-//                }
-                for(int indiceCuadruplo=0;indiceCuadruplo<cuadruplos.size();indiceCuadruplo++)
-                {
-                    if(cuadruplos.get(indiceCuadruplo).getIdRegla()==simbolo.getIdRegla())
+                for (int indiceCuadruplo = 0; indiceCuadruplo < cuadruplos.size(); indiceCuadruplo++)
+                    if (cuadruplos.get(indiceCuadruplo).getIdRegla() == simbolo.getIdRegla())
                     {
-                        construirCuadruplo(simbolo, plantilla, cuadruplos,indiceCuadruplo);
+                        construirCuadruplo(simbolo, plantilla, cuadruplos, indiceCuadruplo);
                         return;
                     }
-                }
-                if(cuadruplos.get(cuadruplos.size()-1).getIdRegla() != simbolo.getIdRegla() )
-                {
-                    Cuadruplo cuadruplo=new Cuadruplo();
-                    cuadruplo.setIdRegla(simbolo.getIdRegla());
-                    cuadruplo.setIndiceRegla(indiceRegla);
-                    cuadruplo.setPadre(simbolo.getPadre());
-                    cuadruplos.add(cuadruplo);
-                    construirCuadruplo(simbolo, plantilla, cuadruplos,cuadruplos.size()-1);
-                }
-
+                if (cuadruplos.get(cuadruplos.size() - 1).getIdRegla() != simbolo.getIdRegla())
+                    crearCuadruplo(simbolo, plantilla, cuadruplos);
             }
-        }
+    }
+
+    private void reducirCuadruplos(List<Cuadruplo> cuadruplos)
+    {
+        
     }
     
-
-
-    private int controlarErrores(List<Token> tokens, List<ErrorSintactico> errores, Stack<Simbolo> pila, int indiceTokens, List<Cuadruplo> cuadruplos,Temporal temporal)
+    private int controlarErrores(List<Token> tokens, List<ErrorSintactico> errores, Stack<Simbolo> pila, int indiceTokens, List<Cuadruplo> cuadruplos, Temporal temporal)
     {
         if (pila.peek().getClass() == Terminal.class)//obligatorio para el metodo reeemplazar simbolo
         {
             errores.add(new ErrorSintactico(TipoError.TOKEN_IRRECONOCIBLE, tokens.get(indiceTokens)));
-            return encontrarFinError(tokens, indiceTokens, pila, cuadruplos,temporal);// -1 termina
+            return encontrarFinError(tokens, indiceTokens, pila, cuadruplos, temporal);// -1 termina
         } else
         {
             int indiceRegla = tablaAnalisis.encontrarIndiceReglaProduccion(new Terminal(tokens.get(indiceTokens)), (NoTerminal) pila.peek());
             if (indiceRegla == -1)
             {
                 errores.add(new ErrorSintactico(TipoError.NOTERMINAL_IRRECONOCIBLE, tokens.get(indiceTokens)));
-                return encontrarFinError(tokens, indiceTokens, pila, cuadruplos,temporal);// -1 termina
+                return encontrarFinError(tokens, indiceTokens, pila, cuadruplos, temporal);// -1 termina
             } else if (pila.isEmpty() && (indiceTokens + 1) < tokens.size())
                 errores.add(new ErrorSintactico(TipoError.TOKENS_SIN_LEER, tokens.get(indiceTokens)));
             else
-                reemplazarSimbolos(pila, tablaAnalisis, indiceRegla, cuadruplos,temporal);
+                reemplazarSimbolos(pila, tablaAnalisis, indiceRegla, cuadruplos, temporal);
         }
         return indiceTokens;
     }
 
-    private Simbolo cargarSimbolo(Simbolo simbolo, Token token)
+    private Simbolo mezclar(Simbolo simbolo, Token token)
     {
-        return ((Terminal) simbolo).getLexema() == null ? new Terminal(token, simbolo.getIndiceRegla()) : simbolo;
+        if (simbolo instanceof Terminal)
+        {
+            Terminal terminal = (Terminal) simbolo;
+            if (terminal.getLexema() == null)
+            {
+                terminal.setLexema(token.getLexema());
+                return terminal;
+            }
+        }
+        return simbolo;
     }
 
     public Respuesta analizar(List<Token> tokens)
     {
         List<ErrorSintactico> errores = new ArrayList<>();
         List<Cuadruplo> cuadruplos = new ArrayList<>();
-        Stack<Simbolo> simbolos = new Stack<>();
-        
-        Temporal temporal=new Temporal();
-        
-        simbolos.add(tablaAnalisis.getNoTerminalInicial());
+        Stack<Simbolo> pila = new Stack<>();
+
+        Temporal temporal = new Temporal();
+
+        pila.add(tablaAnalisis.getNoTerminalInicial());
 
         int indice = 0;
-        while (!simbolos.empty())
-        {
-            if (esTokenAceptadoPorPila(simbolos, tokens.get(indice)))
+        while (!pila.empty())
+            if (esTokenAceptadoPorPila(pila, tokens.get(indice)))
             {
-                generarCuadruplo(cargarSimbolo(simbolos.pop(), tokens.get(indice)), cuadruplos,temporal);
+                generarCuadruplo(mezclar(pila.pop(), tokens.get(indice)), cuadruplos);
+                if (!pila.empty() && pila.peek() instanceof NoTerminal)
+                    temporal.setSimbolo(pila.peek());
                 indice = (indice + 1) < tokens.size() ? indice + 1 : indice;
             } else
             {
-                indice = controlarErrores(tokens, errores, simbolos, indice, cuadruplos,temporal);
+                indice = controlarErrores(tokens, errores, pila, indice, cuadruplos, temporal);
                 if (indice == -1)
                     break;
             }
-        }
+        reducirCuadruplos(cuadruplos);
         imprimirCuadruplos(cuadruplos);
         return new RespuestaSintactica("nombreArchivo", new ArrayList<>(), errores);
     }
-
+    
     private boolean esTokenAceptadoPorPila(Stack<Simbolo> pila, Token token)
     {
         return pila.peek().getClass() == Terminal.class && ((Terminal) pila.peek()).equals(token);
     }
 
-    private void reemplazarSimbolos(Stack<Simbolo> pila, TablaAnalisis tablaAnalisis, int indiceRegla, List<Cuadruplo> cuadruplos,Temporal temporal)
+    private void reemplazarSimbolos(Stack<Simbolo> pila, TablaAnalisis tablaAnalisis, int indiceRegla, List<Cuadruplo> cuadruplos, Temporal temporal)
     {
-        Simbolo simbolo=pila.pop();
-        generarCuadruplo(simbolo, cuadruplos,temporal);
+        Simbolo simbolo = pila.pop();
+        generarCuadruplo(simbolo, cuadruplos);
         Simbolo[] derivacion = tablaAnalisis.generarReglaProduccion(indiceRegla);
-        if(derivacion.length>0) System.out.print(convertirAString(temporal.getSimbolo())+"->"); 
         for (int i = (derivacion.length - 1); i >= 0; i--)
         {
-            System.out.print(convertirAString(derivacion[i]));
             derivacion[i].setPadre(temporal.getSimbolo());
             pila.add(derivacion[i]);
         }
-        if(derivacion.length>0) System.out.println();
-        System.out.println("SACAR::"+convertirAString(simbolo)+"  PILA::"+convertirAString(pila.peek()));
-        if(simbolo.getIdRegla()!=pila.peek().getIdRegla() && pila.peek() instanceof NoTerminal)
-        {
-            System.out.println("INGRESA::"+convertirAString(simbolo)+"  PILA::"+convertirAString(pila.peek()));
+        if (simbolo.getIdRegla() != pila.peek().getIdRegla() && pila.peek() instanceof NoTerminal)
             temporal.setSimbolo(pila.peek());
-        } 
+
     }
 
     private String convertirAString(Simbolo[] simbolos)
     {
-        String cadena="";
-        for(Simbolo simbolo:simbolos)
-        {
-            cadena+=simbolo ==null ?"vacio ":(simbolo instanceof Terminal ? ((Terminal) simbolo).getLexema() : ((NoTerminal) simbolo).getValor())+" ";
-        }
+        String cadena = "";
+        for (Simbolo simbolo : simbolos)
+            cadena += convertirAString(simbolo);
         return cadena.trim();
     }
-    
+
     private void imprimirPila(Stack<Simbolo> pila)
     {
         pila.stream().forEach((simbolo) ->
@@ -299,13 +232,17 @@ public class AnalizadorSintactico //implements Analizador
         }
         );
     }
-    
+
     private String convertirAString(Simbolo simbolo)
     {
         if (simbolo == null)
             return "vacio";
-        return simbolo instanceof Terminal ? ((Terminal) simbolo).getLexema() : ((NoTerminal) simbolo).getValor();
+        else if (simbolo instanceof Terminal)
+        {
+            Terminal terminal = ((Terminal) simbolo);
+            return terminal.getLexema() == null ? terminal.getTipoToken().toString() : terminal.getLexema();
+        } else
+            return ((NoTerminal) simbolo).getValor();
     }
-
 
 }

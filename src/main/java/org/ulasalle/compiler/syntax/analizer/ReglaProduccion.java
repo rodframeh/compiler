@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 package org.ulasalle.compiler.syntax.analizer;
+
+import org.ulasalle.compiler.util.Simbolo;
+
 /**
  *
  * @author francisco

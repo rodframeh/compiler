@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.ulasalle.compiler.syntax.analizer;
+package org.ulasalle.compiler.util;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import org.ulasalle.compiler.util.SimboloDeserializer;
@@ -23,4 +23,5 @@ public interface Simbolo
     public void setIdSimbolo(int idSimbolo);
     public Simbolo getPadre();
     public void setPadre(Simbolo padre);
+    public Simbolo copiarValor();
 }

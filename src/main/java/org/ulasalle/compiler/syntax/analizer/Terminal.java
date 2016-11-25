@@ -6,6 +6,7 @@
 package org.ulasalle.compiler.syntax.analizer;
 
 
+import org.ulasalle.compiler.util.Simbolo;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.util.Objects;
 import org.ulasalle.compiler.util.TipoToken;
@@ -31,13 +32,6 @@ public class Terminal extends Token implements Simbolo
     {
         super(token);
     }
-
-    public Terminal(Token token,int indiceRegla)
-    {
-        super(token);
-        this.indiceRegla=indiceRegla;
-    }
-
     
     public Terminal(TipoToken tipoToken)
     {
@@ -113,6 +107,19 @@ public class Terminal extends Token implements Simbolo
     public void setPadre(Simbolo padre)
     {
         this.padre = padre;
+    }
+    
+    @Override
+    public Simbolo copiarValor()
+    {
+        Terminal terminal=new Terminal();
+        terminal.idRegla=this.idRegla;
+        terminal.idSimbolo=this.idSimbolo;
+        terminal.indiceRegla=this.indiceRegla;
+        terminal.padre=this.padre;
+        terminal.setLexema(this.getLexema());
+        terminal.setTipoToken(this.getTipoToken());
+        return terminal;
     }
     
 }

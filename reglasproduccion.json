@@ -5,15 +5,12 @@
         },
         "derivacion": [
             {
-                "tipoToken": null,
                 "lexema": "Programa"
             },
             {
-                "tipoToken": null,
                 "lexema": "("
             },
             {
-                "tipoToken": null,
                 "lexema": ")"
             },
             {
@@ -29,14 +26,12 @@
         },
         "derivacion": [
             {
-                "tipoToken": null,
                 "lexema": "{"
             },
             {
                 "valor": "<S*>"
             },
             {
-                "tipoToken": null,
                 "lexema": "}"
             }
         ],
@@ -163,7 +158,7 @@
                 "valor": "<RD*>"
             },
             {
-                "tipoToken": null,
+
                 "lexema": ";"
             }
         ],
@@ -176,7 +171,7 @@
         },
         "derivacion": [
             {
-                "tipoToken": null,
+
                 "lexema": ","
             },
             {
@@ -201,14 +196,25 @@
         },
         "derivacion": [
             {
-                "tipoToken": "IDENTIFICADOR",
-                "lexema": null
+                "tipoToken": "IDENTIFICADOR"
             },
             {
                 "valor": "<A>"
             }
         ],
-        "plantilla": [],
+        "plantilla": [
+            {
+                "tipoToken": "IDENTIFICADOR"
+            },
+            {
+                "valor": "<A>"
+            },
+            {
+
+                "lexema": "="
+            },
+            null
+        ],
         "nuevoBloque": false
     },
     {
@@ -217,14 +223,25 @@
         },
         "derivacion": [
             {
-                "tipoToken": null,
+
                 "lexema": "="
             },
             {
                 "valor": "<EM>"
             }
         ],
-        "plantilla": [],
+        "plantilla": [
+            {
+                "valor": "<A>"
+            },
+            {
+                "valor": "<EM>"
+            },
+            {
+
+                "lexema": "="
+            }
+        ],
         "nuevoBloque": false
     },
     {
@@ -239,7 +256,7 @@
         },
         "derivacion": [
             {
-                "tipoToken": null,
+
                 "lexema": "entero"
             }
         ],
@@ -252,29 +269,27 @@
         },
         "derivacion": [
             {
-                "tipoToken": "IDENTIFICADOR",
-                "lexema": null
+                "tipoToken": "IDENTIFICADOR"
             },
             {
-                "tipoToken": null,
+
                 "lexema": "="
             },
             {
                 "valor": "<EM>"
             },
             {
-                "tipoToken": null,
+
                 "lexema": ";"
             }
-        ], 
+        ],
         "plantilla": [
             {
-                "tipoToken": "IDENTIFICADOR",
-                "lexema": null
+                "tipoToken": "IDENTIFICADOR"
             }, {
                 "valor": "<EM>"
             }, {
-                "tipoToken": null,
+
                 "lexema": "="
             }, null
         ],
@@ -286,18 +301,18 @@
         },
         "derivacion": [
             {
-                "tipoToken": null,
+
                 "lexema": "Mientras"
             },
             {
-                "tipoToken": null,
+
                 "lexema": "("
             },
             {
                 "valor": "<EM>"
             },
             {
-                "tipoToken": null,
+
                 "lexema": ")"
             },
             {
@@ -337,18 +352,18 @@
         },
         "derivacion": [
             {
-                "tipoToken": null,
+
                 "lexema": "Si"
             },
             {
-                "tipoToken": null,
+
                 "lexema": "("
             },
             {
                 "valor": "<EM>"
             },
             {
-                "tipoToken": null,
+
                 "lexema": ")"
             },
             {
@@ -367,7 +382,7 @@
         },
         "derivacion": [
             {
-                "tipoToken": null,
+
                 "lexema": "Osino"
             },
             {
@@ -389,29 +404,29 @@
         },
         "derivacion": [
             {
-                "tipoToken": null,
+
                 "lexema": "Hacer"
             },
             {
                 "valor": "<SubB>"
             },
             {
-                "tipoToken": null,
+
                 "lexema": "Mientras"
             },
             {
-                "tipoToken": null,
+
                 "lexema": "("
             },
             {
                 "valor": "<EM>"
             },
             {
-                "tipoToken": null,
+
                 "lexema": ")"
             },
             {
-                "tipoToken": null,
+
                 "lexema": ";"
             }
         ],
@@ -537,7 +552,7 @@
         },
         "derivacion": [
             {
-                "tipoToken": null,
+
                 "lexema": "||"
             }
         ],
@@ -550,7 +565,7 @@
         },
         "derivacion": [
             {
-                "tipoToken": null,
+
                 "lexema": "&&"
             }
         ],
@@ -574,14 +589,14 @@
             {
                 "valor": "<T*>"
             }
-        ],   
+        ],
         "plantilla": [
             {
                 "valor": "<EXP*>"
             }, {
                 "valor": "<T>"
             },
-            null, 
+            null,
             {
                 "valor": "<T*>"
             }
@@ -601,11 +616,11 @@
             }
         ],
         "plantilla": [
-         {
+            {
                 "valor": "<T*>"
             },
             null,
-             {
+            {
                 "valor": "<OP1>"
             },
             {
@@ -627,7 +642,7 @@
             }
         ],
         "plantilla": [
-        {
+            {
                 "valor": "<TMP2>"
             },
             {
@@ -652,7 +667,7 @@
         },
         "derivacion": [
             {
-                "tipoToken": null,
+
                 "lexema": "+"
             }
         ],
@@ -665,7 +680,7 @@
         },
         "derivacion": [
             {
-                "tipoToken": null,
+
                 "lexema": "-"
             }
         ],
@@ -685,7 +700,7 @@
             }
         ],
         "plantilla": [
-        {
+            {
                 "valor": "<T>"
             },
             {
@@ -711,14 +726,14 @@
             }
         ],
         "plantilla": [
-        {
+            {
                 "valor": "<F*>"
             },
-        null,
-        {
+            null,
+            {
                 "valor": "<OP2>"
             },
-        {
+            {
                 "valor": "<TMP3>"
             }],
         "nuevoBloque": false
@@ -738,19 +753,19 @@
         "derivacion": [{
                 "valor": "<F>"
             },
-        {
+            {
                 "valor": "<F*>"
             }],
-        
+
         "plantilla": [
-        {
+            {
                 "valor": "<TMP3>"
             },
-        {
+            {
                 "valor": "<F>"
             },
-        null,
-        {
+            null,
+            {
                 "valor": "<F*>"
             }],
         "nuevoBloque": false
@@ -761,25 +776,25 @@
         },
         "derivacion": [
             {
-                "tipoToken": null,
+
                 "lexema": "("
             },
             {
                 "valor": "<EXP*>"
             },
             {
-                "tipoToken": null,
+
                 "lexema": ")"
             }
         ],
         "plantilla": [
-          {
+            {
                 "valor": "<F>"
             },
-              {
+            {
                 "valor": "<EXP*>"
-            },null,null
-        
+            }, null, null
+
         ],
         "nuevoBloque": false
     },
@@ -789,11 +804,22 @@
         },
         "derivacion": [
             {
-                "tipoToken": "CONST_NUMERICA",
-                "lexema": null
+                "tipoToken": "CONST_NUMERICA"
             }
         ],
-        "plantilla": [],
+        "plantilla": [
+            {
+                "valor": "<F>"
+            },
+            {
+                "tipoToken": "CONST_NUMERICA"
+            },
+            {
+
+                "lexema": "="
+            },
+            null
+        ],
         "nuevoBloque": false
     },
     {
@@ -802,11 +828,22 @@
         },
         "derivacion": [
             {
-                "tipoToken": "IDENTIFICADOR",
-                "lexema": null
+                "tipoToken": "IDENTIFICADOR"
             }
         ],
-        "plantilla": [],
+        "plantilla": [
+            {
+                "valor": "<F>"
+            },
+            {
+                "tipoToken": "IDENTIFICADOR"
+            },
+            {
+
+                "lexema": "="
+            },
+            null
+        ],
         "nuevoBloque": false
     },
     {
@@ -815,7 +852,7 @@
         },
         "derivacion": [
             {
-                "tipoToken": null,
+
                 "lexema": "=="
             }
         ],
@@ -828,7 +865,7 @@
         },
         "derivacion": [
             {
-                "tipoToken": null,
+
                 "lexema": "!="
             }
         ],
@@ -841,7 +878,7 @@
         },
         "derivacion": [
             {
-                "tipoToken": null,
+
                 "lexema": "<"
             }
         ],
@@ -854,7 +891,7 @@
         },
         "derivacion": [
             {
-                "tipoToken": null,
+
                 "lexema": ">"
             }
         ],
@@ -867,7 +904,7 @@
         },
         "derivacion": [
             {
-                "tipoToken": null,
+
                 "lexema": "<="
             }
         ],
@@ -880,7 +917,7 @@
         },
         "derivacion": [
             {
-                "tipoToken": null,
+
                 "lexema": ">="
             }
         ],
@@ -893,11 +930,24 @@
         },
         "derivacion": [
             {
-                "tipoToken": null,
+
                 "lexema": "*"
             }
         ],
-        "plantilla": [],
+        "plantilla": [
+            {
+                "valor": "<OP2>"
+            },
+            {
+
+                "lexema": "*"
+            },
+            {
+
+                "lexema": "="
+            },
+            null
+        ],
         "nuevoBloque": false
     },
     {
@@ -906,11 +956,24 @@
         },
         "derivacion": [
             {
-                "tipoToken": null,
+
                 "lexema": "/"
             }
         ],
-        "plantilla": [],
+        "plantilla": [
+            {
+                "valor": "<OP2>"
+            },
+            {
+
+                "lexema": "/"
+            },
+            {
+
+                "lexema": "="
+            },
+            null
+        ],
         "nuevoBloque": false
     },
     {
@@ -919,11 +982,24 @@
         },
         "derivacion": [
             {
-                "tipoToken": null,
+
                 "lexema": "%"
             }
         ],
-        "plantilla": [],
+        "plantilla": [
+            {
+                "valor": "<OP2>"
+            },
+            {
+
+                "lexema": "%"
+            },
+            {
+
+                "lexema": "="
+            },
+            null
+        ],
         "nuevoBloque": false
     },
     {
@@ -932,19 +1008,18 @@
         },
         "derivacion": [
             {
-                "tipoToken": null,
+
                 "lexema": "LeerTeclado"
             },
             {
-                "tipoToken": null,
+
                 "lexema": "("
             },
             {
-                "tipoToken": "IDENTIFICADOR",
-                "lexema": null
+                "tipoToken": "IDENTIFICADOR"
             },
             {
-                "tipoToken": null,
+
                 "lexema": ")"
             }
         ],
@@ -957,22 +1032,22 @@
         },
         "derivacion": [
             {
-                "tipoToken": null,
+
                 "lexema": "EscribirPantalla"
             },
             {
-                "tipoToken": null,
+
                 "lexema": "("
             },
             {
                 "valor": "<E>"
             },
             {
-                "tipoToken": null,
+
                 "lexema": ")"
             },
             {
-                "tipoToken": null,
+
                 "lexema": ";"
             }
         ],
@@ -997,8 +1072,7 @@
         },
         "derivacion": [
             {
-                "tipoToken": "IDENTIFICADOR",
-                "lexema": null
+                "tipoToken": "IDENTIFICADOR"
             }
         ],
         "plantilla": [],
@@ -1010,8 +1084,7 @@
         },
         "derivacion": [
             {
-                "tipoToken": "LITERAL_CADENA",
-                "lexema": null
+                "tipoToken": "LITERAL_CADENA"
             }
         ],
         "plantilla": [],
@@ -1023,8 +1096,7 @@
         },
         "derivacion": [
             {
-                "tipoToken": "CONST_NUMERICA",
-                "lexema": null
+                "tipoToken": "CONST_NUMERICA"
             }
         ],
         "plantilla": [],
