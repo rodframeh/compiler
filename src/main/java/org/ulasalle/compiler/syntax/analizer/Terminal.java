@@ -19,6 +19,10 @@ import org.ulasalle.compiler.util.Token;
 public class Terminal extends Token implements Simbolo 
 {
     private int indiceRegla;
+    private int idRegla;
+    private int idSimbolo;
+    private Simbolo padre;
+    
     public Terminal()
     {
     }
@@ -28,6 +32,13 @@ public class Terminal extends Token implements Simbolo
         super(token);
     }
 
+    public Terminal(Token token,int indiceRegla)
+    {
+        super(token);
+        this.indiceRegla=indiceRegla;
+    }
+
+    
     public Terminal(TipoToken tipoToken)
     {
         super(tipoToken);
@@ -74,4 +85,34 @@ public class Terminal extends Token implements Simbolo
         this.indiceRegla=indiceRegla;
     }
 
+    public int getIdRegla()
+    {
+        return idRegla;
+    }
+
+    public void setIdRegla(int idRegla)
+    {
+        this.idRegla = idRegla;
+    }
+
+    public int getIdSimbolo()
+    {
+        return idSimbolo;
+    }
+
+    public void setIdSimbolo(int idSimbolo)
+    {
+        this.idSimbolo = idSimbolo;
+    }
+
+    public Simbolo getPadre()
+    {
+        return padre;
+    }
+
+    public void setPadre(Simbolo padre)
+    {
+        this.padre = padre;
+    }
+    
 }

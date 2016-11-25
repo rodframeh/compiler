@@ -1,19 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.ulasalle.compiler.syntax.analizer;
 
 import org.ulasalle.compiler.util.Resultado;
 
-/**
- *
- * @author francisco
- */
 public class Cuadruplo implements Resultado
 {
+    private TablaSimbolos contexto;
     private int bloque;
+    private int idRegla;
+    private int indiceRegla;
+    private Simbolo padre;
     private Simbolo resultado;
     private Simbolo operando1;
     private Simbolo operacion;
@@ -21,6 +16,41 @@ public class Cuadruplo implements Resultado
 
     public Cuadruplo()
     {
+    }
+    
+    public TablaSimbolos getTablaSimbolos()
+    {
+        return contexto;
+    }
+    
+    public Simbolo getPadre()
+    {
+        return padre;
+    }
+
+    public void setPadre(Simbolo padre)
+    {
+        this.padre = padre;
+    }
+    
+    public int getIndiceRegla()
+    {
+        return indiceRegla;
+    }
+
+    public void setIndiceRegla(int indiceRegla)
+    {
+        this.indiceRegla = indiceRegla;
+    }
+
+    public int getIdRegla()
+    {
+        return idRegla;
+    }
+
+    public void setIdRegla(int idRegla)
+    {
+        this.idRegla = idRegla;
     }
     
     public int getBloque()

@@ -1,779 +1,1033 @@
 [
-  {
-    "noTerminal": {
-      "valor": "<P>"
+    {
+        "noTerminal": {
+            "valor": "<P>"
+        },
+        "derivacion": [
+            {
+                "tipoToken": null,
+                "lexema": "Programa"
+            },
+            {
+                "tipoToken": null,
+                "lexema": "("
+            },
+            {
+                "tipoToken": null,
+                "lexema": ")"
+            },
+            {
+                "valor": "<BS>"
+            }
+        ],
+        "plantilla": [],
+        "nuevoBloque": false
     },
-    "derivacion": [
-      {
-        "tipoToken": null,
-        "lexema": "Programa"
-      },
-      {
-        "tipoToken": null,
-        "lexema": "("
-      },
-      {
-        "tipoToken": null,
-        "lexema": ")"
-      },
-      {
-        "valor": "<BS>"
-      }
-    ],
-    "plantilla":[],"nuevoBloque":false
-  },
-  {
-    "noTerminal": {
-      "valor": "<BS>"
+    {
+        "noTerminal": {
+            "valor": "<BS>"
+        },
+        "derivacion": [
+            {
+                "tipoToken": null,
+                "lexema": "{"
+            },
+            {
+                "valor": "<S*>"
+            },
+            {
+                "tipoToken": null,
+                "lexema": "}"
+            }
+        ],
+        "plantilla": [],
+        "nuevoBloque": false
     },
-    "derivacion": [
-      {
-        "tipoToken": null,
-        "lexema": "{"
-      },
-      {
-        "valor": "<S*>"
-      },
-      {
-        "tipoToken": null,
-        "lexema": "}"
-      }
-    ],
-    "plantilla":[],"nuevoBloque":false
-  },
-  {
-    "noTerminal": {
-      "valor": "<S*>"
+    {
+        "noTerminal": {
+            "valor": "<S*>"
+        },
+        "derivacion": [
+            {
+                "valor": "<S>"
+            },
+            {
+                "valor": "<S*>"
+            }
+        ],
+        "plantilla": [],
+        "nuevoBloque": false
     },
-    "derivacion": [
-      {
-        "valor": "<S>"
-      },
-      {
-        "valor": "<S*>"
-      }
-    ],    "plantilla":[],"nuevoBloque":false
-  },
-  {
-    "noTerminal": {
-      "valor": "<S*>"
+    {
+        "noTerminal": {
+            "valor": "<S*>"
+        },
+        "derivacion": []
     },
-    "derivacion": []
-  },
-  {
-    "noTerminal": {
-      "valor": "<S>"
+    {
+        "noTerminal": {
+            "valor": "<S>"
+        },
+        "derivacion": [
+            {
+                "valor": "<SD>"
+            }
+        ],
+        "plantilla": [],
+        "nuevoBloque": false
     },
-    "derivacion": [
-      {
-        "valor": "<SD>"
-      }
-    ],    "plantilla":[],"nuevoBloque":false
-  },
-  {
-    "noTerminal": {
-      "valor": "<S>"
+    {
+        "noTerminal": {
+            "valor": "<S>"
+        },
+        "derivacion": [
+            {
+                "valor": "<SA>"
+            }
+        ],
+        "plantilla": [],
+        "nuevoBloque": false
     },
-    "derivacion": [
-      {
-        "valor": "<SA>"
-      }
-    ],    "plantilla":[],"nuevoBloque":false
-  },
-  {
-    "noTerminal": {
-      "valor": "<S>"
+    {
+        "noTerminal": {
+            "valor": "<S>"
+        },
+        "derivacion": [
+            {
+                "valor": "<SC>"
+            }
+        ],
+        "plantilla": [],
+        "nuevoBloque": false
     },
-    "derivacion": [
-      {
-        "valor": "<SC>"
-      }
-    ],    "plantilla":[],"nuevoBloque":false
-  },
-  {
-    "noTerminal": {
-      "valor": "<S>"
+    {
+        "noTerminal": {
+            "valor": "<S>"
+        },
+        "derivacion": [
+            {
+                "valor": "<SM>"
+            }
+        ],
+        "plantilla": [],
+        "nuevoBloque": false
     },
-    "derivacion": [
-      {
-        "valor": "<SM>"
-      }
-    ],    "plantilla":[],"nuevoBloque":false
-  },
-  {
-    "noTerminal": {
-      "valor": "<S>"
+    {
+        "noTerminal": {
+            "valor": "<S>"
+        },
+        "derivacion": [
+            {
+                "valor": "<SL>"
+            }
+        ],
+        "plantilla": [],
+        "nuevoBloque": false
     },
-    "derivacion": [
-      {
-        "valor": "<SL>"
-      }
-    ],    "plantilla":[],"nuevoBloque":false
-  },
-  {
-    "noTerminal": {
-      "valor": "<S>"
+    {
+        "noTerminal": {
+            "valor": "<S>"
+        },
+        "derivacion": [
+            {
+                "valor": "<SE>"
+            }
+        ],
+        "plantilla": [],
+        "nuevoBloque": false
     },
-    "derivacion": [
-      {
-        "valor": "<SE>"
-      }
-    ],    "plantilla":[],"nuevoBloque":false
-  },
-  {
-    "noTerminal": {
-      "valor": "<S>"
+    {
+        "noTerminal": {
+            "valor": "<S>"
+        },
+        "derivacion": [
+            {
+                "valor": "<SHM>"
+            }
+        ],
+        "plantilla": [],
+        "nuevoBloque": false
     },
-    "derivacion": [
-      {
-        "valor": "<SHM>"
-      }
-    ],    "plantilla":[],"nuevoBloque":false
-  },
-  {
-    "noTerminal": {
-      "valor": "<SD>"
+    {
+        "noTerminal": {
+            "valor": "<SD>"
+        },
+        "derivacion": [
+            {
+                "valor": "<TD>"
+            },
+            {
+                "valor": "<VA>"
+            },
+            {
+                "valor": "<RD*>"
+            },
+            {
+                "tipoToken": null,
+                "lexema": ";"
+            }
+        ],
+        "plantilla": [],
+        "nuevoBloque": false
     },
-    "derivacion": [
-      {
-        "valor": "<TD>"
-      },
-      {
-        "valor": "<VA>"
-      },
-      {
-        "valor": "<RD*>"
-      },
-      {
-        "tipoToken": null,
-        "lexema": ";"
-      }
-    ],    "plantilla":[],"nuevoBloque":false
-  },
-  {
-    "noTerminal": {
-      "valor": "<RD*>"
+    {
+        "noTerminal": {
+            "valor": "<RD*>"
+        },
+        "derivacion": [
+            {
+                "tipoToken": null,
+                "lexema": ","
+            },
+            {
+                "valor": "<VA>"
+            },
+            {
+                "valor": "<RD*>"
+            }
+        ],
+        "plantilla": [],
+        "nuevoBloque": false
     },
-    "derivacion": [
-      {
-        "tipoToken": null,
-        "lexema": ","
-      },
-      {
-        "valor": "<VA>"
-      },
-      {
-        "valor": "<RD*>"
-      }
-    ],    "plantilla":[],"nuevoBloque":false
-  },
-  {
-    "noTerminal": {
-      "valor": "<RD*>"
+    {
+        "noTerminal": {
+            "valor": "<RD*>"
+        },
+        "derivacion": []
     },
-    "derivacion": []
-  },
-  {
-    "noTerminal": {
-      "valor": "<VA>"
+    {
+        "noTerminal": {
+            "valor": "<VA>"
+        },
+        "derivacion": [
+            {
+                "tipoToken": "IDENTIFICADOR",
+                "lexema": null
+            },
+            {
+                "valor": "<A>"
+            }
+        ],
+        "plantilla": [],
+        "nuevoBloque": false
     },
-    "derivacion": [
-      {
-        "tipoToken": "IDENTIFICADOR",
-        "lexema": null
-      },
-      {
-        "valor": "<A>"
-      }
-    ],    "plantilla":[],"nuevoBloque":false
-  },
-  {
-    "noTerminal": {
-      "valor": "<A>"
+    {
+        "noTerminal": {
+            "valor": "<A>"
+        },
+        "derivacion": [
+            {
+                "tipoToken": null,
+                "lexema": "="
+            },
+            {
+                "valor": "<EM>"
+            }
+        ],
+        "plantilla": [],
+        "nuevoBloque": false
     },
-    "derivacion": [
-      {
-        "tipoToken": null,
-        "lexema": "="
-      },
-      {
-        "valor": "<EM>"
-      }
-    ],    "plantilla":[],"nuevoBloque":false
-  },
-  {
-    "noTerminal": {
-      "valor": "<A>"
+    {
+        "noTerminal": {
+            "valor": "<A>"
+        },
+        "derivacion": []
     },
-    "derivacion": []
-  },
-  {
-    "noTerminal": {
-      "valor": "<TD>"
+    {
+        "noTerminal": {
+            "valor": "<TD>"
+        },
+        "derivacion": [
+            {
+                "tipoToken": null,
+                "lexema": "entero"
+            }
+        ],
+        "plantilla": [],
+        "nuevoBloque": false
     },
-    "derivacion": [
-      {
-        "tipoToken": null,
-        "lexema": "entero"
-      }
-    ],    "plantilla":[],"nuevoBloque":false
-  },
-  {
-    "noTerminal": {
-      "valor": "<SA>"
+    {
+        "noTerminal": {
+            "valor": "<SA>"
+        },
+        "derivacion": [
+            {
+                "tipoToken": "IDENTIFICADOR",
+                "lexema": null
+            },
+            {
+                "tipoToken": null,
+                "lexema": "="
+            },
+            {
+                "valor": "<EM>"
+            },
+            {
+                "tipoToken": null,
+                "lexema": ";"
+            }
+        ], 
+        "plantilla": [
+            {
+                "tipoToken": "IDENTIFICADOR",
+                "lexema": null
+            }, {
+                "valor": "<EM>"
+            }, {
+                "tipoToken": null,
+                "lexema": "="
+            }, null
+        ],
+        "nuevoBloque": false
     },
-    "derivacion": [
-      {
-        "tipoToken": "IDENTIFICADOR",
-        "lexema": null
-      },
-      {
-        "tipoToken": null,
-        "lexema": "="
-      },
-      {
-        "valor": "<EM>"
-      },
-      {
-        "tipoToken": null,
-        "lexema": ";"
-      }
-    ], 
-    "plantilla":[
-        {
-            "tipoToken": "IDENTIFICADOR",
-            "lexema": null
-        },  {
+    {
+        "noTerminal": {
+            "valor": "<SM>"
+        },
+        "derivacion": [
+            {
+                "tipoToken": null,
+                "lexema": "Mientras"
+            },
+            {
+                "tipoToken": null,
+                "lexema": "("
+            },
+            {
+                "valor": "<EM>"
+            },
+            {
+                "tipoToken": null,
+                "lexema": ")"
+            },
+            {
+                "valor": "<SubB>"
+            }
+        ],
+        "plantilla": [],
+        "nuevoBloque": false
+    },
+    {
+        "noTerminal": {
+            "valor": "<SubB>"
+        },
+        "derivacion": [
+            {
+                "valor": "<S>"
+            }
+        ],
+        "plantilla": [],
+        "nuevoBloque": false
+    },
+    {
+        "noTerminal": {
+            "valor": "<SubB>"
+        },
+        "derivacion": [
+            {
+                "valor": "<BS>"
+            }
+        ],
+        "plantilla": [],
+        "nuevoBloque": false
+    },
+    {
+        "noTerminal": {
+            "valor": "<SC>"
+        },
+        "derivacion": [
+            {
+                "tipoToken": null,
+                "lexema": "Si"
+            },
+            {
+                "tipoToken": null,
+                "lexema": "("
+            },
+            {
+                "valor": "<EM>"
+            },
+            {
+                "tipoToken": null,
+                "lexema": ")"
+            },
+            {
+                "valor": "<SubB>"
+            },
+            {
+                "valor": "<ELSE>"
+            }
+        ],
+        "plantilla": [],
+        "nuevoBloque": false
+    },
+    {
+        "noTerminal": {
+            "valor": "<ELSE>"
+        },
+        "derivacion": [
+            {
+                "tipoToken": null,
+                "lexema": "Osino"
+            },
+            {
+                "valor": "<SubB>"
+            }
+        ],
+        "plantilla": [],
+        "nuevoBloque": false
+    },
+    {
+        "noTerminal": {
+            "valor": "<ELSE>"
+        },
+        "derivacion": []
+    },
+    {
+        "noTerminal": {
+            "valor": "<SHM>"
+        },
+        "derivacion": [
+            {
+                "tipoToken": null,
+                "lexema": "Hacer"
+            },
+            {
+                "valor": "<SubB>"
+            },
+            {
+                "tipoToken": null,
+                "lexema": "Mientras"
+            },
+            {
+                "tipoToken": null,
+                "lexema": "("
+            },
+            {
+                "valor": "<EM>"
+            },
+            {
+                "tipoToken": null,
+                "lexema": ")"
+            },
+            {
+                "tipoToken": null,
+                "lexema": ";"
+            }
+        ],
+        "plantilla": [],
+        "nuevoBloque": false
+    },
+    {
+        "noTerminal": {
             "valor": "<EM>"
-        },{
-            "tipoToken": null,
-            "lexema": "="
-        },null
-    ],"nuevoBloque":false
-  },
-  {
-    "noTerminal": {
-      "valor": "<SM>"
+        },
+        "derivacion": [
+            {
+                "valor": "<EXP*>"
+            },
+            {
+                "valor": "<TMP1>"
+            }
+        ],
+        "plantilla": [
+            {
+                "valor": "<EM>"
+            },
+            {
+                "valor": "<EXP*>"
+            },
+            null,
+            {
+                "valor": "<TMP1>"
+            }
+        ],
+        "nuevoBloque": false
     },
-    "derivacion": [
-      {
-        "tipoToken": null,
-        "lexema": "Mientras"
-      },
-      {
-        "tipoToken": null,
-        "lexema": "("
-      },
-      {
-        "valor": "<EM>"
-      },
-      {
-        "tipoToken": null,
-        "lexema": ")"
-      },
-      {
-        "valor": "<SubB>"
-      }
-    ],    "plantilla":[],"nuevoBloque":false
-  },
-  {
-    "noTerminal": {
-      "valor": "<SubB>"
+
+    {
+        "noTerminal": {
+            "valor": "<TMP1>"
+        },
+        "derivacion": [
+            {
+                "valor": "<EXPB>"
+            },
+            {
+                "valor": "<OL>"
+            }
+        ],
+        "plantilla": [
+            {
+                "valor": "<TMP1>"
+            },
+            {
+                "valor": "<EXPB>"
+            },
+            null,
+            {
+                "valor": "<OL>"
+            }
+        ],
+        "nuevoBloque": false
     },
-    "derivacion": [
-      {
-        "valor": "<S>"
-      }
-    ],    "plantilla":[],"nuevoBloque":false
-  },
-  {
-    "noTerminal": {
-      "valor": "<SubB>"
+
+    {
+        "noTerminal": {
+            "valor": "<EXPB>"
+        },
+        "derivacion": [
+            {
+                "valor": "<OP3>"
+            },
+            {
+                "valor": "<EXP*>"
+            }
+        ],
+        "plantilla": [
+            {
+                "valor": "<EXPB>"
+            },
+            null,
+            {
+                "valor": "<OP3>"
+            },
+            {
+                "valor": "<EXP*>"
+            }
+        ],
+        "nuevoBloque": false
     },
-    "derivacion": [
-      {
-        "valor": "<BS>"
-      }
-    ],    "plantilla":[],"nuevoBloque":false
-  },
-  {
-    "noTerminal": {
-      "valor": "<SC>"
+    {
+        "noTerminal": {
+            "valor": "<OL>"
+        },
+        "derivacion": [
+            {
+                "valor": "<OP4>"
+            },
+            {
+                "valor": "<EM>"
+            }
+        ],
+        "plantilla": [
+            {
+                "valor": "<OL>"
+            },
+            null,
+            {
+                "valor": "<OP4>"
+            },
+            {
+                "valor": "<EM>"
+            }
+
+        ],
+        "nuevoBloque": false
     },
-    "derivacion": [
-      {
-        "tipoToken": null,
-        "lexema": "Si"
-      },
-      {
-        "tipoToken": null,
-        "lexema": "("
-      },
-      {
-        "valor": "<EM>"
-      },
-      {
-        "tipoToken": null,
-        "lexema": ")"
-      },
-      {
-        "valor": "<SubB>"
-      },
-      {
-        "valor": "<ELSE>"
-      }
-    ],    "plantilla":[],"nuevoBloque":false
-  },
-  {
-    "noTerminal": {
-      "valor": "<ELSE>"
+    {
+        "noTerminal": {
+            "valor": "<OL>"
+        },
+        "derivacion": []
     },
-    "derivacion": [
-      {
-        "tipoToken": null,
-        "lexema": "Osino"
-      },
-      {
-        "valor": "<SubB>"
-      }
-    ],    "plantilla":[],"nuevoBloque":false
-  },
-  {
-    "noTerminal": {
-      "valor": "<ELSE>"
+    {
+        "noTerminal": {
+            "valor": "<OP4>"
+        },
+        "derivacion": [
+            {
+                "tipoToken": null,
+                "lexema": "||"
+            }
+        ],
+        "plantilla": [],
+        "nuevoBloque": false
     },
-    "derivacion": []
-  },
-  {
-    "noTerminal": {
-      "valor": "<SHM>"
+    {
+        "noTerminal": {
+            "valor": "<OP4>"
+        },
+        "derivacion": [
+            {
+                "tipoToken": null,
+                "lexema": "&&"
+            }
+        ],
+        "plantilla": [],
+        "nuevoBloque": false
     },
-    "derivacion": [
-      {
-        "tipoToken": null,
-        "lexema": "Hacer"
-      },
-      {
-        "valor": "<SubB>"
-      },
-      {
-        "tipoToken": null,
-        "lexema": "Mientras"
-      },
-      {
-        "tipoToken": null,
-        "lexema": "("
-      },
-      {
-        "valor": "<EM>"
-      },
-      {
-        "tipoToken": null,
-        "lexema": ")"
-      },
-      {
-        "tipoToken": null,
-        "lexema": ";"
-      }
-    ],    "plantilla":[],"nuevoBloque":false
-  },
-  {
-    "noTerminal": {
-      "valor": "<EM>"
+    {
+        "noTerminal": {
+            "valor": "<EXPB>"
+        },
+        "derivacion": []
     },
-    "derivacion": [
-      {
-        "valor": "<EXP*>"
-      },
-      {
-        "valor": "<EXPB>"
-      },
-      {
-        "valor": "<OL>"
-      }
-    ],    "plantilla":[],"nuevoBloque":false
-  },
-  {
-    "noTerminal": {
-      "valor": "<EXPB>"
+    {
+        "noTerminal": {
+            "valor": "<EXP*>"
+        },
+        "derivacion": [
+            {
+                "valor": "<T>"
+            },
+            {
+                "valor": "<T*>"
+            }
+        ],   
+        "plantilla": [
+            {
+                "valor": "<EXP*>"
+            }, {
+                "valor": "<T>"
+            },
+            null, 
+            {
+                "valor": "<T*>"
+            }
+        ],
+        "nuevoBloque": false
     },
-    "derivacion": [
-      {
-        "valor": "<OP3>"
-      },
-      {
-        "valor": "<EXP*>"
-      }
-    ],    "plantilla":[],"nuevoBloque":false
-  },
-  {
-    "noTerminal": {
-      "valor": "<OL>"
+    {
+        "noTerminal": {
+            "valor": "<T*>"
+        },
+        "derivacion": [
+            {
+                "valor": "<OP1>"
+            },
+            {
+                "valor": "<TMP2>"
+            }
+        ],
+        "plantilla": [
+         {
+                "valor": "<T*>"
+            },
+            null,
+             {
+                "valor": "<OP1>"
+            },
+            {
+                "valor": "<TMP2>"
+            }
+        ],
+        "nuevoBloque": false
     },
-    "derivacion": [
-      {
-        "valor": "<OP4>"
-      },
-      {
-        "valor": "<EM>"
-      }
-    ],    "plantilla":[],"nuevoBloque":false
-  },
-  {
-    "noTerminal": {
-      "valor": "<OL>"
+    {
+        "noTerminal": {
+            "valor": "<TMP2>"
+        },
+        "derivacion": [
+            {
+                "valor": "<T>"
+            },
+            {
+                "valor": "<T*>"
+            }
+        ],
+        "plantilla": [
+        {
+                "valor": "<TMP2>"
+            },
+            {
+                "valor": "<T>"
+            },
+            null,
+            {
+                "valor": "<T*>"
+            }
+        ],
+        "nuevoBloque": false
     },
-    "derivacion": []
-  },
-  {
-    "noTerminal": {
-      "valor": "<OP4>"
+    {
+        "noTerminal": {
+            "valor": "<T*>"
+        },
+        "derivacion": []
     },
-    "derivacion": [
-      {
-        "tipoToken": null,
-        "lexema": "||"
-      }
-    ],    "plantilla":[],"nuevoBloque":false
-  },
-  {
-    "noTerminal": {
-      "valor": "<OP4>"
+    {
+        "noTerminal": {
+            "valor": "<OP1>"
+        },
+        "derivacion": [
+            {
+                "tipoToken": null,
+                "lexema": "+"
+            }
+        ],
+        "plantilla": [],
+        "nuevoBloque": false
     },
-    "derivacion": [
-      {
-        "tipoToken": null,
-        "lexema": "&&"
-      }
-    ],    "plantilla":[],"nuevoBloque":false
-  },
-  {
-    "noTerminal": {
-      "valor": "<EXPB>"
+    {
+        "noTerminal": {
+            "valor": "<OP1>"
+        },
+        "derivacion": [
+            {
+                "tipoToken": null,
+                "lexema": "-"
+            }
+        ],
+        "plantilla": [],
+        "nuevoBloque": false
     },
-    "derivacion": []
-  },
-  {
-    "noTerminal": {
-      "valor": "<EXP*>"
+    {
+        "noTerminal": {
+            "valor": "<T>"
+        },
+        "derivacion": [
+            {
+                "valor": "<F>"
+            },
+            {
+                "valor": "<F*>"
+            }
+        ],
+        "plantilla": [
+        {
+                "valor": "<T>"
+            },
+            {
+                "valor": "<F>"
+            },
+            null,
+            {
+                "valor": "<F*>"
+            }
+        ],
+        "nuevoBloque": false
     },
-    "derivacion": [
-      {
-        "valor": "<T>"
-      },
-      {
-        "valor": "<T*>"
-      }
-    ],    "plantilla":[],"nuevoBloque":false
-  },
-  {
-    "noTerminal": {
-      "valor": "<T*>"
+    {
+        "noTerminal": {
+            "valor": "<F*>"
+        },
+        "derivacion": [
+            {
+                "valor": "<OP2>"
+            },
+            {
+                "valor": "<TMP3>"
+            }
+        ],
+        "plantilla": [
+        {
+                "valor": "<F*>"
+            },
+        null,
+        {
+                "valor": "<OP2>"
+            },
+        {
+                "valor": "<TMP3>"
+            }],
+        "nuevoBloque": false
     },
-    "derivacion": [
-      {
-        "valor": "<op1>"
-      },
-      {
-        "valor": "<T>"
-      },
-      {
-        "valor": "<T*>"
-      }
-    ],    "plantilla":[],"nuevoBloque":false
-  },
-  {
-    "noTerminal": {
-      "valor": "<T*>"
+    {
+        "noTerminal": {
+            "valor": "<F*>"
+        },
+        "derivacion": [],
+        "plantilla": [],
+        "nuevoBloque": false
     },
-    "derivacion": []
-  },
-  {
-    "noTerminal": {
-      "valor": "<op1>"
+    {
+        "noTerminal": {
+            "valor": "<TMP3>"
+        },
+        "derivacion": [{
+                "valor": "<F>"
+            },
+        {
+                "valor": "<F*>"
+            }],
+        
+        "plantilla": [
+        {
+                "valor": "<TMP3>"
+            },
+        {
+                "valor": "<F>"
+            },
+        null,
+        {
+                "valor": "<F*>"
+            }],
+        "nuevoBloque": false
     },
-    "derivacion": [
-      {
-        "tipoToken": null,
-        "lexema": "+"
-      }
-    ],    "plantilla":[],"nuevoBloque":false
-  },
-  {
-    "noTerminal": {
-      "valor": "<op1>"
+    {
+        "noTerminal": {
+            "valor": "<F>"
+        },
+        "derivacion": [
+            {
+                "tipoToken": null,
+                "lexema": "("
+            },
+            {
+                "valor": "<EXP*>"
+            },
+            {
+                "tipoToken": null,
+                "lexema": ")"
+            }
+        ],
+        "plantilla": [
+          {
+                "valor": "<F>"
+            },
+              {
+                "valor": "<EXP*>"
+            },null,null
+        
+        ],
+        "nuevoBloque": false
     },
-    "derivacion": [
-      {
-        "tipoToken": null,
-        "lexema": "-"
-      }
-    ],    "plantilla":[],"nuevoBloque":false
-  },
-  {
-    "noTerminal": {
-      "valor": "<T>"
+    {
+        "noTerminal": {
+            "valor": "<F>"
+        },
+        "derivacion": [
+            {
+                "tipoToken": "CONST_NUMERICA",
+                "lexema": null
+            }
+        ],
+        "plantilla": [],
+        "nuevoBloque": false
     },
-    "derivacion": [
-      {
-        "valor": "<F>"
-      },
-      {
-        "valor": "<F*>"
-      }
-    ],    "plantilla":[],"nuevoBloque":false
-  },
-  {
-    "noTerminal": {
-      "valor": "<F*>"
+    {
+        "noTerminal": {
+            "valor": "<F>"
+        },
+        "derivacion": [
+            {
+                "tipoToken": "IDENTIFICADOR",
+                "lexema": null
+            }
+        ],
+        "plantilla": [],
+        "nuevoBloque": false
     },
-    "derivacion": [
-      {
-        "valor": "<op2>"
-      },
-      {
-        "valor": "<F>"
-      },
-      {
-        "valor": "<F*>"
-      }
-    ],    "plantilla":[],"nuevoBloque":false
-  },
-  {
-    "noTerminal": {
-      "valor": "<F*>"
+    {
+        "noTerminal": {
+            "valor": "<OP3>"
+        },
+        "derivacion": [
+            {
+                "tipoToken": null,
+                "lexema": "=="
+            }
+        ],
+        "plantilla": [],
+        "nuevoBloque": false
     },
-    "derivacion": []
-  },
-  {
-    "noTerminal": {
-      "valor": "<F>"
+    {
+        "noTerminal": {
+            "valor": "<OP3>"
+        },
+        "derivacion": [
+            {
+                "tipoToken": null,
+                "lexema": "!="
+            }
+        ],
+        "plantilla": [],
+        "nuevoBloque": false
     },
-    "derivacion": [
-      {
-        "tipoToken": null,
-        "lexema": "("
-      },
-      {
-        "valor": "<EXP*>"
-      },
-      {
-        "tipoToken": null,
-        "lexema": ")"
-      }
-    ],    "plantilla":[],"nuevoBloque":false
-  },
-  {
-    "noTerminal": {
-      "valor": "<F>"
+    {
+        "noTerminal": {
+            "valor": "<OP3>"
+        },
+        "derivacion": [
+            {
+                "tipoToken": null,
+                "lexema": "<"
+            }
+        ],
+        "plantilla": [],
+        "nuevoBloque": false
     },
-    "derivacion": [
-      {
-        "tipoToken": "CONST_NUMERICA",
-        "lexema": null
-      }
-    ],    "plantilla":[],"nuevoBloque":false
-  },
-  {
-    "noTerminal": {
-      "valor": "<F>"
+    {
+        "noTerminal": {
+            "valor": "<OP3>"
+        },
+        "derivacion": [
+            {
+                "tipoToken": null,
+                "lexema": ">"
+            }
+        ],
+        "plantilla": [],
+        "nuevoBloque": false
     },
-    "derivacion": [
-      {
-        "tipoToken": "IDENTIFICADOR",
-        "lexema": null
-      }
-    ],    "plantilla":[],"nuevoBloque":false
-  },
-  {
-    "noTerminal": {
-      "valor": "<OP3>"
+    {
+        "noTerminal": {
+            "valor": "<OP3>"
+        },
+        "derivacion": [
+            {
+                "tipoToken": null,
+                "lexema": "<="
+            }
+        ],
+        "plantilla": [],
+        "nuevoBloque": false
     },
-    "derivacion": [
-      {
-        "tipoToken": null,
-        "lexema": "=="
-      }
-    ],    "plantilla":[],"nuevoBloque":false
-  },
-  {
-    "noTerminal": {
-      "valor": "<OP3>"
+    {
+        "noTerminal": {
+            "valor": "<OP3>"
+        },
+        "derivacion": [
+            {
+                "tipoToken": null,
+                "lexema": ">="
+            }
+        ],
+        "plantilla": [],
+        "nuevoBloque": false
     },
-    "derivacion": [
-      {
-        "tipoToken": null,
-        "lexema": "!="
-      }
-    ],    "plantilla":[],"nuevoBloque":false
-  },
-  {
-    "noTerminal": {
-      "valor": "<OP3>"
+    {
+        "noTerminal": {
+            "valor": "<OP2>"
+        },
+        "derivacion": [
+            {
+                "tipoToken": null,
+                "lexema": "*"
+            }
+        ],
+        "plantilla": [],
+        "nuevoBloque": false
     },
-    "derivacion": [
-      {
-        "tipoToken": null,
-        "lexema": "<"
-      }
-    ],    "plantilla":[],"nuevoBloque":false
-  },
-  {
-    "noTerminal": {
-      "valor": "<OP3>"
+    {
+        "noTerminal": {
+            "valor": "<OP2>"
+        },
+        "derivacion": [
+            {
+                "tipoToken": null,
+                "lexema": "/"
+            }
+        ],
+        "plantilla": [],
+        "nuevoBloque": false
     },
-    "derivacion": [
-      {
-        "tipoToken": null,
-        "lexema": ">"
-      }
-    ],    "plantilla":[],"nuevoBloque":false
-  },
-  {
-    "noTerminal": {
-      "valor": "<OP3>"
+    {
+        "noTerminal": {
+            "valor": "<OP2>"
+        },
+        "derivacion": [
+            {
+                "tipoToken": null,
+                "lexema": "%"
+            }
+        ],
+        "plantilla": [],
+        "nuevoBloque": false
     },
-    "derivacion": [
-      {
-        "tipoToken": null,
-        "lexema": "<="
-      }
-    ],    "plantilla":[],"nuevoBloque":false
-  },
-  {
-    "noTerminal": {
-      "valor": "<OP3>"
+    {
+        "noTerminal": {
+            "valor": "<SL>"
+        },
+        "derivacion": [
+            {
+                "tipoToken": null,
+                "lexema": "LeerTeclado"
+            },
+            {
+                "tipoToken": null,
+                "lexema": "("
+            },
+            {
+                "tipoToken": "IDENTIFICADOR",
+                "lexema": null
+            },
+            {
+                "tipoToken": null,
+                "lexema": ")"
+            }
+        ],
+        "plantilla": [],
+        "nuevoBloque": false
     },
-    "derivacion": [
-      {
-        "tipoToken": null,
-        "lexema": ">="
-      }
-    ],    "plantilla":[],"nuevoBloque":false
-  },
-  {
-    "noTerminal": {
-      "valor": "<op2>"
+    {
+        "noTerminal": {
+            "valor": "<SE>"
+        },
+        "derivacion": [
+            {
+                "tipoToken": null,
+                "lexema": "EscribirPantalla"
+            },
+            {
+                "tipoToken": null,
+                "lexema": "("
+            },
+            {
+                "valor": "<E>"
+            },
+            {
+                "tipoToken": null,
+                "lexema": ")"
+            },
+            {
+                "tipoToken": null,
+                "lexema": ";"
+            }
+        ],
+        "plantilla": [],
+        "nuevoBloque": false
     },
-    "derivacion": [
-      {
-        "tipoToken": null,
-        "lexema": "*"
-      }
-    ],    "plantilla":[],"nuevoBloque":false
-  },
-  {
-    "noTerminal": {
-      "valor": "<op2>"
+    {
+        "noTerminal": {
+            "valor": "<E>"
+        },
+        "derivacion": [
+            {
+                "valor": "<EM>"
+            }
+        ],
+        "plantilla": [],
+        "nuevoBloque": false
     },
-    "derivacion": [
-      {
-        "tipoToken": null,
-        "lexema": "/"
-      }
-    ],    "plantilla":[],"nuevoBloque":false
-  },
-  {
-    "noTerminal": {
-      "valor": "<op2>"
+    {
+        "noTerminal": {
+            "valor": "<E>"
+        },
+        "derivacion": [
+            {
+                "tipoToken": "IDENTIFICADOR",
+                "lexema": null
+            }
+        ],
+        "plantilla": [],
+        "nuevoBloque": false
     },
-    "derivacion": [
-      {
-        "tipoToken": null,
-        "lexema": "%"
-      }
-    ],    "plantilla":[],"nuevoBloque":false
-  },
-  {
-    "noTerminal": {
-      "valor": "<SL>"
+    {
+        "noTerminal": {
+            "valor": "<E>"
+        },
+        "derivacion": [
+            {
+                "tipoToken": "LITERAL_CADENA",
+                "lexema": null
+            }
+        ],
+        "plantilla": [],
+        "nuevoBloque": false
     },
-    "derivacion": [
-      {
-        "tipoToken": null,
-        "lexema": "LeerTeclado"
-      },
-      {
-        "tipoToken": null,
-        "lexema": "("
-      },
-      {
-        "tipoToken": "IDENTIFICADOR",
-        "lexema": null
-      },
-      {
-        "tipoToken": null,
-        "lexema": ")"
-      }
-    ],    "plantilla":[],"nuevoBloque":false
-  },
-  {
-    "noTerminal": {
-      "valor": "<SE>"
-    },
-    "derivacion": [
-      {
-        "tipoToken": null,
-        "lexema": "EscribirPantalla"
-      },
-      {
-        "tipoToken": null,
-        "lexema": "("
-      },
-      {
-        "valor": "<E>"
-      },
-      {
-        "tipoToken": null,
-        "lexema": ")"
-      },
-      {
-        "tipoToken": null,
-        "lexema": ";"
-      }
-    ],    "plantilla":[],"nuevoBloque":false
-  },
-  {
-    "noTerminal": {
-      "valor": "<E>"
-    },
-    "derivacion": [
-      {
-        "valor": "<EM>"
-      }
-    ],    "plantilla":[],"nuevoBloque":false
-  },
-  {
-    "noTerminal": {
-      "valor": "<E>"
-    },
-    "derivacion": [
-      {
-        "tipoToken": "IDENTIFICADOR",
-        "lexema": null
-      }
-    ],    "plantilla":[],"nuevoBloque":false
-  },
-  {
-    "noTerminal": {
-      "valor": "<E>"
-    },
-    "derivacion": [
-      {
-        "tipoToken": "LITERAL_CADENA",
-        "lexema": null
-      }
-    ],    "plantilla":[],"nuevoBloque":false
-  },
-  {
-    "noTerminal": {
-      "valor": "<E>"
-    },
-    "derivacion": [
-      {
-        "tipoToken": "CONST_NUMERICA",
-        "lexema": null
-      }
-    ],    "plantilla":[],"nuevoBloque":false
-  }
+    {
+        "noTerminal": {
+            "valor": "<E>"
+        },
+        "derivacion": [
+            {
+                "tipoToken": "CONST_NUMERICA",
+                "lexema": null
+            }
+        ],
+        "plantilla": [],
+        "nuevoBloque": false
+    }
 ]

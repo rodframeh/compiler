@@ -1,15 +1,8 @@
 package org.ulasalle.compiler;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import org.ulasalle.compiler.lexical.analizer.AnalizadorLexico;
-import org.ulasalle.compiler.lexical.analizer.ErrorLexico;
-import org.ulasalle.compiler.util.Respuesta;
 import org.ulasalle.compiler.syntax.analizer.AnalizadorSintactico;
-import org.ulasalle.compiler.syntax.analizer.ErrorSintactico;
 import org.ulasalle.compiler.util.TipoToken;
 import org.ulasalle.compiler.util.Token;
 

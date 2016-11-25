@@ -1,23 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.ulasalle.compiler.syntax.analizer;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import java.util.Objects;
 
-/**
- *
- * @author francisco
- */
 @JsonDeserialize(as=NoTerminal.class)
 public class NoTerminal implements Simbolo
 {
 
     private String valor;
     private int indiceRegla;
+    private int idRegla;
+    private int idSimbolo;
+    private Simbolo padre;
     
     public NoTerminal()
     {
@@ -28,11 +22,22 @@ public class NoTerminal implements Simbolo
         this.valor = valor;
     }
 
+    public NoTerminal(String valor, int indiceRegla)
+    {
+        this.valor = valor;
+        this.indiceRegla = indiceRegla;
+    }
+    
     public String getValor()
     {
         return valor;
     }
 
+    public void setValor(String valor)
+    {
+        this.valor = valor;
+    }
+    
     @Override
     public boolean equals(Object obj)
     {
@@ -53,4 +58,35 @@ public class NoTerminal implements Simbolo
         this.indiceRegla=indiceRegla;
     }
 
+    public int getIdRegla()
+    {
+        return idRegla;
+    }
+
+    public void setIdRegla(int idRegla)
+    {
+        this.idRegla = idRegla;
+    }
+
+    public int getIdSimbolo()
+    {
+        return idSimbolo;
+    }
+
+    public void setIdSimbolo(int idSimbolo)
+    {
+        this.idSimbolo = idSimbolo;
+    }
+
+    public Simbolo getPadre()
+    {
+        return padre;
+    }
+
+    public void setPadre(Simbolo padre)
+    {
+        this.padre = padre;
+    }
+
+   
 }

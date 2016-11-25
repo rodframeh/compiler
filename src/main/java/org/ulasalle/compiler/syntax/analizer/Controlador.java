@@ -1,26 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.ulasalle.compiler.syntax.analizer;
 
-/**
- *
- * @author francisco
- */
-public class PlantillaControl
+public class Controlador
 {
     private int indiceRegla;
     private Simbolo[] plantilla;
     private boolean estaControlada;
     private int bloque;
 
-    public PlantillaControl()
+    public Controlador()
     {
     }
 
-    public PlantillaControl(int indiceRegla, Simbolo[] plantilla, boolean estaControlada, int bloque) {
+    public Controlador(int indiceRegla, Simbolo[] plantilla, boolean estaControlada, int bloque) {
         this.indiceRegla = indiceRegla;
         this.plantilla = plantilla;
         this.estaControlada = estaControlada;
