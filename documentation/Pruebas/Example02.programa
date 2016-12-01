@@ -1,0 +1,7 @@
+Programa()
+{
+  entero a = 7;
+  Mientras( 6==6 ||  a!=3 || a>6 || a<8 || a>=6){
+    a=10;
+  }
+}

@@ -1,0 +1,8 @@
+Programa(){
+//error
+entero a;
+entero b;
+a=a+b;
+b=b+a;
+a+b;
+}

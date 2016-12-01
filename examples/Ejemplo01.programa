@@ -1,0 +1,13 @@
+Programa()
+{
+entero a=2;
+entero b=5;
+Si(a>5)
+{
+EscribirPantalla(a);
+}Osino
+{
+EscribirPantalla(b);
+}
+
+}

@@ -1,0 +1,9 @@
+Programa(){
+Si(a<5 || b>4)
+{
+	entero a=0+5*8;
+}
+Osino{
+	entero b=8*5;
+}
+}

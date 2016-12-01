@@ -260,7 +260,12 @@
                 "lexema": "entero"
             }
         ],
-        "plantilla": [],
+        "plantilla": [
+            {"valor": "<TD>"},
+            null,
+            {"valor": "entero"},
+            null
+        ],
         "nuevoBloque": false
     },
     {
@@ -367,13 +372,35 @@
                 "lexema": ")"
             },
             {
+                "valor": "<TMP4>"
+            }
+        ],
+        "plantilla": [
+            {"valor":"<SC>"},
+            {"valor":"<EM>"},
+            {"valor":"Si"},
+            {"valor":"<TMP4>"}
+        ],
+        "nuevoBloque": false
+    },
+    {
+        "noTerminal": {
+            "valor": "<TMP4>"
+        },
+        "derivacion": [
+            {
                 "valor": "<SubB>"
             },
             {
                 "valor": "<ELSE>"
             }
         ],
-        "plantilla": [],
+        "plantilla": [
+            {"valor":"<TMP4>"},
+            {"valor":"<SubB>"},
+            null,
+            {"valor":"<ELSE>"}
+        ],
         "nuevoBloque": false
     },
     {
@@ -382,14 +409,18 @@
         },
         "derivacion": [
             {
-
                 "lexema": "Osino"
             },
             {
                 "valor": "<SubB>"
             }
         ],
-        "plantilla": [],
+        "plantilla": [
+            {"valor":"<ELSE>"},
+            null,
+            {"lexema": "Osino"},
+            {"valor":"<SubB>"}
+        ],
         "nuevoBloque": false
     },
     {
@@ -556,7 +587,20 @@
                 "lexema": "||"
             }
         ],
-        "plantilla": [],
+        "plantilla": [
+            {
+                "valor": "<OP4>"
+            },
+            {
+
+                "lexema": "||"
+            },
+            {
+
+                "lexema": "="
+            },
+            null
+        ],
         "nuevoBloque": false
     },
     {
@@ -569,7 +613,20 @@
                 "lexema": "&&"
             }
         ],
-        "plantilla": [],
+        "plantilla": [
+            {
+                "valor": "<OP4>"
+            },
+            {
+
+                "lexema": "&&"
+            },
+            {
+
+                "lexema": "="
+            },
+            null
+        ],
         "nuevoBloque": false
     },
     {
@@ -671,7 +728,20 @@
                 "lexema": "+"
             }
         ],
-        "plantilla": [],
+        "plantilla": [
+            {
+                "valor": "<OP1>"
+            },
+            {
+
+                "lexema": "+"
+            },
+            {
+
+                "lexema": "="
+            },
+            null
+        ],
         "nuevoBloque": false
     },
     {
@@ -684,7 +754,20 @@
                 "lexema": "-"
             }
         ],
-        "plantilla": [],
+        "plantilla": [
+            {
+                "valor": "<OP1>"
+            },
+            {
+
+                "lexema": "-"
+            },
+            {
+
+                "lexema": "="
+            },
+            null
+        ],
         "nuevoBloque": false
     },
     {
@@ -780,7 +863,7 @@
                 "lexema": "("
             },
             {
-                "valor": "<EXP*>"
+                "valor": "<EM>"
             },
             {
 
@@ -856,7 +939,20 @@
                 "lexema": "=="
             }
         ],
-        "plantilla": [],
+        "plantilla": [
+            {
+                "valor": "<OP3>"
+            },
+            {
+
+                "lexema": "=="
+            },
+            {
+
+                "lexema": "="
+            },
+            null
+        ],
         "nuevoBloque": false
     },
     {
@@ -869,7 +965,20 @@
                 "lexema": "!="
             }
         ],
-        "plantilla": [],
+        "plantilla": [
+            {
+                "valor": "<OP3>"
+            },
+            {
+
+                "lexema": "!="
+            },
+            {
+
+                "lexema": "="
+            },
+            null
+        ],
         "nuevoBloque": false
     },
     {
@@ -882,7 +991,20 @@
                 "lexema": "<"
             }
         ],
-        "plantilla": [],
+        "plantilla": [
+            {
+                "valor": "<OP3>"
+            },
+            {
+
+                "lexema": "<"
+            },
+            {
+
+                "lexema": "="
+            },
+            null
+        ],
         "nuevoBloque": false
     },
     {
@@ -895,7 +1017,20 @@
                 "lexema": ">"
             }
         ],
-        "plantilla": [],
+        "plantilla": [
+            {
+                "valor": "<OP3>"
+            },
+            {
+
+                "lexema": ">"
+            },
+            {
+
+                "lexema": "="
+            },
+            null
+        ],
         "nuevoBloque": false
     },
     {
@@ -908,7 +1043,20 @@
                 "lexema": "<="
             }
         ],
-        "plantilla": [],
+        "plantilla": [
+            {
+                "valor": "<OP3>"
+            },
+            {
+
+                "lexema": "<="
+            },
+            {
+
+                "lexema": "="
+            },
+            null
+        ],
         "nuevoBloque": false
     },
     {
@@ -921,7 +1069,20 @@
                 "lexema": ">="
             }
         ],
-        "plantilla": [],
+        "plantilla": [
+            {
+                "valor": "<OP3>"
+            },
+            {
+
+                "lexema": ">="
+            },
+            {
+
+                "lexema": "="
+            },
+            null
+        ],
         "nuevoBloque": false
     },
     {
@@ -1023,7 +1184,17 @@
                 "lexema": ")"
             }
         ],
-        "plantilla": [],
+        "plantilla": [
+            {
+                "tipoToken": "IDENTIFICADOR"
+            },
+            null,
+            {
+
+                "lexema": "LeerTeclado"
+            },
+            null
+        ],
         "nuevoBloque": false
     },
     {
@@ -1040,7 +1211,7 @@
                 "lexema": "("
             },
             {
-                "valor": "<E>"
+                "valor": "<EM>"
             },
             {
 
@@ -1051,55 +1222,17 @@
                 "lexema": ";"
             }
         ],
-        "plantilla": [],
-        "nuevoBloque": false
-    },
-    {
-        "noTerminal": {
-            "valor": "<E>"
-        },
-        "derivacion": [
+        "plantilla": [
             {
                 "valor": "<EM>"
-            }
-        ],
-        "plantilla": [],
-        "nuevoBloque": false
-    },
-    {
-        "noTerminal": {
-            "valor": "<E>"
-        },
-        "derivacion": [
+            },
+            null,
             {
-                "tipoToken": "IDENTIFICADOR"
-            }
+
+                "lexema": "EscribirPantalla"
+            },
+            null
         ],
-        "plantilla": [],
-        "nuevoBloque": false
-    },
-    {
-        "noTerminal": {
-            "valor": "<E>"
-        },
-        "derivacion": [
-            {
-                "tipoToken": "LITERAL_CADENA"
-            }
-        ],
-        "plantilla": [],
-        "nuevoBloque": false
-    },
-    {
-        "noTerminal": {
-            "valor": "<E>"
-        },
-        "derivacion": [
-            {
-                "tipoToken": "CONST_NUMERICA"
-            }
-        ],
-        "plantilla": [],
         "nuevoBloque": false
     }
 ]

@@ -1,0 +1,5 @@
+Programa()
+{
+    entero a;;
+    Mientras(4>6)
+}

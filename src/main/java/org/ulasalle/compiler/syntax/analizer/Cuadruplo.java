@@ -9,7 +9,7 @@ public class Cuadruplo implements Resultado
     private int bloque;
     private int idRegla;
     private int indiceRegla;
-    private Simbolo padre;
+
     private Simbolo resultado;
     private Simbolo operando1;
     private Simbolo operacion;
@@ -23,17 +23,7 @@ public class Cuadruplo implements Resultado
     {
         return contexto;
     }
-    
-    public Simbolo getPadre()
-    {
-        return padre;
-    }
-
-    public void setPadre(Simbolo padre)
-    {
-        this.padre = padre;
-    }
-    
+        
     public int getIndiceRegla()
     {
         return indiceRegla;

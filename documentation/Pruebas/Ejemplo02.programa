@@ -1,0 +1,6 @@
+Programa(){
+entero a;
+entero b;
+a=a>1 && b<1;
+
+}

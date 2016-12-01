@@ -1,0 +1,7 @@
+Programa(){
+Mientras(a>b && a>3*5)
+{
+	entero a=0+5*8;
+}
+
+}

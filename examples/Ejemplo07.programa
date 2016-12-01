@@ -1,0 +1,7 @@
+Programa(){
+Mientras(a>b || a)
+{
+	entero a=0+5*8;
+}
+
+}
