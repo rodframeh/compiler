@@ -2,7 +2,10 @@ package org.ulasalle.compiler.syntax.analizer;
 
 import org.ulasalle.compiler.util.Simbolo;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Stack;
 import org.ulasalle.compiler.util.Respuesta;
 import org.ulasalle.compiler.util.Token;
@@ -113,6 +116,61 @@ public class AnalizadorSintactico
 
     private void reducirCuadruplos(List<Cuadruplo> cuadruplos)
     {
+        Map<Integer,Integer> identificadores=new HashMap<>();
+        for(int i=0;i<cuadruplos.size();i++)
+        {
+            if(cuadruplos.get(i).getOperando2() instanceof NoTerminal )
+            {
+                int identificador=cuadruplos.get(i).getOperando2().getIdSimbolo();
+                int acumulado=(identificadores.get(identificador)==null?1:identificadores.get(identificador)+1);
+                identificadores.put(identificador, acumulado);
+            }
+            if(cuadruplos.get(i).getResultado()instanceof NoTerminal)
+            {
+                int identificador=cuadruplos.get(i).getResultado().getIdSimbolo();
+                int acumulado=(identificadores.get(identificador)==null?1:identificadores.get(identificador)+1);
+                identificadores.put(identificador, acumulado);
+            }
+        }
+        cuadruplos.forEach((c) ->identificadores.keySet().stream().filter((i) -> (c.getOperando2() instanceof NoTerminal && c.getOperando2().getIdSimbolo()==i && identificadores.get(i)==1)).forEachOrdered((_item) ->c.setOperando2(null)));
+        
+        
+        
+        
+        List<Integer> eliminados=new ArrayList<>();
+        
+        List<Cuadruplo> copia=new ArrayList<>(cuadruplos.size());
+        Collections.copy(cuadruplos, copia);
+        
+        for(int i=0;i<copia.size();i++)
+        {
+            if(copia.get(i).getOperacion()==null && copia.get(i).getOperando2()==null)
+            {
+                for(int j=0;j<cuadruplos.size();j++)
+                {
+                    if(cuadruplos.get(j).getOperando2()!=null && cuadruplos.get(j).getOperando2().getIdSimbolo()==copia.get(i).getResultado().getIdSimbolo())
+                    {
+                        cuadruplos.get(j).setOperando2(copia.get(i).getResultado());
+                       eliminados.add(i);
+                    }else if(cuadruplos.get(j).getOperando1()!=null && cuadruplos.get(j).getOperando1().getIdSimbolo()==copia.get(i).getResultado().getIdSimbolo())
+                    {
+                        cuadruplos.get(j).setOperando1(copia.get(i).getResultado());
+                        eliminados.add(i);
+                    } else if(cuadruplos.get(j).getOperacion()!=null && cuadruplos.get(j).getOperacion().getIdSimbolo()==copia.get(i).getResultado().getIdSimbolo())
+                    {
+                        cuadruplos.get(j).setOperacion(copia.get(i).getResultado());
+                        eliminados.add(i);
+                    } 
+                }
+            }
+        }
+        
+        for(int i:eliminados)
+        {
+            cuadruplos.remove(i);
+        }
+        
+        
         
     }
     
