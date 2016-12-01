@@ -4,10 +4,15 @@ entero a=2;
 entero b=5;
 Si(a>5)
 {
-EscribirPantalla(a);
-}Osino
-{
-EscribirPantalla(b);
-}
 
+Hacer
+{EscribirPantalla(a);}
+Mientras(a<b);
+
+}Osino{
+
+Mientras(a>b)
+{EscribirPantalla(b);}
+
+}
 }

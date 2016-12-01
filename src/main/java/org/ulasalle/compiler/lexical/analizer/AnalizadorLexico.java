@@ -34,6 +34,7 @@ public class AnalizadorLexico //implements Analizador
         palabrasReservadas.add("Si");
         palabrasReservadas.add("Osino");
         palabrasReservadas.add("Mientras");
+        palabrasReservadas.add("Hacer");
         palabrasReservadas.add("LeerTeclado");
         palabrasReservadas.add("EscribirPantalla");
     }
