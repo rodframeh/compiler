@@ -32,7 +32,7 @@ public class AnalizadorLexico //implements Analizador
         palabrasReservadas.add("Programa");
         palabrasReservadas.add("entero");
         palabrasReservadas.add("Si");
-        palabrasReservadas.add("OsiNo");
+        palabrasReservadas.add("Osino");
         palabrasReservadas.add("Mientras");
         palabrasReservadas.add("LeerTeclado");
         palabrasReservadas.add("EscribirPantalla");

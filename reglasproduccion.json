@@ -204,16 +204,19 @@
         ],
         "plantilla": [
             {
-                "tipoToken": "IDENTIFICADOR"
+                "valor": "<VA>"
             },
             {
-                "valor": "<A>"
+                "tipoToken": "IDENTIFICADOR"
             },
             {
 
                 "lexema": "="
             },
-            null
+            {
+                "valor": "<A>"
+            }
+            
         ],
         "nuevoBloque": false
     },
@@ -262,8 +265,8 @@
         ],
         "plantilla": [
             {"valor": "<TD>"},
-            null,
             {"valor": "entero"},
+            {"valor": "declaracion"},
             null
         ],
         "nuevoBloque": false
@@ -324,7 +327,12 @@
                 "valor": "<SubB>"
             }
         ],
-        "plantilla": [],
+        "plantilla": [
+            {"valor":"<SM>"},
+            {"valor":"<EM>"},
+            {"lexema":"Mientras"},
+            {"valor":"<SubB>"}
+        ],
         "nuevoBloque": false
     },
     {
@@ -438,30 +446,49 @@
 
                 "lexema": "Hacer"
             },
+     
             {
+                "valor": "<TMP5>"
+            }
+        ],
+        "plantilla": [
+            {"valor": "<SHM>"},
+            {"valor": "<TMP5>"},
+            {"lexema": "Hacer"},
+            null
+        ],
+        "nuevoBloque": false
+    },
+    {
+        "noTerminal": {
+            "valor": "<TMP5>"
+        },
+        "derivacion": [
+                   {
                 "valor": "<SubB>"
             },
             {
-
                 "lexema": "Mientras"
             },
             {
-
                 "lexema": "("
             },
             {
                 "valor": "<EM>"
             },
-            {
-
+                  {
                 "lexema": ")"
             },
-            {
-
+                  {
                 "lexema": ";"
             }
         ],
-        "plantilla": [],
+        "plantilla": [
+            {"valor": "<TMP5>"},
+            {"valor": "<EM>"},
+            {"lexema": "Mientras"},
+            {"valor": "<SubB>"}
+        ],
         "nuevoBloque": false
     },
     {
@@ -1182,6 +1209,10 @@
             {
 
                 "lexema": ")"
+            },
+            {
+
+                "lexema": ";"
             }
         ],
         "plantilla": [

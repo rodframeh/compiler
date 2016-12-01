@@ -130,7 +130,9 @@ public class AnalizadorSintactico
                 errores.add(new ErrorSintactico(TipoError.NOTERMINAL_IRRECONOCIBLE, tokens.get(indiceTokens)));
                 return encontrarFinError(tokens, indiceTokens, pila, cuadruplos, temporal);// -1 termina
             } else if (pila.isEmpty() && (indiceTokens + 1) < tokens.size())
+            {
                 errores.add(new ErrorSintactico(TipoError.TOKENS_SIN_LEER, tokens.get(indiceTokens)));
+            }
             else
                 reemplazarSimbolos(pila, tablaAnalisis, indiceRegla, cuadruplos, temporal);
         }

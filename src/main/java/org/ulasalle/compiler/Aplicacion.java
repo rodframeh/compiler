@@ -21,10 +21,6 @@ public class Aplicacion
             AnalizadorLexico lexico = new AnalizadorLexico();
             Respuesta respuestaLexico = lexico.analizar("examples/Ejemplo01.programa");
             List<Token> tokens=(List<Token>) respuestaLexico.getResultados();
-            tokens.forEach((token) ->
-            {
-                System.out.println(token.getLexema() + " - " + token.getTipoToken());
-            });
             List<ErrorLexico> erroresLexicos =(List<ErrorLexico>) respuestaLexico.getErrores();
             erroresLexicos.forEach((error) ->
             {
