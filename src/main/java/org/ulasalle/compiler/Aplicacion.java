@@ -40,6 +40,7 @@ public class Aplicacion
         {
             Logger.getLogger(Aplicacion.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         /*
         List<Token> tokens=new ArrayList<>();
         tokens.add(new Token(TipoToken.IDENTIFICADOR, "Programa"));
