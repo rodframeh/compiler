@@ -152,15 +152,13 @@
                 "valor": "<TD>"
             },
             {
-                "valor": "<VA>"
+                "valor": "<TMP7>"
             },
+            
             {
-                "valor": "<RD*>"
-            },
-            {
-
                 "lexema": ";"
             }
+
         ],
         "plantilla": [],
         "nuevoBloque": false
