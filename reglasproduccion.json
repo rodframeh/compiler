@@ -160,7 +160,48 @@
             }
 
         ],
-        "plantilla": [],
+        "plantilla": [
+            {
+                "valor": "<SD>"
+            },
+            {
+                "valor": "<TD>"
+            },
+            null,
+            {
+                "valor": "<TMP7>"
+            }
+            
+        ],
+        "nuevoBloque": false
+    },
+    {
+        "noTerminal": {
+            "valor": "<TMP7>"
+        },
+        "derivacion": [
+            {
+                "valor": "<VA>"
+            },
+            {
+                "valor": "<RD*>"
+            }
+        ],
+        "plantilla": [
+            {
+                "valor": "<TMP7>"
+            },
+            {
+                "valor": "<VA>"
+            },
+            {
+                "lexema": "declaracion"
+            },
+            {
+                "valor": "<RD*>"
+            }
+            
+        ],
         "nuevoBloque": false
     },
     {
@@ -179,7 +220,21 @@
                 "valor": "<RD*>"
             }
         ],
-        "plantilla": [],
+        "plantilla": [
+            {
+                "valor": "<RD*>"
+            },
+            {
+                "valor": "<VA>"
+            },
+            {
+                "lexema": "declaracion"
+            },
+            {
+                "valor": "<RD*>"
+            }
+            
+        ],
         "nuevoBloque": false
     },
     {
