@@ -265,7 +265,7 @@
         ],
         "plantilla": [
             {"valor": "<TD>"},
-            {"valor": "entero"},
+            {"lexema": "entero"},
             {"valor": "declaracion"},
             null
         ],
