@@ -1270,9 +1270,11 @@
         ],
         "plantilla": [
             {
+                "valor": "<SL>"
+            },
+            {
                 "tipoToken": "IDENTIFICADOR"
             },
-            null,
             {
 
                 "lexema": "LeerTeclado"
@@ -1308,9 +1310,13 @@
         ],
         "plantilla": [
             {
-                "valor": "<EM>"
+                
+                "valor": "<SE>"
+               
             },
-            null,
+            {
+                 "valor": "<EM>"
+            },
             {
 
                 "lexema": "EscribirPantalla"

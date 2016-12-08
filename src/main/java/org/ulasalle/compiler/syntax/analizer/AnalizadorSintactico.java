@@ -2,7 +2,6 @@ package org.ulasalle.compiler.syntax.analizer;
 
 import org.ulasalle.compiler.util.Simbolo;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -114,66 +113,138 @@ public class AnalizadorSintactico
             }
     }
 
-    private void reducirCuadruplos(List<Cuadruplo> cuadruplos)
+    private void acumularIdentificadores(Map<Integer, Integer> identificadores, int identificador)
     {
-        Map<Integer,Integer> identificadores=new HashMap<>();
-        for(int i=0;i<cuadruplos.size();i++)
-        {
-            if(cuadruplos.get(i).getOperando2() instanceof NoTerminal )
-            {
-                int identificador=cuadruplos.get(i).getOperando2().getIdSimbolo();
-                int acumulado=(identificadores.get(identificador)==null?1:identificadores.get(identificador)+1);
-                identificadores.put(identificador, acumulado);
-            }
-            if(cuadruplos.get(i).getResultado()instanceof NoTerminal)
-            {
-                int identificador=cuadruplos.get(i).getResultado().getIdSimbolo();
-                int acumulado=(identificadores.get(identificador)==null?1:identificadores.get(identificador)+1);
-                identificadores.put(identificador, acumulado);
-            }
-        }
-        cuadruplos.forEach((c) ->identificadores.keySet().stream().filter((i) -> (c.getOperando2() instanceof NoTerminal && c.getOperando2().getIdSimbolo()==i && identificadores.get(i)==1)).forEachOrdered((_item) ->c.setOperando2(null)));
-        
-        
-        
-        
-        List<Integer> eliminados=new ArrayList<>();
-        
-        List<Cuadruplo> copia=new ArrayList<>(cuadruplos.size());
-        Collections.copy(cuadruplos, copia);
-        
-        for(int i=0;i<copia.size();i++)
-        {
-            if(copia.get(i).getOperacion()==null && copia.get(i).getOperando2()==null)
-            {
-                for(int j=0;j<cuadruplos.size();j++)
+        int acumulado = (identificadores.get(identificador) == null ? 1 : identificadores.get(identificador) + 1);
+        identificadores.put(identificador, acumulado);
+    }
+
+    private void eliminarAsignacionSimple(List<Cuadruplo> cuadruplos)
+    {
+        //elimino = null
+        List<Cuadruplo> eliminados = new ArrayList<>();
+        for (Cuadruplo cuadruplo : cuadruplos)
+            if (((cuadruplo.getOperacion() instanceof Terminal
+                    && ((Terminal) cuadruplo.getOperacion()).getLexema().equals("="))
+                    ||  cuadruplo.getOperacion()==null) 
+                    && cuadruplo.getOperando2() == null)
+                eliminados.add(cuadruplo);
+        if (eliminados.size() > 0)
+            for (Cuadruplo eliminado : eliminados)
+                for (int c = 0; c < cuadruplos.size(); c++)
                 {
-                    if(cuadruplos.get(j).getOperando2()!=null && cuadruplos.get(j).getOperando2().getIdSimbolo()==copia.get(i).getResultado().getIdSimbolo())
-                    {
-                        cuadruplos.get(j).setOperando2(copia.get(i).getResultado());
-                       eliminados.add(i);
-                    }else if(cuadruplos.get(j).getOperando1()!=null && cuadruplos.get(j).getOperando1().getIdSimbolo()==copia.get(i).getResultado().getIdSimbolo())
-                    {
-                        cuadruplos.get(j).setOperando1(copia.get(i).getResultado());
-                        eliminados.add(i);
-                    } else if(cuadruplos.get(j).getOperacion()!=null && cuadruplos.get(j).getOperacion().getIdSimbolo()==copia.get(i).getResultado().getIdSimbolo())
-                    {
-                        cuadruplos.get(j).setOperacion(copia.get(i).getResultado());
-                        eliminados.add(i);
-                    } 
+                    int identificador = eliminado.getResultado().getIdSimbolo();
+                    if (cuadruplos.get(c).getOperando1() != null && cuadruplos.get(c).getOperando1().getIdSimbolo() == identificador)
+                        cuadruplos.get(c).setOperando1(eliminado.getOperando1());
+                    else if (cuadruplos.get(c).getOperando2() != null && cuadruplos.get(c).getOperando2().getIdSimbolo() == identificador)
+                        cuadruplos.get(c).setOperando2(eliminado.getOperando1());
+                    else if (cuadruplos.get(c).getOperacion() != null && cuadruplos.get(c).getOperacion().getIdSimbolo() == identificador)
+                        cuadruplos.get(c).setOperacion(eliminado.getOperando1());
                 }
+        for (Cuadruplo eliminado : eliminados)
+            cuadruplos.remove(eliminado);
+    }
+
+    private void eliminarSimbolosObsoletos(List<Cuadruplo> cuadruplos)
+    {
+        //elimino simbolos obsoletos
+        Map<Integer, Integer> identificadores = new HashMap<>();
+        for (int i = 0; i < cuadruplos.size(); i++)
+        {
+            if (cuadruplos.get(i).getResultado() instanceof NoTerminal)
+                acumularIdentificadores(identificadores, cuadruplos.get(i).getResultado().getIdSimbolo());
+            if (cuadruplos.get(i).getOperando1() instanceof NoTerminal)
+                acumularIdentificadores(identificadores, cuadruplos.get(i).getOperando1().getIdSimbolo());
+            if (cuadruplos.get(i).getOperacion() instanceof NoTerminal)
+                acumularIdentificadores(identificadores, cuadruplos.get(i).getOperacion().getIdSimbolo());
+            if (cuadruplos.get(i).getOperando2() instanceof NoTerminal)
+                acumularIdentificadores(identificadores, cuadruplos.get(i).getOperando2().getIdSimbolo());
+        }
+        
+       
+        identificadores.keySet().stream()
+                .filter((identificador) -> ( identificadores.get(identificador) == 1))
+                .forEachOrdered((identificador) ->{
+            cuadruplos.forEach((cuadruplo) -> {
+                if(cuadruplo.getOperando1() instanceof NoTerminal
+                        && cuadruplo.getOperando1().getIdSimbolo() == identificador
+                        )
+                {
+                    cuadruplo.setOperando1(null);
+                }else if(cuadruplo.getOperando2() instanceof NoTerminal
+                        && cuadruplo.getOperando2().getIdSimbolo() == identificador
+                        )
+                {
+                    cuadruplo.setOperando2(null);
+                }
+            });
+        });
+        
+
+
+    }
+
+    private void eliminarSimpleRelacion(List<Cuadruplo> cuadruplos)
+    {
+        //elimino los null null
+        List<Cuadruplo> eliminados = new ArrayList<>();
+        for (Cuadruplo cuadruplo : cuadruplos)
+            if (cuadruplo.getOperacion() == null
+                    && cuadruplo.getOperando2() == null)
+                eliminados.add(cuadruplo);
+        if (eliminados.size() > 0)
+            for (Cuadruplo eliminado : eliminados)
+                for (int c = 0; c < cuadruplos.size(); c++)
+                {
+                    int identificador = eliminado.getResultado().getIdSimbolo();
+                    if (cuadruplos.get(c).getOperando1() != null && cuadruplos.get(c).getOperando1().getIdSimbolo() == identificador)
+                        cuadruplos.get(c).setOperando1(eliminado.getOperando1());
+                    else if (cuadruplos.get(c).getOperando2() != null && cuadruplos.get(c).getOperando2().getIdSimbolo() == identificador)
+                        cuadruplos.get(c).setOperando2(eliminado.getOperando1());
+                    else if (cuadruplos.get(c).getOperacion() != null && cuadruplos.get(c).getOperacion().getIdSimbolo() == identificador)
+                        cuadruplos.get(c).setOperacion(eliminado.getOperando1());
+                }
+        for (Cuadruplo eliminado : eliminados)
+            cuadruplos.remove(eliminado);
+
+    }
+
+    private void eliminarRelacionOperacion(List<Cuadruplo> cuadruplos)
+    {
+        List<Cuadruplo> eliminados=new ArrayList<>();
+        for(Cuadruplo cuadruplo:cuadruplos)
+        {
+            if((cuadruplo.getOperando1()==null && cuadruplo.getOperacion()!=null && cuadruplo.getOperando2()!=null))
+            {
+                eliminados.add(cuadruplo);
+     
             }
         }
-        
-        for(int i:eliminados)
-        {
-            cuadruplos.remove(i);
-        }
-        
-        
-        
+   
+        if (eliminados.size() > 0)
+            for (Cuadruplo eliminado : eliminados)
+                for (int c = 0; c < cuadruplos.size(); c++)
+                {
+                    int identificador = eliminado.getResultado().getIdSimbolo();
+                    if (cuadruplos.get(c).getOperando2() != null && cuadruplos.get(c).getOperando2().getIdSimbolo() == identificador)
+                    {
+                        cuadruplos.get(c).setOperacion(eliminado.getOperacion());
+                        cuadruplos.get(c).setOperando2(eliminado.getOperando2());
+                    }
+                }
+
+        for (Cuadruplo eliminado : eliminados)
+            cuadruplos.remove(eliminado);
     }
     
+    private void reducirCuadruplos(List<Cuadruplo> cuadruplos)
+    {
+        eliminarSimbolosObsoletos(cuadruplos);
+        eliminarSimpleRelacion(cuadruplos);
+        eliminarAsignacionSimple(cuadruplos);
+        eliminarRelacionOperacion(cuadruplos);
+    }
+
     private int controlarErrores(List<Token> tokens, List<ErrorSintactico> errores, Stack<Simbolo> pila, int indiceTokens, List<Cuadruplo> cuadruplos, Temporal temporal)
     {
         if (pila.peek().getClass() == Terminal.class)//obligatorio para el metodo reeemplazar simbolo
@@ -188,9 +259,7 @@ public class AnalizadorSintactico
                 errores.add(new ErrorSintactico(TipoError.NOTERMINAL_IRRECONOCIBLE, tokens.get(indiceTokens)));
                 return encontrarFinError(tokens, indiceTokens, pila, cuadruplos, temporal);// -1 termina
             } else if (pila.isEmpty() && (indiceTokens + 1) < tokens.size())
-            {
                 errores.add(new ErrorSintactico(TipoError.TOKENS_SIN_LEER, tokens.get(indiceTokens)));
-            }
             else
                 reemplazarSimbolos(pila, tablaAnalisis, indiceRegla, cuadruplos, temporal);
         }
@@ -239,7 +308,7 @@ public class AnalizadorSintactico
         imprimirCuadruplos(cuadruplos);
         return new RespuestaSintactica("nombreArchivo", new ArrayList<>(), errores);
     }
-    
+
     private boolean esTokenAceptadoPorPila(Stack<Simbolo> pila, Token token)
     {
         return pila.peek().getClass() == Terminal.class && ((Terminal) pila.peek()).equals(token);
