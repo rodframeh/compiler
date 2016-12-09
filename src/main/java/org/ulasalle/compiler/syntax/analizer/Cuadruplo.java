@@ -1,9 +1,8 @@
 package org.ulasalle.compiler.syntax.analizer;
 
 import org.ulasalle.compiler.util.Simbolo;
-import org.ulasalle.compiler.util.Resultado;
 
-public class Cuadruplo implements Resultado
+public class Cuadruplo 
 {
     private Bloque bloque;
     private int idRegla;

@@ -1,7 +1,9 @@
 Programa()
 {
 entero a=2;
-entero b=5;
+entero b=5,c=2,d,f=b,o,p,q,r,s;
+entero h;
+entero j,k,l,m,n;
 Si(a>5)
 {
 

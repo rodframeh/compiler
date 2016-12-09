@@ -1,22 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.ulasalle.compiler.util;
 
 import java.util.Objects;
 
-/**
- *
- * @author francisco
- */
-public class Token implements Resultado
+public class Token 
 {
 
     private TipoToken tipoToken;
     private String lexema;
-
+    private int linea;
+    
     public Token()
     {
     }
@@ -37,10 +29,27 @@ public class Token implements Resultado
         this.tipoToken = tipoToken;
         this.lexema = lexema;
     }
+    
+    public Token(TipoToken tipoToken, String lexema,int linea)
+    {
+        this.tipoToken = tipoToken;
+        this.lexema = lexema;
+        this.linea=linea;
+    }
 
     public Token(String lexema)
     {
         this.lexema = lexema;
+    }
+
+    public int getLinea()
+    {
+        return linea;
+    }
+
+    public void setLinea(int linea)
+    {
+        this.linea = linea;
     }
     
     public TipoToken getTipoToken()

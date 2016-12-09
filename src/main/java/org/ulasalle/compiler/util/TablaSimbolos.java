@@ -2,20 +2,12 @@ package org.ulasalle.compiler.util;
 
 public class TablaSimbolos 
 {
-    private int offset;// Posicion en la pila
+
     private int tipo;//Entero = 1
     private int lineaDeclaracion;
     private int lineaPrimeraAsignacion;
     private String lexema;
     
-    public int getOffset() {
-        return offset;
-    }
-
-    public void setOffset(int offset) {
-        this.offset = offset;
-    }
-
     public int getTipo() {
         return tipo;
     }

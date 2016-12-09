@@ -1,28 +1,23 @@
 package org.ulasalle.compiler.syntax.analizer;
 
-import org.ulasalle.compiler.util.Error;
 import org.ulasalle.compiler.util.Token;
-/**
- *
- * @author francisco
- */
-public class ErrorSintactico implements Error
+
+public class Error 
 {
     
     private TipoError tipoError;
     private Token token;
 
-    public ErrorSintactico()
+    public Error()
     {
     }
     
-    public ErrorSintactico(TipoError tipoError, Token token)
+    public Error(TipoError tipoError, Token token)
     {
         this.tipoError = tipoError;
         this.token = token;
     }
-    
-    @Override
+ 
     public String getDescripcion()
     {
         String  detalles = "";

@@ -1,9 +1,5 @@
 package org.ulasalle.compiler.lexical.analizer;
 
-/**
- *
- * @author francisco
- */
 public class TransicionDTO
 {
 

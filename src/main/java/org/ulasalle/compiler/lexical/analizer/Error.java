@@ -1,22 +1,17 @@
 package org.ulasalle.compiler.lexical.analizer;
 
-import org.ulasalle.compiler.util.Error;
-/**
- *
- * @author christianlp
- */
-public class ErrorLexico implements Error
+public class Error
 {
 
     private String buffer;
     private char caracter;
     private int linea;
 
-    public ErrorLexico()
+    public Error()
     {
     }
 
-    public ErrorLexico(String buffer, char caracter, int linea)
+    public Error(String buffer, char caracter, int linea)
     {
         this.buffer = buffer;
         this.linea = linea;
@@ -38,7 +33,6 @@ public class ErrorLexico implements Error
         return caracter;
     }
 
-    @Override
     public String getDescripcion()
     {
         String detalles;

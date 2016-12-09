@@ -1,6 +1,5 @@
 package org.ulasalle.compiler.lexical.analizer;
 
-import org.ulasalle.compiler.util.Respuesta;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -10,11 +9,7 @@ import java.util.stream.Stream;
 import org.ulasalle.compiler.util.TipoToken;
 import org.ulasalle.compiler.util.Token;
 
-/**
- *
- * @author christianlp
- */
-public class AnalizadorLexico //implements Analizador
+public class AnalizadorLexico
 {
 
     private Automata automata;
@@ -49,7 +44,7 @@ public class AnalizadorLexico //implements Analizador
         return sourceCode.toString().trim();
     }
 
-    private void agregarToken(StringBuilder buffer, List<Token> tokens)
+    private void agregarToken(StringBuilder buffer, List<Token> tokens, int linea)
     {
         String lexema = buffer.toString();
         buffer.delete(0, buffer.length());
@@ -59,7 +54,7 @@ public class AnalizadorLexico //implements Analizador
         {
             if (tipoToken == TipoToken.IDENTIFICADOR && palabrasReservadas.stream().filter(p -> p.equals(lexema)).count() > 0)
                 tipoToken = TipoToken.PALABRA_RESERVADA;
-            tokens.add(new Token(tipoToken, lexema));
+            tokens.add(new Token(tipoToken, lexema, linea));
 
         }
     }
@@ -69,10 +64,10 @@ public class AnalizadorLexico //implements Analizador
         return caracter == ' ' || caracter == '\t' || caracter == '\n';
     }
 
-    public Respuesta analizar(String rutaArchivo) throws IOException
+    public List<Token> analizar(String rutaArchivo) throws IOException
     {
         List<Token> tokens = new ArrayList<>();
-        List<ErrorLexico> errores = new ArrayList<>();
+        List<Error> errores = new ArrayList<>();
         String codigoFuente = leerArchivo(rutaArchivo);
         StringBuilder buffer = new StringBuilder();
         int linea = 1;
@@ -83,9 +78,9 @@ public class AnalizadorLexico //implements Analizador
             {
                 buffer.append(caracter);
                 if (index++ == codigoFuente.length() - 1)
-                    agregarToken(buffer, tokens);
+                    agregarToken(buffer, tokens, linea);
             } else if (automata.esFinal())
-                agregarToken(buffer, tokens);
+                agregarToken(buffer, tokens, linea);
             else if (esBlanco(caracter))
                 do
                 {
@@ -95,11 +90,18 @@ public class AnalizadorLexico //implements Analizador
                 } while (esBlanco(caracter));
             else
             {
-                errores.add(new ErrorLexico(buffer + "" + caracter, caracter, linea));
+                errores.add(new Error(buffer + "" + caracter, caracter, linea));
                 index++;
             }
         }
-        return new RespuestaLexica((new File(rutaArchivo)).getName(), tokens, errores);
+        if (errores.size() > 0)
+            imprimirErrores(errores);
+        return tokens;
+    }
+
+    private void imprimirErrores(List<Error> errores)
+    {
+        errores.forEach((error) -> System.out.println(error.getDescripcion()));
     }
 
 }
