@@ -5,8 +5,7 @@ import org.ulasalle.compiler.util.Resultado;
 
 public class Cuadruplo implements Resultado
 {
-    private TablaSimbolos contexto;
-    private int bloque;
+    private Bloque bloque;
     private int idRegla;
     private int indiceRegla;
 
@@ -18,10 +17,15 @@ public class Cuadruplo implements Resultado
     public Cuadruplo()
     {
     }
-    
-    public TablaSimbolos getTablaSimbolos()
+
+    public Bloque getBloque()
     {
-        return contexto;
+        return bloque;
+    }
+
+    public void setBloque(Bloque bloque)
+    {
+        this.bloque = bloque;
     }
         
     public int getIndiceRegla()
@@ -44,15 +48,6 @@ public class Cuadruplo implements Resultado
         this.idRegla = idRegla;
     }
     
-    public int getBloque()
-    {
-        return bloque;
-    }
-
-    public void setBloque(int bloque)
-    {
-        this.bloque = bloque;
-    }
 
     public Simbolo getResultado()
     {

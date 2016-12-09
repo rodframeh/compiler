@@ -23,6 +23,7 @@ public class Terminal extends Token implements Simbolo
     private int idRegla;
     private int idSimbolo;
     private Simbolo padre;
+    private Bloque contexto;
     
     public Terminal()
     {
@@ -47,7 +48,17 @@ public class Terminal extends Token implements Simbolo
     {
         super(tipoToken, lexema);
     }
- 
+
+    public Bloque getContexto()
+    {
+        return contexto;
+    }
+
+    public void setContexto(Bloque contexto)
+    {
+        this.contexto = contexto;
+    }
+    
     @Override
     public boolean equals(Object obj)
     {

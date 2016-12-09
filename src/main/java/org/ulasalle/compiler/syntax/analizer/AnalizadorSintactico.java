@@ -11,15 +11,15 @@ import org.ulasalle.compiler.util.Token;
 
 public class AnalizadorSintactico
 {
-
+    
     private static TablaAnalisis tablaAnalisis;
-
+    
     public AnalizadorSintactico()
     {
         if (tablaAnalisis == null)
             tablaAnalisis = new TablaAnalisis();
     }
-
+    
     private int encontrarFinError(List<Token> tokens, int indiceTokens, Stack<Simbolo> pila, List<Cuadruplo> cuadruplos, Temporal temporal)
     {
         for (; indiceTokens < tokens.size(); indiceTokens++)
@@ -47,7 +47,7 @@ public class AnalizadorSintactico
                 indiceTokens++;
         return indiceTokens;
     }
-
+    
     private void configurarCuadruplo(int i, List<Cuadruplo> cuadruplos, int indiceCuadruplo, Simbolo simbolo)
     {
         switch (i)
@@ -66,7 +66,7 @@ public class AnalizadorSintactico
                 break;
         }
     }
-
+    
     private void construirCuadruplo(Simbolo simbolo, Simbolo[] plantilla, List<Cuadruplo> cuadruplos, int indiceCuadruplo)
     {
         for (int i = 0; i < plantilla.length; i++)
@@ -81,7 +81,7 @@ public class AnalizadorSintactico
                     break;
                 }
     }
-
+    
     private void crearCuadruplo(Simbolo simbolo, Simbolo[] plantilla, List<Cuadruplo> cuadruplos)
     {
         Cuadruplo cuadruplo = new Cuadruplo();
@@ -93,13 +93,27 @@ public class AnalizadorSintactico
         cuadruplos.add(cuadruplo);
         construirCuadruplo(simbolo, plantilla, cuadruplos, cuadruplos.size() - 1 == 0 ? 0 : cuadruplos.size() - 1);
     }
-
+    
+    private void generarBloque(Simbolo simbolo)
+    {
+        Bloque bloque = null;
+        if (simbolo instanceof NoTerminal && ((NoTerminal) simbolo).isBloque())
+            if (simbolo.getPadre() != null)
+                if (simbolo.getPadre().getContexto() == null)
+                    bloque = new Bloque();
+                else
+                    bloque = new Bloque(simbolo.getPadre().getContexto());
+            else
+                bloque = new Bloque();
+        else
+            if (simbolo.getPadre() != null)
+                bloque = simbolo.getPadre().getContexto();
+        if (bloque != null)
+            simbolo.setContexto(bloque);
+    }
+    
     private void generarCuadruplo(Simbolo simbolo, List<Cuadruplo> cuadruplos)
     {
-        if(simbolo instanceof NoTerminal && ((NoTerminal) simbolo).isBloque() )
-        {
-            
-        }
         Simbolo[] plantilla = tablaAnalisis.getPlantilla(simbolo.getIndiceRegla());
         if (plantilla.length > 0)
             if (cuadruplos.isEmpty())
@@ -116,13 +130,13 @@ public class AnalizadorSintactico
                     crearCuadruplo(simbolo, plantilla, cuadruplos);
             }
     }
-
+    
     private void acumularIdentificadores(Map<Integer, Integer> identificadores, int identificador)
     {
         int acumulado = (identificadores.get(identificador) == null ? 1 : identificadores.get(identificador) + 1);
         identificadores.put(identificador, acumulado);
     }
-
+    
     private void eliminarAsignacionSimple(List<Cuadruplo> cuadruplos)
     {
         //elimino = null
@@ -130,7 +144,7 @@ public class AnalizadorSintactico
         for (Cuadruplo cuadruplo : cuadruplos)
             if (((cuadruplo.getOperacion() instanceof Terminal
                     && ((Terminal) cuadruplo.getOperacion()).getLexema().equals("="))
-                    ||  cuadruplo.getOperacion()==null) 
+                    || cuadruplo.getOperacion() == null)
                     && cuadruplo.getOperando2() == null)
                 eliminados.add(cuadruplo);
         if (eliminados.size() > 0)
@@ -148,7 +162,7 @@ public class AnalizadorSintactico
         for (Cuadruplo eliminado : eliminados)
             cuadruplos.remove(eliminado);
     }
-
+    
     private void eliminarSimbolosObsoletos(List<Cuadruplo> cuadruplos)
     {
         //elimino simbolos obsoletos
@@ -165,29 +179,23 @@ public class AnalizadorSintactico
                 acumularIdentificadores(identificadores, cuadruplos.get(i).getOperando2().getIdSimbolo());
         }
         
-       
         identificadores.keySet().stream()
-                .filter((identificador) -> ( identificadores.get(identificador) == 1))
-                .forEachOrdered((identificador) ->{
-            cuadruplos.forEach((cuadruplo) -> {
-                if(cuadruplo.getOperando1() instanceof NoTerminal
-                        && cuadruplo.getOperando1().getIdSimbolo() == identificador
-                        )
+                .filter((identificador) -> (identificadores.get(identificador) == 1))
+                .forEachOrdered((identificador) ->
                 {
-                    cuadruplo.setOperando1(null);
-                }else if(cuadruplo.getOperando2() instanceof NoTerminal
-                        && cuadruplo.getOperando2().getIdSimbolo() == identificador
-                        )
-                {
-                    cuadruplo.setOperando2(null);
-                }
-            });
-        });
+                    cuadruplos.forEach((cuadruplo) ->
+                    {
+                        if (cuadruplo.getOperando1() instanceof NoTerminal
+                                && cuadruplo.getOperando1().getIdSimbolo() == identificador)
+                            cuadruplo.setOperando1(null);
+                        else if (cuadruplo.getOperando2() instanceof NoTerminal
+                                && cuadruplo.getOperando2().getIdSimbolo() == identificador)
+                            cuadruplo.setOperando2(null);
+                    });
+                });
         
-
-
     }
-
+    
     private void eliminarSimpleRelacion(List<Cuadruplo> cuadruplos)
     {
         //elimino los null null
@@ -210,21 +218,18 @@ public class AnalizadorSintactico
                 }
         for (Cuadruplo eliminado : eliminados)
             cuadruplos.remove(eliminado);
-
+        
     }
-
+    
+    
+    
     private void eliminarRelacionOperacion(List<Cuadruplo> cuadruplos)
     {
-        List<Cuadruplo> eliminados=new ArrayList<>();
-        for(Cuadruplo cuadruplo:cuadruplos)
-        {
-            if((cuadruplo.getOperando1()==null && cuadruplo.getOperacion()!=null && cuadruplo.getOperando2()!=null))
-            {
+        List<Cuadruplo> eliminados = new ArrayList<>();
+        for (Cuadruplo cuadruplo : cuadruplos)
+            if ((cuadruplo.getOperando1() == null && cuadruplo.getOperacion() != null && cuadruplo.getOperando2() != null))
                 eliminados.add(cuadruplo);
-     
-            }
-        }
-   
+        
         if (eliminados.size() > 0)
             for (Cuadruplo eliminado : eliminados)
                 for (int c = 0; c < cuadruplos.size(); c++)
@@ -236,7 +241,7 @@ public class AnalizadorSintactico
                         cuadruplos.get(c).setOperando2(eliminado.getOperando2());
                     }
                 }
-
+        
         for (Cuadruplo eliminado : eliminados)
             cuadruplos.remove(eliminado);
     }
@@ -247,8 +252,17 @@ public class AnalizadorSintactico
         eliminarSimpleRelacion(cuadruplos);
         eliminarAsignacionSimple(cuadruplos);
         eliminarRelacionOperacion(cuadruplos);
+        for(Cuadruplo cuadruplo:cuadruplos)
+        {
+            if(cuadruplo.getOperando1()!=null)
+                cuadruplo.setBloque(cuadruplo.getOperando1().getContexto());
+            else  if(cuadruplo.getOperando2()!=null)
+                cuadruplo.setBloque(cuadruplo.getOperando2().getContexto());
+            else if(cuadruplo.getOperacion()!=null)
+                cuadruplo.setBloque(cuadruplo.getOperacion().getContexto());
+        }
     }
-
+    
     private int controlarErrores(List<Token> tokens, List<ErrorSintactico> errores, Stack<Simbolo> pila, int indiceTokens, List<Cuadruplo> cuadruplos, Temporal temporal)
     {
         if (pila.peek().getClass() == Terminal.class)//obligatorio para el metodo reeemplazar simbolo
@@ -269,8 +283,8 @@ public class AnalizadorSintactico
         }
         return indiceTokens;
     }
-
-    private Simbolo construirSimbolo(Simbolo simbolo, Token token)
+    
+    private Simbolo configurarSimbolo(Simbolo simbolo, Token token)
     {
         if (simbolo instanceof Terminal)
         {
@@ -283,22 +297,24 @@ public class AnalizadorSintactico
         }
         return simbolo;
     }
-
+    
     public Respuesta analizar(List<Token> tokens)
     {
         List<ErrorSintactico> errores = new ArrayList<>();
         List<Cuadruplo> cuadruplos = new ArrayList<>();
         Stack<Simbolo> pila = new Stack<>();
-
+        
         Temporal temporal = new Temporal();
-
+        
         pila.add(tablaAnalisis.getNoTerminalInicial());
-
+        
         int indice = 0;
         while (!pila.empty())
             if (esTokenAceptadoPorPila(pila, tokens.get(indice)))
             {
-                generarCuadruplo(construirSimbolo(pila.pop(), tokens.get(indice)), cuadruplos);
+                Simbolo simbolo=configurarSimbolo(pila.pop(), tokens.get(indice));
+                generarBloque(simbolo);
+                generarCuadruplo(simbolo, cuadruplos);
                 if (!pila.empty() && pila.peek() instanceof NoTerminal)
                     temporal.setSimbolo(pila.peek());
                 indice = (indice + 1) < tokens.size() ? indice + 1 : indice;
@@ -312,15 +328,16 @@ public class AnalizadorSintactico
         imprimirCuadruplos(cuadruplos);
         return new RespuestaSintactica("nombreArchivo", new ArrayList<>(), errores);
     }
-
+    
     private boolean esTokenAceptadoPorPila(Stack<Simbolo> pila, Token token)
     {
         return pila.peek().getClass() == Terminal.class && ((Terminal) pila.peek()).equals(token);
     }
-
+    
     private void reemplazarSimbolos(Stack<Simbolo> pila, TablaAnalisis tablaAnalisis, int indiceRegla, List<Cuadruplo> cuadruplos, Temporal temporal)
     {
         Simbolo simbolo = pila.pop();
+        generarBloque(simbolo);
         generarCuadruplo(simbolo, cuadruplos);
         Simbolo[] derivacion = tablaAnalisis.generarReglaProduccion(indiceRegla);
         for (int i = (derivacion.length - 1); i >= 0; i--)
@@ -330,9 +347,9 @@ public class AnalizadorSintactico
         }
         if (simbolo.getIdRegla() != pila.peek().getIdRegla() && pila.peek() instanceof NoTerminal)
             temporal.setSimbolo(pila.peek());
-
+        
     }
-
+    
     private String convertirAString(Simbolo[] simbolos)
     {
         String cadena = "";
@@ -340,7 +357,7 @@ public class AnalizadorSintactico
             cadena += convertirAString(simbolo);
         return cadena.trim();
     }
-
+    
     private void imprimirPila(Stack<Simbolo> pila)
     {
         pila.stream().forEach((simbolo) ->
@@ -349,14 +366,14 @@ public class AnalizadorSintactico
         });
         System.out.println();
     }
-
+    
     private void imprimirCuadruplos(List<Cuadruplo> cuadruplos)
     {
         cuadruplos.stream().forEach(
                 cuadruplo ->
         {
             System.out.println(
-                    cuadruplo.getBloque()
+                    (cuadruplo.getBloque()!=null?cuadruplo.getBloque().getNivel():"")
                     + "\t" + convertirAString(cuadruplo.getResultado())
                     + "\t" + convertirAString(cuadruplo.getOperando1())
                     + "\t" + convertirAString(cuadruplo.getOperacion())
@@ -365,7 +382,7 @@ public class AnalizadorSintactico
         }
         );
     }
-
+    
     private String convertirAString(Simbolo simbolo)
     {
         if (simbolo == null)
@@ -377,5 +394,5 @@ public class AnalizadorSintactico
         } else
             return ((NoTerminal) simbolo).getValor();
     }
-
+    
 }

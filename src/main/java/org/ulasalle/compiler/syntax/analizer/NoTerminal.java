@@ -14,6 +14,7 @@ public class NoTerminal implements Simbolo
     private int idSimbolo;
     private Simbolo padre;
     private boolean bloque;
+    private Bloque contexto;
     
     public NoTerminal()
     {
@@ -39,7 +40,17 @@ public class NoTerminal implements Simbolo
         this.bloque = bloque;
     }
 
+    public Bloque getContexto()
+    {
+        return contexto;
+    }
 
+    public void setContexto(Bloque contexto)
+    {
+        this.contexto = contexto;
+    }
+
+    
     
     
     

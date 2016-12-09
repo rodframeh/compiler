@@ -1,20 +1,35 @@
 package org.ulasalle.compiler.syntax.analizer;
 
-import org.ulasalle.compiler.util.EntradaTablaSimbolos;
+import org.ulasalle.compiler.util.TablaSimbolos;
 import java.util.List;
 import java.util.ArrayList;
 
-public class TablaSimbolos
+public class Bloque
 {
-    private List<EntradaTablaSimbolos> variables;
+    private List<TablaSimbolos> variables;
+    private int nivel;
     
-    TablaSimbolos padre;
+    Bloque padre;
+
+    public Bloque()
+    {
+        variables = new ArrayList<>();
+        nivel=0;
+    }
     
-    public TablaSimbolos( TablaSimbolos padre )
+    public Bloque( Bloque padre )
     {
         variables = new ArrayList<>();
         this.padre = padre;
+        nivel=padre.getNivel()+1;
     }
+
+    public int getNivel()
+    {
+        return nivel;
+    }
+    
+    
     
     public boolean fueDecladara( String lexema )
     {
@@ -27,7 +42,7 @@ public class TablaSimbolos
     
     public void declarar(String lexema, int lineaDeclaracion)
     {
-        EntradaTablaSimbolos nuevaEntrada = new EntradaTablaSimbolos(lexema, lineaDeclaracion);
+        TablaSimbolos nuevaEntrada = new TablaSimbolos(lexema, lineaDeclaracion);
         variables.add(nuevaEntrada);
     }
 }

@@ -1,17 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.ulasalle.compiler.util;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import org.ulasalle.compiler.util.SimboloDeserializer;
+import org.ulasalle.compiler.syntax.analizer.Bloque;
 
-/**
- *
- * @author francisco
- */
 @JsonDeserialize(using = SimboloDeserializer.class)
 public interface Simbolo
 {
@@ -24,4 +15,6 @@ public interface Simbolo
     public Simbolo getPadre();
     public void setPadre(Simbolo padre);
     public Simbolo copiarValor();
+    public Bloque getContexto();
+    public void setContexto(Bloque contexto);
 }

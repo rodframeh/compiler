@@ -1,6 +1,6 @@
 package org.ulasalle.compiler.util;
 
-public class EntradaTablaSimbolos 
+public class TablaSimbolos 
 {
     private int offset;// Posicion en la pila
     private int tipo;//Entero = 1
@@ -40,7 +40,7 @@ public class EntradaTablaSimbolos
         this.lineaPrimeraAsignacion = lineaPrimeraAsignacion;
     }
     
-    public EntradaTablaSimbolos(String lexema, int lineaDeclaracion)
+    public TablaSimbolos(String lexema, int lineaDeclaracion)
     {
         this.lexema = lexema;
         this.lineaDeclaracion = lineaDeclaracion;

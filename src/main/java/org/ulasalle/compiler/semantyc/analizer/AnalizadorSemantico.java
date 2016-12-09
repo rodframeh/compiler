@@ -2,7 +2,7 @@ package org.ulasalle.compiler.semantyc.analizer;
 
 import java.util.List;
 import org.ulasalle.compiler.syntax.analizer.Cuadruplo;
-import org.ulasalle.compiler.syntax.analizer.TablaSimbolos;
+import org.ulasalle.compiler.syntax.analizer.Bloque;
 import org.ulasalle.compiler.syntax.analizer.Terminal;
         
 public class AnalizadorSemantico 
@@ -13,7 +13,7 @@ public class AnalizadorSemantico
         {
             Terminal operacion = (Terminal)cuadruplo.getOperacion();
             
-            TablaSimbolos contexto = cuadruplo.getTablaSimbolos();
+            Bloque contexto = cuadruplo.getBloque();
             
             switch( operacion.getLexema() )
             {
