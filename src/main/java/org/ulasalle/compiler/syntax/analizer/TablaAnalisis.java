@@ -6,10 +6,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.ulasalle.compiler.syntax.analizer.NoTerminal;
-import org.ulasalle.compiler.syntax.analizer.ReglaProduccion;
 import org.ulasalle.compiler.util.Simbolo;
-import org.ulasalle.compiler.syntax.analizer.Terminal;
 import org.ulasalle.compiler.util.CargadorPropiedades;
 
 public class TablaAnalisis
@@ -57,16 +54,7 @@ public class TablaAnalisis
         return -1;
     }
 
-    public Simbolo[] getReglaProduccion(int indiceDeRegla)
-    {
-        Simbolo[] simbolos=this.reglasProduccion[indiceDeRegla].getDerivacion();
-        for(Simbolo simbolo:simbolos)
-        {
-            simbolo.setIndiceRegla(indiceDeRegla);
-        }
-        return simbolos;
-    }
-    
+
     private Simbolo[] copiarSimbolos(Simbolo[] simbolos)
     {
         Simbolo[] nuevos=new Simbolo[simbolos.length];

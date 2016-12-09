@@ -13,22 +13,12 @@ public class NoTerminal implements Simbolo
     private int idRegla;
     private int idSimbolo;
     private Simbolo padre;
+    private boolean bloque;
     
     public NoTerminal()
     {
     }
-    
-    public NoTerminal(String valor)
-    {
-        this.valor = valor;
-    }
 
-    public NoTerminal(String valor, int indiceRegla)
-    {
-        this.valor = valor;
-        this.indiceRegla = indiceRegla;
-    }
-    
     public String getValor()
     {
         return valor;
@@ -38,6 +28,20 @@ public class NoTerminal implements Simbolo
     {
         this.valor = valor;
     }
+
+    public boolean isBloque()
+    {
+        return bloque;
+    }
+
+    public void setBloque(boolean bloque)
+    {
+        this.bloque = bloque;
+    }
+
+
+    
+    
     
     @Override
     public boolean equals(Object obj)
@@ -98,6 +102,7 @@ public class NoTerminal implements Simbolo
         noTerminal.indiceRegla=this.indiceRegla;
         noTerminal.padre=this.padre;
         noTerminal.valor=this.valor;
+        noTerminal.bloque=this.bloque;
         return noTerminal;
     }
 

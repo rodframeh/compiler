@@ -96,6 +96,10 @@ public class AnalizadorSintactico
 
     private void generarCuadruplo(Simbolo simbolo, List<Cuadruplo> cuadruplos)
     {
+        if(simbolo instanceof NoTerminal && ((NoTerminal) simbolo).isBloque() )
+        {
+            
+        }
         Simbolo[] plantilla = tablaAnalisis.getPlantilla(simbolo.getIndiceRegla());
         if (plantilla.length > 0)
             if (cuadruplos.isEmpty())
@@ -266,7 +270,7 @@ public class AnalizadorSintactico
         return indiceTokens;
     }
 
-    private Simbolo mezclar(Simbolo simbolo, Token token)
+    private Simbolo construirSimbolo(Simbolo simbolo, Token token)
     {
         if (simbolo instanceof Terminal)
         {
@@ -294,7 +298,7 @@ public class AnalizadorSintactico
         while (!pila.empty())
             if (esTokenAceptadoPorPila(pila, tokens.get(indice)))
             {
-                generarCuadruplo(mezclar(pila.pop(), tokens.get(indice)), cuadruplos);
+                generarCuadruplo(construirSimbolo(pila.pop(), tokens.get(indice)), cuadruplos);
                 if (!pila.empty() && pila.peek() instanceof NoTerminal)
                     temporal.setSimbolo(pila.peek());
                 indice = (indice + 1) < tokens.size() ? indice + 1 : indice;

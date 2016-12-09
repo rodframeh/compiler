@@ -14,11 +14,12 @@
                 "lexema": ")"
             },
             {
-                "valor": "<BS>"
+                "valor": "<BS>",
+                "bloque":true
             }
         ],
-        "plantilla": [],
-        "nuevoBloque": false
+        "plantilla": []
+        
     },
     {
         "noTerminal": {
@@ -35,8 +36,8 @@
                 "lexema": "}"
             }
         ],
-        "plantilla": [],
-        "nuevoBloque": false
+        "plantilla": []
+        
     },
     {
         "noTerminal": {
@@ -50,8 +51,8 @@
                 "valor": "<S*>"
             }
         ],
-        "plantilla": [],
-        "nuevoBloque": false
+        "plantilla": []
+        
     },
     {
         "noTerminal": {
@@ -68,8 +69,8 @@
                 "valor": "<SD>"
             }
         ],
-        "plantilla": [],
-        "nuevoBloque": false
+        "plantilla": []
+        
     },
     {
         "noTerminal": {
@@ -80,8 +81,8 @@
                 "valor": "<SA>"
             }
         ],
-        "plantilla": [],
-        "nuevoBloque": false
+        "plantilla": []
+        
     },
     {
         "noTerminal": {
@@ -92,8 +93,8 @@
                 "valor": "<SC>"
             }
         ],
-        "plantilla": [],
-        "nuevoBloque": false
+        "plantilla": []
+        
     },
     {
         "noTerminal": {
@@ -104,8 +105,8 @@
                 "valor": "<SM>"
             }
         ],
-        "plantilla": [],
-        "nuevoBloque": false
+        "plantilla": []
+        
     },
     {
         "noTerminal": {
@@ -116,8 +117,8 @@
                 "valor": "<SL>"
             }
         ],
-        "plantilla": [],
-        "nuevoBloque": false
+        "plantilla": []
+        
     },
     {
         "noTerminal": {
@@ -128,8 +129,8 @@
                 "valor": "<SE>"
             }
         ],
-        "plantilla": [],
-        "nuevoBloque": false
+        "plantilla": []
+        
     },
     {
         "noTerminal": {
@@ -140,8 +141,8 @@
                 "valor": "<SHM>"
             }
         ],
-        "plantilla": [],
-        "nuevoBloque": false
+        "plantilla": []
+        
     },
     {
         "noTerminal": {
@@ -172,8 +173,8 @@
                 "valor": "<TMP7>"
             }
             
-        ],
-        "nuevoBloque": false
+        ]
+        
     },
     {
         "noTerminal": {
@@ -201,8 +202,8 @@
                 "valor": "<RD*>"
             }
             
-        ],
-        "nuevoBloque": false
+        ]
+        
     },
     {
         "noTerminal": {
@@ -234,8 +235,8 @@
                 "valor": "<RD*>"
             }
             
-        ],
-        "nuevoBloque": false
+        ]
+        
     },
     {
         "noTerminal": {
@@ -270,8 +271,8 @@
                 "valor": "<A>"
             }
             
-        ],
-        "nuevoBloque": false
+        ]
+        
     },
     {
         "noTerminal": {
@@ -297,8 +298,8 @@
 
                 "lexema": "="
             }
-        ],
-        "nuevoBloque": false
+        ]
+        
     },
     {
         "noTerminal": {
@@ -321,8 +322,8 @@
             {"lexema": "entero"},
             {"valor": "declaracion"},
             null
-        ],
-        "nuevoBloque": false
+        ]
+        
     },
     {
         "noTerminal": {
@@ -353,8 +354,8 @@
 
                 "lexema": "="
             }, null
-        ],
-        "nuevoBloque": false
+        ]
+        
     },
     {
         "noTerminal": {
@@ -385,8 +386,8 @@
             {"valor":"<EM>"},
             {"lexema":"Mientras"},
             {"valor":"<SubB>"}
-        ],
-        "nuevoBloque": false
+        ]
+        
     },
     {
         "noTerminal": {
@@ -394,11 +395,12 @@
         },
         "derivacion": [
             {
-                "valor": "<S>"
+                "valor": "<S>",
+                "bloque":true
             }
         ],
-        "plantilla": [],
-        "nuevoBloque": false
+        "plantilla": []
+        
     },
     {
         "noTerminal": {
@@ -406,11 +408,12 @@
         },
         "derivacion": [
             {
-                "valor": "<BS>"
+                "valor": "<BS>",
+                "bloque":true
             }
         ],
-        "plantilla": [],
-        "nuevoBloque": false
+        "plantilla": []
+        
     },
     {
         "noTerminal": {
@@ -441,8 +444,8 @@
             {"valor":"<EM>"},
             {"valor":"Si"},
             {"valor":"<TMP4>"}
-        ],
-        "nuevoBloque": false
+        ]
+        
     },
     {
         "noTerminal": {
@@ -461,8 +464,8 @@
             {"valor":"<SubB>"},
             null,
             {"valor":"<ELSE>"}
-        ],
-        "nuevoBloque": false
+        ]
+        
     },
     {
         "noTerminal": {
@@ -481,8 +484,8 @@
             null,
             {"lexema": "Osino"},
             {"valor":"<SubB>"}
-        ],
-        "nuevoBloque": false
+        ]
+        
     },
     {
         "noTerminal": {
@@ -509,8 +512,8 @@
             {"valor": "<TMP5>"},
             {"lexema": "Hacer"},
             null
-        ],
-        "nuevoBloque": false
+        ]
+        
     },
     {
         "noTerminal": {
@@ -541,8 +544,8 @@
             {"valor": "<EM>"},
             {"lexema": "Mientras"},
             {"valor": "<SubB>"}
-        ],
-        "nuevoBloque": false
+        ]
+        
     },
     {
         "noTerminal": {
@@ -567,8 +570,8 @@
             {
                 "valor": "<TMP1>"
             }
-        ],
-        "nuevoBloque": false
+        ]
+        
     },
 
     {
@@ -594,8 +597,8 @@
             {
                 "valor": "<OL>"
             }
-        ],
-        "nuevoBloque": false
+        ]
+        
     },
 
     {
@@ -621,8 +624,8 @@
             {
                 "valor": "<EXP*>"
             }
-        ],
-        "nuevoBloque": false
+        ]
+        
     },
     {
         "noTerminal": {
@@ -648,8 +651,8 @@
                 "valor": "<EM>"
             }
 
-        ],
-        "nuevoBloque": false
+        ]
+        
     },
     {
         "noTerminal": {
@@ -680,8 +683,8 @@
                 "lexema": "="
             },
             null
-        ],
-        "nuevoBloque": false
+        ]
+        
     },
     {
         "noTerminal": {
@@ -706,8 +709,8 @@
                 "lexema": "="
             },
             null
-        ],
-        "nuevoBloque": false
+        ]
+        
     },
     {
         "noTerminal": {
@@ -737,8 +740,8 @@
             {
                 "valor": "<T*>"
             }
-        ],
-        "nuevoBloque": false
+        ]
+        
     },
     {
         "noTerminal": {
@@ -763,8 +766,8 @@
             {
                 "valor": "<TMP2>"
             }
-        ],
-        "nuevoBloque": false
+        ]
+        
     },
     {
         "noTerminal": {
@@ -789,8 +792,8 @@
             {
                 "valor": "<T*>"
             }
-        ],
-        "nuevoBloque": false
+        ]
+        
     },
     {
         "noTerminal": {
@@ -821,8 +824,8 @@
                 "lexema": "="
             },
             null
-        ],
-        "nuevoBloque": false
+        ]
+        
     },
     {
         "noTerminal": {
@@ -847,8 +850,8 @@
                 "lexema": "="
             },
             null
-        ],
-        "nuevoBloque": false
+        ]
+        
     },
     {
         "noTerminal": {
@@ -873,8 +876,8 @@
             {
                 "valor": "<F*>"
             }
-        ],
-        "nuevoBloque": false
+        ]
+        
     },
     {
         "noTerminal": {
@@ -898,16 +901,16 @@
             },
             {
                 "valor": "<TMP3>"
-            }],
-        "nuevoBloque": false
+            }]
+        
     },
     {
         "noTerminal": {
             "valor": "<F*>"
         },
         "derivacion": [],
-        "plantilla": [],
-        "nuevoBloque": false
+        "plantilla": []
+        
     },
     {
         "noTerminal": {
@@ -930,8 +933,8 @@
             null,
             {
                 "valor": "<F*>"
-            }],
-        "nuevoBloque": false
+            }]
+        
     },
     {
         "noTerminal": {
@@ -958,8 +961,8 @@
                 "valor": "<EXP*>"
             }, null, null
 
-        ],
-        "nuevoBloque": false
+        ]
+        
     },
     {
         "noTerminal": {
@@ -982,8 +985,8 @@
                 "lexema": "="
             },
             null
-        ],
-        "nuevoBloque": false
+        ]
+        
     },
     {
         "noTerminal": {
@@ -1006,8 +1009,8 @@
                 "lexema": "="
             },
             null
-        ],
-        "nuevoBloque": false
+        ]
+        
     },
     {
         "noTerminal": {
@@ -1032,8 +1035,8 @@
                 "lexema": "="
             },
             null
-        ],
-        "nuevoBloque": false
+        ]
+        
     },
     {
         "noTerminal": {
@@ -1058,8 +1061,8 @@
                 "lexema": "="
             },
             null
-        ],
-        "nuevoBloque": false
+        ]
+        
     },
     {
         "noTerminal": {
@@ -1084,8 +1087,8 @@
                 "lexema": "="
             },
             null
-        ],
-        "nuevoBloque": false
+        ]
+        
     },
     {
         "noTerminal": {
@@ -1110,8 +1113,8 @@
                 "lexema": "="
             },
             null
-        ],
-        "nuevoBloque": false
+        ]
+        
     },
     {
         "noTerminal": {
@@ -1136,8 +1139,8 @@
                 "lexema": "="
             },
             null
-        ],
-        "nuevoBloque": false
+        ]
+        
     },
     {
         "noTerminal": {
@@ -1162,8 +1165,8 @@
                 "lexema": "="
             },
             null
-        ],
-        "nuevoBloque": false
+        ]
+        
     },
     {
         "noTerminal": {
@@ -1188,8 +1191,8 @@
                 "lexema": "="
             },
             null
-        ],
-        "nuevoBloque": false
+        ]
+        
     },
     {
         "noTerminal": {
@@ -1214,8 +1217,8 @@
                 "lexema": "="
             },
             null
-        ],
-        "nuevoBloque": false
+        ]
+        
     },
     {
         "noTerminal": {
@@ -1240,8 +1243,8 @@
                 "lexema": "="
             },
             null
-        ],
-        "nuevoBloque": false
+        ]
+        
     },
     {
         "noTerminal": {
@@ -1280,8 +1283,8 @@
                 "lexema": "LeerTeclado"
             },
             null
-        ],
-        "nuevoBloque": false
+        ]
+        
     },
     {
         "noTerminal": {
@@ -1322,7 +1325,7 @@
                 "lexema": "EscribirPantalla"
             },
             null
-        ],
-        "nuevoBloque": false
+        ]
+        
     }
 ]
